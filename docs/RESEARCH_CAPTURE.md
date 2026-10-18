@@ -63,8 +63,6 @@ Nothing is automatically declared superseded. Documents may change because of ed
 - Journal and content hashes are tamper-*evident relative to recorded state*, not independently signed audit evidence. Local single-writer assumptions still apply.
 - Evidence briefs need human assessment for relevance, source independence, quantitative accuracy, contradictory evidence and consequent recommendations.
 
-A subsequent adapter may retrieve authorized public sources, but it must preserve origin, permissions, content type, date, snapshot integrity and isolation. Do not add arbitrary URL fetching without threat-modeling SSRF, redirection, credential handling and untrusted content.
-
 ## Restricted public HTTPS capture
 
 You can retrieve **one public HTML or plain UTF-8 source at a time** when you explicitly authorize its exact hostname:
