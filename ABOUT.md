@@ -1,4 +1,4 @@
-# About Venture Method
+# About Khan's Venture Method Framework
 
 I work across ventures, products, companies, and technology. The work changes constantly, but a lot of the preparation repeats: learn the industry, understand the people involved, find reliable information, decide which methods make sense, assemble the right expertise, and produce something that can actually be used.
 
@@ -6,7 +6,7 @@ Then the context changes. A new customer interview challenges an assumption. A c
 
 I wanted a better way to work.
 
-**Venture Method is my attempt to make complex professional work cumulative, adaptable, and easier to execute well, whether I'm working alone or with other people and AI agents.**
+**Khan's Venture Method Framework is my attempt to make complex professional work cumulative, adaptable, and easier to execute well, whether I'm working alone or with other people and AI agents.**
 
 It is intended to help someone move from an unfamiliar situation to a sound understanding of it, select and apply suitable methods, carry out the work, make informed choices, and maintain what they learn.
 
