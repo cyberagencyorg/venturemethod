@@ -1,0 +1,46 @@
+{
+  "schema_version": "1.0",
+  "status": "planning_inventory_only",
+  "tools": [
+    {
+      "id": "engagement-read",
+      "effect": "read",
+      "availability": "local",
+      "description": "Read engagement-scope records",
+      "approval": "none",
+      "data_scope": "one engagement"
+    },
+    {
+      "id": "draft-artifact",
+      "effect": "draft",
+      "availability": "local",
+      "description": "Write a deterministic private draft to the engagement",
+      "approval": "manual review required for external use",
+      "data_scope": "one engagement"
+    },
+    {
+      "id": "external-research",
+      "effect": "read",
+      "availability": "unimplemented",
+      "description": "Fetch and verify external public/private research",
+      "approval": "source authorization required",
+      "data_scope": "approved source set"
+    },
+    {
+      "id": "financial-model",
+      "effect": "draft",
+      "availability": "unimplemented",
+      "description": "Run tested financial calculations with reproducible inputs",
+      "approval": "qualified review needed",
+      "data_scope": "one engagement"
+    },
+    {
+      "id": "crm-update",
+      "effect": "external_write",
+      "availability": "unimplemented",
+      "description": "Write to a scoped CRM",
+      "approval": "explicit authenticated approval",
+      "data_scope": "authorized account"
+    }
+  ]
+}
