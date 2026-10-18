@@ -166,6 +166,13 @@ def compose(case: Path, *, goals: list[str], method_ids: list[str] | None = None
             blocked.append('Method requires recorded sources and claims linked to them; none found')
         if method['minimum_evidence'] == 'verified' and not independently_verified_source_present:
             blocked.append('No source record has independently verified status')
+        # Torres's OST assumes customer opportunities grounded in customers' own accounts.
+        # A press article or other desk source must not be treated as interview evidence.
+        if method_id == 'opportunity-solution-tree':
+            interviews = {s['id'] for s in sources
+                          if s.get('source_type', '').lower() in ('interview', 'customer_interview', 'user_interview')}
+            if not any(interviews.intersection(cl.get('source_ids', [])) for cl in linked_claims):
+                blocked.append('OST needs a claim linked to a recorded customer interview; desk research alone is insufficient')
         if link['skill_id'] is None:
             blocked.append('No first-party skill implements this method')
         if any(x['availability'] != 'local' for x in tool_contracts):
