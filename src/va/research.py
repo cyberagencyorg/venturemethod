@@ -59,7 +59,7 @@ def _captured_text(case: Path, src: dict) -> str:
 
 def import_file(case: Path, filename: Path, *, title: str, locator: str,
                 source_type: str = 'document', publisher: str = 'unverified',
-                published_at: str | None = None) -> dict:
+                published_at: str | None = None, capture_info: dict | None = None) -> dict:
     """Capture user-authorized UTF-8 text. URL is an identifier, not a fetch command."""
     if not title.strip() or not locator.strip() or not source_type.strip():
         raise ValueError('Source title, locator and source type required')
@@ -83,7 +83,7 @@ def import_file(case: Path, filename: Path, *, title: str, locator: str,
     sha = _digest(raw)
     same_locator = [s for s in _records(case, 'sources') if s.get('locator') == locator and 'snapshot_sha256' in s]
     for old in same_locator:
-        if old['snapshot_sha256'] == sha:
+        if old['snapshot_sha256'] == sha and (capture_info is None or old.get('raw_sha256') == capture_info.get('raw_sha256')):
             _captured_text(case, old)  # Check stored bytes before reusing an old identity.
             return {'source_id': old['id'], 'snapshot_sha256': sha, 'created': False,
                     'possible_changes': [], 'note': 'Identical snapshot already captured for this locator'}
@@ -106,6 +106,7 @@ def import_file(case: Path, filename: Path, *, title: str, locator: str,
         'permissions': 'operator_supplied_rights_review_needed',
         'snapshot_sha256': sha, 'snapshot_relative_path': str(dest.relative_to(case)),
         'snapshot_bytes': len(raw), 'notes': 'Captured by operator; authenticity and accuracy unverified',
+        **(capture_info or {}),
     })
     changes = []
     for old in same_locator:
@@ -145,6 +146,16 @@ def audit(case: Path) -> dict:
     for sid, src in captured.items():
         try:
             _captured_text(case, src)
+            if src.get('raw_sha256'):
+                sha = src['raw_sha256']
+                if len(sha) != 64 or any(c not in '0123456789abcdef' for c in sha):
+                    raise ValueError(f'{sid}: invalid raw source digest')
+                path = case / 'research' / 'raw' / (sha + '.bin')
+                if ((case / 'research').is_symlink() or path.parent.is_symlink()
+                        or not path.parent.resolve().is_relative_to(case.resolve())
+                        or path.is_symlink() or not path.is_file()
+                        or _digest(path.read_bytes()) != sha):
+                    raise ValueError(f'{sid}: raw retrieved source missing or altered')
         except ValueError as exc:
             errors.append(str(exc))
     for claim in _records(case, 'claims'):

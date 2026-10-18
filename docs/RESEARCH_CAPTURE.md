@@ -63,4 +63,41 @@ Nothing is automatically declared superseded. Documents may change because of ed
 - Journal and content hashes are tamper-*evident relative to recorded state*, not independently signed audit evidence. Local single-writer assumptions still apply.
 - Evidence briefs need human assessment for relevance, source independence, quantitative accuracy, contradictory evidence and consequent recommendations.
 
-A subsequent adapter may retrieve authorized public sources, but it must preserve origin, permissions, content type, date, snapshot integrity and isolation. Do not add arbitrary URL fetching without threat-modeling SSRF, redirection, credential handling and untrusted content.
+## Restricted public HTTPS capture
+
+You can retrieve **one public HTML or plain UTF-8 source at a time** when you explicitly authorize its exact hostname:
+
+```bash
+python vm.py research fetch example-assessment \
+  --url 'https://www.example.org/public-report' \
+  --allow-host www.example.org \
+  --title 'Published research report' \
+  --publisher 'Publisher claimed on page'
+```
+
+The adapter refuses HTTP, wildcard hosts, IP-literal URLs, private or mixed private/public DNS responses, credentials, unapproved ports, redirects, compressed responses, unsupported MIME types, oversized content and non-UTF-8 input. It connects to the validated public IP through TLS with certificate checking. It never crawls linked pages or sends cookies and browser credentials.
+
+Both the original response bytes and the extracted text are preserved inside the private engagement, with separate hashes. `research audit` detects changes to either copy. HTML extraction is basic; it is not a JavaScript browser, general PDF parser, or publisher authentication system. TLS confirms the server connection, **not the truth of the content**. No actual publication rights are inferred.
+
+Security tests exercise DNS and transport using mocked responses. A separate live-network compatibility test and independent security review are still needed before broad deployment. This is an operator-initiated read, never autonomous crawling.
+
+## Independent comparative research review
+
+Produce two Markdown research reports about the same question (for example, a manual baseline and a framework-assisted version), then prepare anonymous A/B packets:
+
+```bash
+python vm.py research-benchmark prepare \
+  --engagement example-assessment \
+  --baseline /path/to/baseline.md \
+  --candidate /path/to/candidate.md \
+  --question 'Is the evidence sufficient to justify a limited pilot?'
+```
+
+Share **A.md, B.md, review.json** with the independent reviewer, but keep **key.json** out of their view until they have completed the scores. The scoring dimensions are source fidelity, reasoning, alternatives, decision usefulness, uncertainty, quantitative rigor and practicality. The reviewer supplies 0–4 scores and written explanations.
+
+```bash
+python vm.py research-benchmark summarize \
+  --workspace engagements/example-assessment/benchmarks/comparison-<id>
+```
+
+The default result is `incomplete`. The tool cannot run the baseline or candidate model, fabricate timings, enforce reviewer anonymity, authenticate a reviewer, or declare the winner before a review. Scores are human assessments, not independent proof of factual correctness.

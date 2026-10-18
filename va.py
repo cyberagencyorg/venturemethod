@@ -9,7 +9,7 @@ from src.va.core import (ROOT, TYPES, PROFILES, safe_engagement, new_engagement,
     add_source, add_claim, add_decision, add_hypothesis, add_option, add_action,
     add_outcome, plan, quality_check, report, validate_skills, skill_metadata,
     update_engagement, add_entity, add_review, trace, BUNDLES)
-from src.va import ledger, routing, artifacts, skillforge, skill_evals, methodology, change_model, ost, demo, composition, research
+from src.va import ledger, routing, artifacts, skillforge, skill_evals, methodology, change_model, ost, demo, composition, research, retrieval, research_benchmark
 
 
 def printer(v): print(json.dumps(v, indent=2, ensure_ascii=False))
@@ -78,14 +78,21 @@ def main(argv=None):
     comp.add_argument('--evidence', choices=methodology.EVIDENCE, default='minimal')
     comp.add_argument('--save', action='store_true', help='Save immutable proposal under private engagement')
     res=sub.add_parser('research', help='Capture text evidence and prepare traceable draft briefs (no web/model calls)')
-    res.add_argument('action', choices=['import','claim','brief','audit'])
+    res.add_argument('action', choices=['import','fetch','claim','brief','audit'])
     res.add_argument('engagement')
     res.add_argument('--file', type=Path)
+    res.add_argument('--url'); res.add_argument('--allow-host', action='append', default=[])
+    res.add_argument('--timeout', type=int, default=8)
     res.add_argument('--title'); res.add_argument('--locator')
     res.add_argument('--kind', default='document'); res.add_argument('--publisher',default='unverified')
     res.add_argument('--published-at')
     res.add_argument('--source'); res.add_argument('--text'); res.add_argument('--excerpt')
     res.add_argument('--question'); res.add_argument('--preview', action='store_true')
+    rb=sub.add_parser('research-benchmark', help='Prepare or summarize independently graded A/B research packets')
+    rb.add_argument('action', choices=['prepare','summarize'])
+    rb.add_argument('--engagement'); rb.add_argument('--baseline', type=Path)
+    rb.add_argument('--candidate', type=Path); rb.add_argument('--question')
+    rb.add_argument('--workspace', type=Path)
     sub.add_parser('capabilities', help='Validate and display work composition coverage')
     sub.add_parser('methods', help='Show v0.2 methods registry')
     fw=sub.add_parser('frameworks', help='Compare v0.3 methodology candidates; explicit goal, no silent winner')
@@ -187,6 +194,11 @@ def main(argv=None):
                     raise ValueError('research import requires --file --title --locator')
                 printer(research.import_file(case,ns.file,title=ns.title,locator=ns.locator,
                        source_type=ns.kind,publisher=ns.publisher,published_at=ns.published_at))
+            elif ns.action == 'fetch':
+                if not all((ns.url, ns.title, ns.allow_host)):
+                    raise ValueError('research fetch requires --url --title --allow-host')
+                printer(retrieval.fetch(case,ns.url,allowed_hosts=ns.allow_host,title=ns.title,
+                                        publisher=ns.publisher,source_type=ns.kind,timeout=ns.timeout))
             elif ns.action == 'claim':
                 if not all((ns.source, ns.text, ns.excerpt)):
                     raise ValueError('research claim requires --source --text --excerpt')
@@ -195,6 +207,15 @@ def main(argv=None):
             else:
                 result=research.audit(case);printer(result)
                 if not result['passed']:return 2
+        elif ns.command == 'research-benchmark':
+            if ns.action == 'prepare':
+                if not all((ns.engagement, ns.baseline, ns.candidate, ns.question)):
+                    raise ValueError('research-benchmark prepare requires --engagement --baseline --candidate --question')
+                printer(research_benchmark.prepare(safe_engagement(ns.engagement),baseline=ns.baseline,
+                                                   candidate=ns.candidate,question=ns.question))
+            else:
+                if not ns.workspace: raise ValueError('research-benchmark summarize requires --workspace')
+                printer(research_benchmark.summarize(ns.workspace))
         elif ns.command == 'capabilities': printer(composition.inventory())
         elif ns.command == 'methods': printer(json.loads((ROOT/'config'/'methods.json').read_text(encoding='utf8')))
         elif ns.command == 'frameworks': printer(methodology.compare(ns.goal,ns.evidence))

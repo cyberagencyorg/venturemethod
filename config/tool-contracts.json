@@ -50,6 +50,24 @@
       "description": "Write to a scoped CRM",
       "approval": "explicit authenticated approval",
       "data_scope": "authorized account"
+    },
+    {
+      "id": "public-https-capture",
+      "effect": "draft",
+      "availability": "local",
+      "description": "Fetch a single public HTTPS text/HTML page from a specifically authorized hostname; store raw and extracted local source snapshots",
+      "approval": "explicit --url --allow-host; no redirects, background crawling or credential use",
+      "data_scope": "private engagement",
+      "execution": "pinned public-IP TLS, strict content and size limits"
+    },
+    {
+      "id": "manual-research-comparison",
+      "effect": "draft",
+      "availability": "local",
+      "description": "Prepare A/B reports for externally scored blinded research evaluation",
+      "approval": "named external reviewer supplies scores; tool does not claim expert certification",
+      "data_scope": "private engagement benchmark workspace",
+      "execution": "no external model calls"
     }
   ]
 }
