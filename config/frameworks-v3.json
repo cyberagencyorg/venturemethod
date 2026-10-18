@@ -1,0 +1,559 @@
+{
+  "schema_version": "0.3",
+  "items": [
+    {
+      "id": "continuous-discovery",
+      "title": "Continuous Discovery Habits",
+      "goals": [
+        "discover_need",
+        "test_uncertainty",
+        "measure_outcomes"
+      ],
+      "minimum_evidence": "provisional",
+      "fit": "Product team with access to customers, outcome ownership and time for repeated discovery",
+      "avoid": "Treating a single workshop or fictional interviews as continuous discovery",
+      "output": "Opportunity tree, interview insights and tested assumptions",
+      "source": "https://www.producttalk.org/getting-started-with-discovery/",
+      "kind": "operating-practice",
+      "cadence": "iterative",
+      "verified_in_runtime": false
+    },
+    {
+      "id": "opportunity-solution-tree",
+      "title": "Opportunity Solution Tree",
+      "goals": [
+        "discover_need",
+        "prioritize",
+        "test_uncertainty"
+      ],
+      "minimum_evidence": "observed",
+      "fit": "Focused outcome with specified customer and real story-based interview evidence; iterative opportunity, solution and assumption test mapping",
+      "avoid": "Speculative opportunities, company-wide OSTs, or treating the diagram as a validated finding",
+      "output": "Evidence-referenced, revisioned outcome/opportunity/solution/test hierarchy",
+      "source": "https://www.producttalk.org/opportunity-solution-trees/",
+      "kind": "mapping-method",
+      "cadence": "iterative",
+      "verified_in_runtime": false
+    },
+    {
+      "id": "product-operating-model",
+      "title": "SVPG Product Operating Model",
+      "goals": [
+        "transform_org",
+        "measure_outcomes"
+      ],
+      "minimum_evidence": "provisional",
+      "fit": "Cross-functional empowered teams own measurable outcomes",
+      "avoid": "Treating a fixed-scope consulting deliverable as an empowered product team",
+      "output": "Team mandate, decision rights, outcomes, coaching interventions",
+      "source": "https://www.svpg.com/product-model-concepts/",
+      "kind": "organizational-model",
+      "cadence": "iterative",
+      "verified_in_runtime": false
+    },
+    {
+      "id": "business-model-canvas",
+      "title": "Business Model Canvas",
+      "goals": [
+        "design_business",
+        "choose_strategy"
+      ],
+      "minimum_evidence": "minimal",
+      "fit": "Expose dependencies among customers, value creation, delivery and economics",
+      "avoid": "Treating a completed canvas as a validated business or universal company model",
+      "output": "Dated hypothesis version of the nine linked blocks",
+      "source": "https://www.strategyzer.com/library/the-business-model-canvas",
+      "kind": "canvas",
+      "cadence": "iterative",
+      "verified_in_runtime": false
+    },
+    {
+      "id": "value-proposition-canvas",
+      "title": "Value Proposition Canvas",
+      "goals": [
+        "discover_need",
+        "design_business"
+      ],
+      "minimum_evidence": "provisional",
+      "fit": "Compare specific segment jobs, obstacles and desired gains to an offer",
+      "avoid": "Declaring fit without segment-specific customer evidence",
+      "output": "Segment-specific value map with testable fits",
+      "source": "https://www.strategyzer.com/library/the-value-proposition-canvas",
+      "kind": "canvas",
+      "cadence": "iterative",
+      "verified_in_runtime": false
+    },
+    {
+      "id": "test-card",
+      "title": "Strategyzer Test Card",
+      "goals": [
+        "test_uncertainty"
+      ],
+      "minimum_evidence": "provisional",
+      "fit": "State a precise assumption, measurement, threshold and proposed experiment",
+      "avoid": "Experiment with an undefined success threshold",
+      "output": "Hypothesis-linked experimental protocol",
+      "source": "https://www.strategyzer.com/library/validate-your-ideas-with-the-test-card",
+      "kind": "experiment-method",
+      "cadence": "iterative",
+      "verified_in_runtime": false
+    },
+    {
+      "id": "learning-card",
+      "title": "Strategyzer Learning Card",
+      "goals": [
+        "test_uncertainty",
+        "measure_outcomes"
+      ],
+      "minimum_evidence": "observed",
+      "fit": "Translate experimental observations into explicit learning and resulting actions",
+      "avoid": "Conclusions not grounded in actual observations",
+      "output": "Evidence-linked learning and action record",
+      "source": "https://www.strategyzer.com/library/capture-customer-insights-and-actions-with-the-learning-card",
+      "kind": "experiment-method",
+      "cadence": "iterative",
+      "verified_in_runtime": false
+    },
+    {
+      "id": "jtbd-progress",
+      "title": "JTBD: progress and switching",
+      "goals": [
+        "discover_need",
+        "choose_strategy"
+      ],
+      "minimum_evidence": "provisional",
+      "fit": "Explain circumstances and forces behind customer choice and switching",
+      "avoid": "Reducing a lived situation to a demographic persona",
+      "output": "Contextual job stories and alternative selection explanations",
+      "source": "https://www.producttalk.org/continuous-discovery-habits/",
+      "kind": "theoretical-lens",
+      "cadence": "iterative",
+      "verified_in_runtime": false
+    },
+    {
+      "id": "jtbd-odi",
+      "title": "JTBD: Outcome-Driven Innovation",
+      "goals": [
+        "discover_need",
+        "prioritize",
+        "measure_outcomes"
+      ],
+      "minimum_evidence": "observed",
+      "fit": "Quantify desired outcomes for a defined functional job when customer data can be collected",
+      "avoid": "Using invented importance/satisfaction numbers",
+      "output": "Job map and ranked unmet outcome statements",
+      "source": "https://strategyn.com/jobs-to-be-done-template/",
+      "kind": "quantitative-method",
+      "cadence": "iterative",
+      "verified_in_runtime": false
+    },
+    {
+      "id": "wardley-mapping",
+      "title": "Wardley Mapping",
+      "goals": [
+        "map_market",
+        "choose_strategy",
+        "resolve_systemic"
+      ],
+      "minimum_evidence": "provisional",
+      "fit": "Explore value chains, dependencies, technology evolution and strategic positioning",
+      "avoid": "Presenting weakly grounded evolutionary positions as facts",
+      "output": "Versioned value-chain/evolution map and implications",
+      "source": "https://learnwardleymapping.com/introduction/",
+      "kind": "mapping-method",
+      "cadence": "iterative",
+      "verified_in_runtime": false
+    },
+    {
+      "id": "causal-loop",
+      "title": "Causal Loop / Systems Dynamics",
+      "goals": [
+        "resolve_systemic",
+        "transform_org"
+      ],
+      "minimum_evidence": "provisional",
+      "fit": "Explain feedback, delays, unintended consequences across interacting actors",
+      "avoid": "Assuming speculative causal links are proven or omitting delays",
+      "output": "Causal model, alternate mechanisms, intervention hypotheses",
+      "source": "https://donellameadows.org/archives/leverage-points-places-to-intervene-in-a-system/",
+      "kind": "systems-method",
+      "cadence": "iterative",
+      "verified_in_runtime": false
+    },
+    {
+      "id": "leverage-points",
+      "title": "Systems Leverage Points",
+      "goals": [
+        "resolve_systemic",
+        "transform_org"
+      ],
+      "minimum_evidence": "provisional",
+      "fit": "Compare possible interventions at different levels of system behavior",
+      "avoid": "Treating any named leverage point as a guaranteed intervention",
+      "output": "Intervention options, risks and evaluation plan",
+      "source": "https://donellameadows.org/archives/leverage-points-places-to-intervene-in-a-system/",
+      "kind": "systems-method",
+      "cadence": "iterative",
+      "verified_in_runtime": false
+    },
+    {
+      "id": "shell-scenarios",
+      "title": "Scenario Planning",
+      "goals": [
+        "understand_futures",
+        "allocate_capital",
+        "choose_strategy"
+      ],
+      "minimum_evidence": "provisional",
+      "fit": "Develop multiple coherent alternative futures for strategic uncertainty",
+      "avoid": "Turning scenarios into forecasts or assigning unsupported likelihoods",
+      "output": "Scenario set, critical assumptions and robust action options",
+      "source": "https://www.shell.com/news-and-insights/scenarios/what-are-shell-scenarios.html",
+      "kind": "strategy-method",
+      "cadence": "iterative",
+      "verified_in_runtime": false
+    },
+    {
+      "id": "real-options",
+      "title": "Real Options / Staged Commitment",
+      "goals": [
+        "allocate_capital",
+        "test_uncertainty",
+        "choose_strategy"
+      ],
+      "minimum_evidence": "provisional",
+      "fit": "Stage commitments where uncertainty and reversibility have high value",
+      "avoid": "Claiming valuation precision without a defensible model",
+      "output": "Decision stages, exercise/abandon triggers, costs of waiting",
+      "source": "https://en.wikipedia.org/wiki/Real_options_valuation",
+      "kind": "decision-method",
+      "cadence": "iterative",
+      "verified_in_runtime": false
+    },
+    {
+      "id": "venture-diligence",
+      "title": "Venture Diligence",
+      "goals": [
+        "allocate_capital",
+        "design_business"
+      ],
+      "minimum_evidence": "observed",
+      "fit": "Evaluate evidence, economics, founder/team, legal and implementation risks",
+      "avoid": "Scoring an incomplete venture as investable based on narrative quality",
+      "output": "Open diligence issues, scenarios and investment memo",
+      "source": "https://www.strategyzer.com/library/the-business-model-canvas",
+      "kind": "review-process",
+      "cadence": "iterative",
+      "verified_in_runtime": false
+    },
+    {
+      "id": "market-sizing",
+      "title": "Market Sizing / TAM SAM SOM",
+      "goals": [
+        "map_market",
+        "allocate_capital",
+        "design_business"
+      ],
+      "minimum_evidence": "provisional",
+      "fit": "Establish a defined market boundary and plausible accessible share",
+      "avoid": "Confusing worldwide spend, addressable buyer budget and obtainable revenue",
+      "output": "Triangulated ranges, assumptions and sensitivity",
+      "source": "https://github.com/phuryn/pm-skills",
+      "kind": "analytical-method",
+      "cadence": "iterative",
+      "verified_in_runtime": false
+    },
+    {
+      "id": "market-segmentation",
+      "title": "Market and User Segmentation",
+      "goals": [
+        "map_market",
+        "discover_need"
+      ],
+      "minimum_evidence": "observed",
+      "fit": "Differentiate behaviors, constraints and economic attractiveness across segments",
+      "avoid": "Fabricating personas from stereotypes without qualitative/quantitative input",
+      "output": "Versioned segments, uncertainty and target hypotheses",
+      "source": "https://github.com/phuryn/pm-skills",
+      "kind": "analytical-method",
+      "cadence": "iterative",
+      "verified_in_runtime": false
+    },
+    {
+      "id": "competitive-landscape",
+      "title": "Competitive Analysis",
+      "goals": [
+        "map_market",
+        "choose_strategy"
+      ],
+      "minimum_evidence": "provisional",
+      "fit": "Compare direct, indirect and substitute choices with verified evidence",
+      "avoid": "Assuming competing feature lists explain buying behavior",
+      "output": "Competitor dossiers and differentiated options",
+      "source": "https://github.com/phuryn/pm-skills",
+      "kind": "analytical-method",
+      "cadence": "iterative",
+      "verified_in_runtime": false
+    },
+    {
+      "id": "porter-five-forces",
+      "title": "Porter's Five Forces",
+      "goals": [
+        "map_market",
+        "choose_strategy"
+      ],
+      "minimum_evidence": "provisional",
+      "fit": "Evaluate industry structure and bargaining economics",
+      "avoid": "Mistaking industry attractiveness for individual company competitiveness",
+      "output": "Industry forces and testable implications",
+      "source": "https://hbr.org/2008/01/the-five-competitive-forces-that-shape-strategy",
+      "kind": "strategy-framework",
+      "cadence": "iterative",
+      "verified_in_runtime": false
+    },
+    {
+      "id": "pestle",
+      "title": "PESTLE",
+      "goals": [
+        "map_market",
+        "understand_futures"
+      ],
+      "minimum_evidence": "provisional",
+      "fit": "Surface macro-environment dependencies and threats",
+      "avoid": "Treating a long checklist of trends as strategic analysis",
+      "output": "Material external forces and scenarios",
+      "source": "https://github.com/phuryn/pm-skills",
+      "kind": "strategy-framework",
+      "cadence": "iterative",
+      "verified_in_runtime": false
+    },
+    {
+      "id": "risk-assumption-map",
+      "title": "Assumption and Risk Mapping",
+      "goals": [
+        "test_uncertainty",
+        "choose_strategy"
+      ],
+      "minimum_evidence": "minimal",
+      "fit": "Identify what must be true for an intervention to work and cheapest disconfirming tests",
+      "avoid": "Confusing risk scores with calibrated probabilities",
+      "output": "Ranked assumptions and test backlog",
+      "source": "https://github.com/phuryn/pm-skills",
+      "kind": "decision-method",
+      "cadence": "iterative",
+      "verified_in_runtime": false
+    },
+    {
+      "id": "pricing-discovery",
+      "title": "Pricing Research",
+      "goals": [
+        "design_business",
+        "test_uncertainty"
+      ],
+      "minimum_evidence": "observed",
+      "fit": "Choose pricing mechanisms and test willingness to pay",
+      "avoid": "Mistaking volunteered price preference for real purchasing behavior",
+      "output": "Price hypotheses, segments, elasticity caveats and tests",
+      "source": "https://github.com/phuryn/pm-skills",
+      "kind": "analytical-method",
+      "cadence": "iterative",
+      "verified_in_runtime": false
+    },
+    {
+      "id": "north-star",
+      "title": "North Star and Input Metrics",
+      "goals": [
+        "measure_outcomes",
+        "prioritize"
+      ],
+      "minimum_evidence": "provisional",
+      "fit": "Specify meaningful customer value and controllable drivers",
+      "avoid": "Choosing vanity activity counts or confusing correlation with causation",
+      "output": "Metric tree and instrumented definitions",
+      "source": "https://github.com/phuryn/pm-skills",
+      "kind": "measurement-method",
+      "cadence": "iterative",
+      "verified_in_runtime": false
+    },
+    {
+      "id": "ab-testing",
+      "title": "A/B Experiment Analysis",
+      "goals": [
+        "test_uncertainty",
+        "measure_outcomes"
+      ],
+      "minimum_evidence": "observed",
+      "fit": "Assess randomized experiments with adequate exposure and controls",
+      "avoid": "Declaring uplift from tiny biased samples or peeking",
+      "output": "Statistical result, uncertainty and decision memo",
+      "source": "https://github.com/phuryn/pm-skills",
+      "kind": "analysis-method",
+      "cadence": "iterative",
+      "verified_in_runtime": false
+    },
+    {
+      "id": "outcome-roadmapping",
+      "title": "Outcome Roadmapping",
+      "goals": [
+        "prioritize",
+        "plan_delivery"
+      ],
+      "minimum_evidence": "provisional",
+      "fit": "Stage interventions around measurable outcomes rather than feature lists",
+      "avoid": "Treating roadmap dates as contractual promises",
+      "output": "Outcome hypotheses, options, sequencing and review points",
+      "source": "https://github.com/phuryn/pm-skills",
+      "kind": "planning-method",
+      "cadence": "iterative",
+      "verified_in_runtime": false
+    },
+    {
+      "id": "working-backwards",
+      "title": "Working Backwards / PRFAQ",
+      "goals": [
+        "discover_need",
+        "choose_strategy",
+        "plan_delivery"
+      ],
+      "minimum_evidence": "provisional",
+      "fit": "Stress test customer experience and differentiated value before major delivery",
+      "avoid": "Publishing an invented customer story as validated demand",
+      "output": "PRFAQ draft, outstanding assumptions, release criteria",
+      "source": "https://www.workingbackwards.com/",
+      "kind": "planning-method",
+      "cadence": "iterative",
+      "verified_in_runtime": false
+    },
+    {
+      "id": "shape-up",
+      "title": "Shape Up",
+      "goals": [
+        "plan_delivery",
+        "prioritize"
+      ],
+      "minimum_evidence": "provisional",
+      "fit": "Define bounded work with clear appetite and explicit unknowns",
+      "avoid": "Applying betting cycles to unbounded exploratory research",
+      "output": "Shaped pitch and time appetite",
+      "source": "https://basecamp.com/shapeup/",
+      "kind": "delivery-method",
+      "cadence": "iterative",
+      "verified_in_runtime": false
+    },
+    {
+      "id": "okr",
+      "title": "Objectives and Key Results",
+      "goals": [
+        "measure_outcomes",
+        "transform_org"
+      ],
+      "minimum_evidence": "provisional",
+      "fit": "Translate strategic objectives into measurable learning and accountability",
+      "avoid": "Top-down activity targets presented as customer outcomes",
+      "output": "Objectives, key results, owners, review rhythm",
+      "source": "https://github.com/phuryn/pm-skills",
+      "kind": "management-practice",
+      "cadence": "iterative",
+      "verified_in_runtime": false
+    },
+    {
+      "id": "business-capability",
+      "title": "Business Capability Mapping",
+      "goals": [
+        "transform_org",
+        "resolve_systemic"
+      ],
+      "minimum_evidence": "provisional",
+      "fit": "Map what an organization must do independently of current org chart",
+      "avoid": "Treating department chart as an operating-capability assessment",
+      "output": "Capability map, dependencies, intervention candidates",
+      "source": "https://www.businessarchitectureguild.org/",
+      "kind": "architecture-method",
+      "cadence": "iterative",
+      "verified_in_runtime": false
+    },
+    {
+      "id": "premortem",
+      "title": "Pre-mortem",
+      "goals": [
+        "choose_strategy",
+        "plan_delivery",
+        "allocate_capital"
+      ],
+      "minimum_evidence": "minimal",
+      "fit": "Surface foreseeable failure modes before high-stakes commitment",
+      "avoid": "Confusing imaginative pessimism with verified risk likelihood",
+      "output": "Failure mechanisms, mitigations, owners and triggers",
+      "source": "https://hbr.org/2007/09/performing-a-project-premortem",
+      "kind": "review-method",
+      "cadence": "iterative",
+      "verified_in_runtime": false
+    },
+    {
+      "id": "pretotype",
+      "title": "Pretotyping / Cheap Validation",
+      "goals": [
+        "test_uncertainty",
+        "discover_need"
+      ],
+      "minimum_evidence": "minimal",
+      "fit": "Find inexpensive tests of desirability before building significant product",
+      "avoid": "Representing fake-door clicks as proven willingness to pay",
+      "output": "Pretotype plan, limitations and evidence",
+      "source": "https://github.com/phuryn/pm-skills",
+      "kind": "experiment-method",
+      "cadence": "iterative",
+      "verified_in_runtime": false
+    },
+    {
+      "id": "design-sprint",
+      "title": "Design Sprint",
+      "goals": [
+        "discover_need",
+        "test_uncertainty",
+        "plan_delivery"
+      ],
+      "minimum_evidence": "provisional",
+      "fit": "Rapid collaborative design and concept test with representative customers",
+      "avoid": "Using sprint activities to avoid more basic research or feasibility work",
+      "output": "Prototype, user observations and review actions",
+      "source": "https://www.gv.com/sprint/",
+      "kind": "workshop-method",
+      "cadence": "iterative",
+      "verified_in_runtime": false
+    },
+    {
+      "id": "commercial-gtm",
+      "title": "GTM Motion and Beachhead",
+      "goals": [
+        "design_business",
+        "choose_strategy",
+        "map_market"
+      ],
+      "minimum_evidence": "provisional",
+      "fit": "Test acquisition motion and entry segment for a concrete offer",
+      "avoid": "Copying PLG/SLG playbooks regardless of purchasing economics",
+      "output": "Beachhead, ICP, channels, unit economics and experiments",
+      "source": "https://github.com/phuryn/pm-skills",
+      "kind": "strategy-method",
+      "cadence": "iterative",
+      "verified_in_runtime": false
+    },
+    {
+      "id": "portfolio-options",
+      "title": "Venture Portfolio Option Selection",
+      "goals": [
+        "allocate_capital",
+        "choose_strategy"
+      ],
+      "minimum_evidence": "provisional",
+      "fit": "Compare ventures, staging, concentration and capital constraints",
+      "avoid": "Letting uncomparable speculative point scores determine allocation",
+      "output": "Thesis-conditioned options and kill/reinvest triggers",
+      "source": "https://www.strategyzer.com/library/the-business-model-canvas",
+      "kind": "portfolio-method",
+      "cadence": "iterative",
+      "verified_in_runtime": false
+    }
+  ]
+}

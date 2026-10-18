@@ -1,0 +1,7 @@
+[project]
+name = "venturemethod"
+version = "0.5.0"
+description = "An adaptive, AI-native, agent-compatible framework for research, strategy, venture architecture, product and executive work"
+requires-python = ">=3.11"
+[tool.setuptools]
+packages = ["src.va"]

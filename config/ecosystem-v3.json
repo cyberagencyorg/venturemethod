@@ -1,0 +1,115 @@
+{
+  "schema_version": "0.3",
+  "checked_on": "2026-10-19",
+  "integrity_caution": "Advertised upstream counts are not distinct capabilities, not item-by-item verified, and not proof of execution quality. Freeze upstream versions/commits before integration.",
+  "sources": [
+    {
+      "name": "Huryn PM Skills",
+      "url": "https://github.com/phuryn/pm-skills",
+      "advertised_skills": 69,
+      "advertised_workflows": 42,
+      "version": "2.2.0",
+      "observed_commit": "07b34f64ee828df08953f505b7f747aef85ae7c6",
+      "license": "MIT (repository LICENSE; check bundled assets)",
+      "role": "PM domain capabilities and chained workflows",
+      "status": "domain-inventory-verified; individual skill instructions not audited",
+      "reuse_policy": "eligible for reviewed, attributed adaptation subject to verification"
+    },
+    {
+      "name": "Product on Purpose PM Skills",
+      "url": "https://github.com/product-on-purpose/pm-skills",
+      "advertised_skills": 68,
+      "advertised_workflows": 12,
+      "version": "2.34.0",
+      "observed_commit": null,
+      "license": "Apache-2.0 (repository LICENSE; check files)",
+      "role": "framework-neutral categories, quality contracts, reference outputs, skill governance",
+      "status": "README and taxonomy verified; no live skill benchmarking",
+      "reuse_policy": "eligible for reviewed, attributed adaptation subject to verification"
+    },
+    {
+      "name": "Dean Peters PM Skills",
+      "url": "https://github.com/deanpeters/Product-Manager-Skills",
+      "advertised_skills": 77,
+      "advertised_workflows": 6,
+      "version": "0.84 (README 2026-08-10)",
+      "observed_commit": null,
+      "license": "CC BY-NC-SA 4.0; review applicable usage before reuse",
+      "role": "professional PM pedagogy, market-intelligence and product lifecycle methods",
+      "status": "catalog-level verified; no code or text imported",
+      "reuse_policy": "reference concepts; do not bundle or redistribute without cleared rights"
+    },
+    {
+      "name": "Huryn PM Brain",
+      "url": "https://github.com/phuryn/pm-brain",
+      "advertised_skills": null,
+      "advertised_workflows": 6,
+      "version": null,
+      "observed_commit": null,
+      "license": "MIT (README and repository license)",
+      "role": "per-product living knowledge, ingestion, provenance and reviews",
+      "status": "README design inspected; no empirical independent validation",
+      "reuse_policy": "conceptual reference pending license review"
+    },
+    {
+      "name": "BMAD Method",
+      "url": "https://github.com/bmad-code-org/BMAD-METHOD",
+      "advertised_skills": null,
+      "advertised_workflows": null,
+      "version": "stable v6.12; v7 alpha at inspection",
+      "observed_commit": null,
+      "license": "MIT (trademarks separate)",
+      "role": "risk-adaptive software workflow, agent collaboration and context carryover",
+      "status": "README inspected; not imported",
+      "reuse_policy": "conditional adapter, not governing venture methodology"
+    },
+    {
+      "name": "GitHub Spec Kit",
+      "url": "https://github.com/github/spec-kit",
+      "advertised_skills": null,
+      "advertised_workflows": null,
+      "version": null,
+      "observed_commit": null,
+      "license": "MIT (README and repository license)",
+      "role": "specification and implementation consistency, feature decomposition",
+      "status": "docs read, no execution",
+      "reuse_policy": "conditional engineering handoff"
+    },
+    {
+      "name": "Agent Skills standard",
+      "url": "https://agentskills.io/specification",
+      "advertised_skills": null,
+      "advertised_workflows": null,
+      "version": null,
+      "observed_commit": null,
+      "license": "standard documentation and reference implementation use different licenses",
+      "role": "interoperable skill packaging and progressive disclosure",
+      "status": "spec/README reviewed",
+      "reuse_policy": "format standard, not proof that any skill is good"
+    },
+    {
+      "name": "Anthropic Skill Creator",
+      "url": "https://github.com/anthropics/skills/tree/main/skills/skill-creator",
+      "advertised_skills": null,
+      "advertised_workflows": null,
+      "version": null,
+      "observed_commit": null,
+      "license": "per-skill license must be checked; not blanket open permission",
+      "role": "skill authoring, baseline comparisons, eval iteration",
+      "status": "instructions reviewed; source not imported",
+      "reuse_policy": "learn principles and independently implement own evaluation"
+    },
+    {
+      "name": "skills.sh directory",
+      "url": "https://skills.sh/",
+      "advertised_skills": null,
+      "advertised_workflows": null,
+      "version": null,
+      "observed_commit": null,
+      "license": "varies by source",
+      "role": "discovery feed only",
+      "status": "registry concept examined; quality and security not verified",
+      "reuse_policy": "quarantine discoveries until provenance, license, security and quality review"
+    }
+  ]
+}

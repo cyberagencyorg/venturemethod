@@ -1,0 +1,42 @@
+{
+  "engagement_id": "synthetic-harbor-operator",
+  "profile": "standard",
+  "steps": [
+    "intake",
+    "investigate",
+    "diagnose",
+    "options",
+    "evaluate",
+    "decide",
+    "plan",
+    "review"
+  ],
+  "inferred_domains": [
+    "operations",
+    "discovery"
+  ],
+  "why": {
+    "operations": [
+      "manual",
+      "operational",
+      "workflow"
+    ],
+    "discovery": [
+      "customer"
+    ]
+  },
+  "recommended_skills": [
+    "intake-scoping",
+    "company-investigation",
+    "problem-mapping",
+    "service-blueprint",
+    "operating-model",
+    "opportunity-discovery",
+    "evidence-audit"
+  ],
+  "status": "heuristic",
+  "missing_intake": [],
+  "next_step": "Review claim support, alternatives, and the decision record",
+  "method": "transparent objective-first lexical heuristic; advisory; do not treat as semantic understanding",
+  "risk_level": "medium"
+}

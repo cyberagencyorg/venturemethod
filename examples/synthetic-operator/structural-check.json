@@ -1,0 +1,24 @@
+{
+  "engagement_id": "synthetic-harbor-operator",
+  "ready_for_review": true,
+  "blockers": [],
+  "cautions": [
+    "CLM-0001 is unknown"
+  ],
+  "counts": {
+    "sources": 1,
+    "claims": 1,
+    "decisions": 1,
+    "artifacts": 2,
+    "hypotheses": 1,
+    "actions": 1,
+    "outcomes": 0,
+    "reviews": 1
+  },
+  "journal": {
+    "passed": true,
+    "events": 11,
+    "errors": [],
+    "head": "582b13d50728efc1446596c033d8a96f86d788b05695b8b3827b9fd2a8c74ecb"
+  }
+}

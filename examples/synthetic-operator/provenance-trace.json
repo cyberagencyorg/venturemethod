@@ -1,0 +1,98 @@
+{
+  "engagement_id": "synthetic-harbor-operator",
+  "root": "DEC-0001",
+  "nodes": [
+    {
+      "collection": "decisions",
+      "id": "DEC-0001",
+      "record": {
+        "question": "What low-cost step best reduces uncertainty?",
+        "choice": "Prepare a documented workflow observation and small template test, subject to sponsor approval",
+        "claim_ids": [
+          "CLM-0001"
+        ],
+        "alternatives": [
+          "do nothing / defer"
+        ],
+        "rationale": "",
+        "reversibility": "unassessed",
+        "status": "draft",
+        "owner": "unassigned",
+        "review_trigger": "",
+        "approval_evidence": null,
+        "id": "DEC-0001",
+        "recorded_at": "2026-10-18T16:45:56+00:00"
+      }
+    },
+    {
+      "collection": "claims",
+      "id": "CLM-0001",
+      "record": {
+        "statement": "In the fictional exercise, a staff member reports copying quote details between systems",
+        "source_ids": [
+          "SRC-0001"
+        ],
+        "confidence": "unrated",
+        "status": "unknown",
+        "claim_type": "unclassified",
+        "counterevidence_ids": [],
+        "falsification_test": "",
+        "last_reviewed_at": null,
+        "id": "CLM-0001",
+        "recorded_at": "2026-10-18T16:45:54+00:00"
+      }
+    },
+    {
+      "collection": "sources",
+      "id": "SRC-0001",
+      "record": {
+        "title": "Invented example interview notes",
+        "locator": "synthetic:notes-v1",
+        "source_type": "synthetic",
+        "accessed_at": "2026-10-18T16:45:54+00:00",
+        "published_at": null,
+        "independent_verification": "not_verified",
+        "notes": "",
+        "permissions": "review_needed",
+        "publisher": null,
+        "id": "SRC-0001",
+        "recorded_at": "2026-10-18T16:45:54+00:00"
+      }
+    },
+    {
+      "collection": "reviews",
+      "id": "REV-0001",
+      "record": {
+        "target_type": "claim",
+        "target_id": "CLM-0001",
+        "verdict": "inconclusive",
+        "reviewer_assertion": "Fictional reviewer",
+        "rationale": "This is a deliberately fictional test, not external evidence",
+        "source_ids": [
+          "SRC-0001"
+        ],
+        "authorization": "review_only; NOT identity-verified or operational approval",
+        "id": "REV-0001",
+        "recorded_at": "2026-10-18T16:45:57+00:00"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "DEC-0001",
+      "to": "CLM-0001",
+      "relationship": "informed_by_claim"
+    },
+    {
+      "from": "CLM-0001",
+      "to": "SRC-0001",
+      "relationship": "supported_or_cited_by_source"
+    },
+    {
+      "from": "REV-0001",
+      "to": "CLM-0001",
+      "relationship": "reviews"
+    }
+  ],
+  "note": "References represent attribution, not proof of correctness or authorization"
+}

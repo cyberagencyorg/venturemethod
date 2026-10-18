@@ -1,0 +1,12 @@
+# Client material is private by default
+/engagements/
+/private/
+/secrets/
+.env
+.env.*
+!.env.example
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+.DS_Store

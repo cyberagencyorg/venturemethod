@@ -1,0 +1,214 @@
+{
+  "schema_version": "1.0",
+  "registry_policy": "original-internal-skills-only; external candidates require pin, license check and QA",
+  "skills": [
+    {
+      "name": "intake-scoping",
+      "path": "skills/intake-scoping",
+      "origin": "original",
+      "status": "draft-validated-structure",
+      "trust": "first-party",
+      "release": "0.1.0"
+    },
+    {
+      "name": "company-investigation",
+      "path": "skills/company-investigation",
+      "origin": "original",
+      "status": "draft-validated-structure",
+      "trust": "first-party",
+      "release": "0.1.0"
+    },
+    {
+      "name": "problem-mapping",
+      "path": "skills/problem-mapping",
+      "origin": "original",
+      "status": "draft-validated-structure",
+      "trust": "first-party",
+      "release": "0.1.0"
+    },
+    {
+      "name": "market-landscape",
+      "path": "skills/market-landscape",
+      "origin": "original",
+      "status": "draft-validated-structure",
+      "trust": "first-party",
+      "release": "0.1.0"
+    },
+    {
+      "name": "opportunity-discovery",
+      "path": "skills/opportunity-discovery",
+      "origin": "original",
+      "status": "draft-validated-structure",
+      "trust": "first-party",
+      "release": "0.1.0"
+    },
+    {
+      "name": "venture-thesis",
+      "path": "skills/venture-thesis",
+      "origin": "original",
+      "status": "draft-validated-structure",
+      "trust": "first-party",
+      "release": "0.1.0"
+    },
+    {
+      "name": "business-model",
+      "path": "skills/business-model",
+      "origin": "original",
+      "status": "draft-validated-structure",
+      "trust": "first-party",
+      "release": "0.1.0"
+    },
+    {
+      "name": "product-discovery",
+      "path": "skills/product-discovery",
+      "origin": "original",
+      "status": "draft-validated-structure",
+      "trust": "first-party",
+      "release": "0.1.0"
+    },
+    {
+      "name": "product-requirements",
+      "path": "skills/product-requirements",
+      "origin": "original",
+      "status": "draft-validated-structure",
+      "trust": "first-party",
+      "release": "0.1.0"
+    },
+    {
+      "name": "venture-diligence",
+      "path": "skills/venture-diligence",
+      "origin": "original",
+      "status": "draft-validated-structure",
+      "trust": "first-party",
+      "release": "0.1.0"
+    },
+    {
+      "name": "strategic-options",
+      "path": "skills/strategic-options",
+      "origin": "original",
+      "status": "draft-validated-structure",
+      "trust": "first-party",
+      "release": "0.1.0"
+    },
+    {
+      "name": "operating-model",
+      "path": "skills/operating-model",
+      "origin": "original",
+      "status": "draft-validated-structure",
+      "trust": "first-party",
+      "release": "0.1.0"
+    },
+    {
+      "name": "experiment-design",
+      "path": "skills/experiment-design",
+      "origin": "original",
+      "status": "draft-validated-structure",
+      "trust": "first-party",
+      "release": "0.1.0"
+    },
+    {
+      "name": "evidence-audit",
+      "path": "skills/evidence-audit",
+      "origin": "original",
+      "status": "draft-validated-structure",
+      "trust": "first-party",
+      "release": "0.1.0"
+    },
+    {
+      "name": "artifact-quality",
+      "path": "skills/artifact-quality",
+      "origin": "original",
+      "status": "draft-validated-structure",
+      "trust": "first-party",
+      "release": "0.1.0"
+    },
+    {
+      "name": "adversarial-review",
+      "path": "skills/adversarial-review",
+      "origin": "original",
+      "status": "draft-validated-structure",
+      "trust": "first-party",
+      "release": "0.1.0"
+    },
+    {
+      "name": "skill-author",
+      "path": "skills/skill-author",
+      "origin": "original",
+      "status": "draft-validated-structure",
+      "trust": "first-party",
+      "release": "0.1.0"
+    },
+    {
+      "name": "go-to-market",
+      "path": "skills/go-to-market",
+      "origin": "original",
+      "status": "draft-validated-structure",
+      "trust": "first-party",
+      "release": "0.2.0"
+    },
+    {
+      "name": "capital-landscape",
+      "path": "skills/capital-landscape",
+      "origin": "original",
+      "status": "draft-validated-structure",
+      "trust": "first-party",
+      "release": "0.2.0"
+    },
+    {
+      "name": "financial-scenarios",
+      "path": "skills/financial-scenarios",
+      "origin": "original",
+      "status": "draft-validated-structure",
+      "trust": "first-party",
+      "release": "0.2.0"
+    },
+    {
+      "name": "brand-architecture",
+      "path": "skills/brand-architecture",
+      "origin": "original",
+      "status": "draft-validated-structure",
+      "trust": "first-party",
+      "release": "0.2.0"
+    },
+    {
+      "name": "systems-diagnosis",
+      "path": "skills/systems-diagnosis",
+      "origin": "original",
+      "status": "draft-validated-structure",
+      "trust": "first-party",
+      "release": "0.2.0"
+    },
+    {
+      "name": "commercial-offer",
+      "path": "skills/commercial-offer",
+      "origin": "original",
+      "status": "draft-validated-structure",
+      "trust": "first-party",
+      "release": "0.2.0"
+    },
+    {
+      "name": "service-blueprint",
+      "path": "skills/service-blueprint",
+      "origin": "original",
+      "status": "draft-validated-structure",
+      "trust": "first-party",
+      "release": "0.2.0"
+    },
+    {
+      "name": "institutional-landscape",
+      "path": "skills/institutional-landscape",
+      "origin": "original",
+      "status": "draft-validated-structure",
+      "trust": "first-party",
+      "release": "0.2.0"
+    },
+    {
+      "name": "opportunity-solution-tree",
+      "path": "skills/opportunity-solution-tree",
+      "origin": "original",
+      "status": "draft-validated-structure",
+      "trust": "first-party",
+      "release": "0.4.0"
+    }
+  ]
+}

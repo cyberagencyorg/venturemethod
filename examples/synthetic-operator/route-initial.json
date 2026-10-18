@@ -1,0 +1,53 @@
+{
+  "engagement_id": "synthetic-harbor-operator",
+  "profile": "standard",
+  "steps": [
+    "intake",
+    "investigate",
+    "diagnose",
+    "options",
+    "evaluate",
+    "decide",
+    "plan",
+    "review"
+  ],
+  "inferred_domains": [
+    "delivery",
+    "discovery",
+    "operations",
+    "product"
+  ],
+  "why": {
+    "delivery": [
+      "memo"
+    ],
+    "discovery": [
+      "customer"
+    ],
+    "operations": [
+      "workflow"
+    ],
+    "product": [
+      "software"
+    ]
+  },
+  "recommended_skills": [
+    "intake-scoping",
+    "company-investigation",
+    "problem-mapping",
+    "strategic-options",
+    "commercial-offer",
+    "adversarial-review",
+    "evidence-audit",
+    "artifact-quality",
+    "opportunity-discovery",
+    "product-discovery",
+    "service-blueprint",
+    "operating-model"
+  ],
+  "status": "heuristic",
+  "missing_intake": [],
+  "next_step": "Review claim support, alternatives, and the decision record",
+  "method": "transparent keyword heuristic; human may override; not an LLM evaluation",
+  "risk_level": "medium"
+}
