@@ -1,0 +1,462 @@
+{
+  "schema_version": "1.0",
+  "description": "Explicit method-to-capability-to-skill bindings; none asserts specialist competence or autonomous execution",
+  "capabilities": [
+    {
+      "id": "market-intelligence",
+      "title": "Market and competitor intelligence",
+      "default_role": "researcher",
+      "eligible_skill_ids": [
+        "company-investigation",
+        "market-landscape",
+        "institutional-landscape"
+      ],
+      "required_tool_ids": [
+        "engagement-read"
+      ],
+      "execution_boundary": "advisory",
+      "status": "mapped"
+    },
+    {
+      "id": "customer-discovery",
+      "title": "Customer and opportunity discovery",
+      "default_role": "researcher",
+      "eligible_skill_ids": [
+        "opportunity-discovery",
+        "product-discovery",
+        "opportunity-solution-tree"
+      ],
+      "required_tool_ids": [
+        "engagement-read"
+      ],
+      "execution_boundary": "advisory",
+      "status": "mapped"
+    },
+    {
+      "id": "strategy",
+      "title": "Business and competitive strategy",
+      "default_role": "specialist",
+      "eligible_skill_ids": [
+        "strategic-options",
+        "systems-diagnosis",
+        "problem-mapping",
+        "adversarial-review"
+      ],
+      "required_tool_ids": [
+        "engagement-read"
+      ],
+      "execution_boundary": "advisory",
+      "status": "mapped"
+    },
+    {
+      "id": "venture-design",
+      "title": "Venture formation and diligence",
+      "default_role": "specialist",
+      "eligible_skill_ids": [
+        "venture-thesis",
+        "venture-diligence",
+        "business-model"
+      ],
+      "required_tool_ids": [
+        "engagement-read"
+      ],
+      "execution_boundary": "advisory",
+      "status": "mapped"
+    },
+    {
+      "id": "product",
+      "title": "Product planning and leadership",
+      "default_role": "specialist",
+      "eligible_skill_ids": [
+        "product-requirements",
+        "strategic-options",
+        "product-discovery"
+      ],
+      "required_tool_ids": [
+        "engagement-read"
+      ],
+      "execution_boundary": "advisory",
+      "status": "mapped"
+    },
+    {
+      "id": "experimentation",
+      "title": "Hypothesis and experiment design",
+      "default_role": "analyst",
+      "eligible_skill_ids": [
+        "experiment-design"
+      ],
+      "required_tool_ids": [
+        "engagement-read"
+      ],
+      "execution_boundary": "advisory",
+      "status": "mapped"
+    },
+    {
+      "id": "commercial",
+      "title": "Go-to-market and commercial strategy",
+      "default_role": "specialist",
+      "eligible_skill_ids": [
+        "go-to-market",
+        "commercial-offer",
+        "brand-architecture"
+      ],
+      "required_tool_ids": [
+        "engagement-read"
+      ],
+      "execution_boundary": "advisory",
+      "status": "mapped"
+    },
+    {
+      "id": "finance",
+      "title": "Financial analysis and capital options",
+      "default_role": "analyst",
+      "eligible_skill_ids": [
+        "financial-scenarios",
+        "capital-landscape"
+      ],
+      "required_tool_ids": [
+        "engagement-read"
+      ],
+      "execution_boundary": "advisory",
+      "status": "mapped"
+    },
+    {
+      "id": "organization",
+      "title": "Operating models and systems diagnosis",
+      "default_role": "specialist",
+      "eligible_skill_ids": [
+        "operating-model",
+        "service-blueprint",
+        "systems-diagnosis"
+      ],
+      "required_tool_ids": [
+        "engagement-read"
+      ],
+      "execution_boundary": "advisory",
+      "status": "mapped"
+    },
+    {
+      "id": "engagement",
+      "title": "Engagement, evidence and quality practice",
+      "default_role": "lead",
+      "eligible_skill_ids": [
+        "intake-scoping",
+        "evidence-audit",
+        "artifact-quality",
+        "skill-author"
+      ],
+      "required_tool_ids": [
+        "engagement-read"
+      ],
+      "execution_boundary": "advisory",
+      "status": "mapped"
+    },
+    {
+      "id": "sales-operations",
+      "title": "Sales execution and account work",
+      "default_role": "operator",
+      "eligible_skill_ids": [],
+      "required_tool_ids": [
+        "engagement-read"
+      ],
+      "execution_boundary": "specialist_external",
+      "status": "gap_no_first_party_skill"
+    },
+    {
+      "id": "marketing-operations",
+      "title": "Marketing and campaign operations",
+      "default_role": "operator",
+      "eligible_skill_ids": [],
+      "required_tool_ids": [
+        "engagement-read"
+      ],
+      "execution_boundary": "specialist_external",
+      "status": "gap_no_first_party_skill"
+    },
+    {
+      "id": "people-operations",
+      "title": "People operations and hiring",
+      "default_role": "operator",
+      "eligible_skill_ids": [],
+      "required_tool_ids": [
+        "engagement-read"
+      ],
+      "execution_boundary": "specialist_external",
+      "status": "gap_no_first_party_skill"
+    }
+  ],
+  "method_links": [
+    {
+      "method_id": "continuous-discovery",
+      "capability_id": "customer-discovery",
+      "skill_id": "product-discovery",
+      "coverage": "partial_instruction_only",
+      "execution_verified": false,
+      "note": "Catalog mapping does not assert methodology fidelity or executed competence"
+    },
+    {
+      "method_id": "opportunity-solution-tree",
+      "capability_id": "customer-discovery",
+      "skill_id": "opportunity-solution-tree",
+      "coverage": "partial_instruction_only",
+      "execution_verified": false,
+      "note": "Catalog mapping does not assert methodology fidelity or executed competence"
+    },
+    {
+      "method_id": "product-operating-model",
+      "capability_id": "organization",
+      "skill_id": "operating-model",
+      "coverage": "partial_instruction_only",
+      "execution_verified": false,
+      "note": "Catalog mapping does not assert methodology fidelity or executed competence"
+    },
+    {
+      "method_id": "business-model-canvas",
+      "capability_id": "venture-design",
+      "skill_id": "business-model",
+      "coverage": "partial_instruction_only",
+      "execution_verified": false,
+      "note": "Catalog mapping does not assert methodology fidelity or executed competence"
+    },
+    {
+      "method_id": "value-proposition-canvas",
+      "capability_id": "venture-design",
+      "skill_id": "business-model",
+      "coverage": "partial_instruction_only",
+      "execution_verified": false,
+      "note": "Catalog mapping does not assert methodology fidelity or executed competence"
+    },
+    {
+      "method_id": "test-card",
+      "capability_id": "experimentation",
+      "skill_id": "experiment-design",
+      "coverage": "partial_instruction_only",
+      "execution_verified": false,
+      "note": "Catalog mapping does not assert methodology fidelity or executed competence"
+    },
+    {
+      "method_id": "learning-card",
+      "capability_id": "experimentation",
+      "skill_id": "experiment-design",
+      "coverage": "partial_instruction_only",
+      "execution_verified": false,
+      "note": "Catalog mapping does not assert methodology fidelity or executed competence"
+    },
+    {
+      "method_id": "jtbd-progress",
+      "capability_id": "customer-discovery",
+      "skill_id": "opportunity-discovery",
+      "coverage": "partial_instruction_only",
+      "execution_verified": false,
+      "note": "Catalog mapping does not assert methodology fidelity or executed competence"
+    },
+    {
+      "method_id": "jtbd-odi",
+      "capability_id": "customer-discovery",
+      "skill_id": null,
+      "coverage": "no_first_party_skill",
+      "execution_verified": false,
+      "note": "Catalog mapping does not assert methodology fidelity or executed competence"
+    },
+    {
+      "method_id": "wardley-mapping",
+      "capability_id": "strategy",
+      "skill_id": "systems-diagnosis",
+      "coverage": "partial_instruction_only",
+      "execution_verified": false,
+      "note": "Catalog mapping does not assert methodology fidelity or executed competence"
+    },
+    {
+      "method_id": "causal-loop",
+      "capability_id": "organization",
+      "skill_id": "systems-diagnosis",
+      "coverage": "partial_instruction_only",
+      "execution_verified": false,
+      "note": "Catalog mapping does not assert methodology fidelity or executed competence"
+    },
+    {
+      "method_id": "leverage-points",
+      "capability_id": "organization",
+      "skill_id": "systems-diagnosis",
+      "coverage": "partial_instruction_only",
+      "execution_verified": false,
+      "note": "Catalog mapping does not assert methodology fidelity or executed competence"
+    },
+    {
+      "method_id": "shell-scenarios",
+      "capability_id": "strategy",
+      "skill_id": "strategic-options",
+      "coverage": "partial_instruction_only",
+      "execution_verified": false,
+      "note": "Catalog mapping does not assert methodology fidelity or executed competence"
+    },
+    {
+      "method_id": "real-options",
+      "capability_id": "finance",
+      "skill_id": "financial-scenarios",
+      "coverage": "partial_instruction_only",
+      "execution_verified": false,
+      "note": "Catalog mapping does not assert methodology fidelity or executed competence"
+    },
+    {
+      "method_id": "venture-diligence",
+      "capability_id": "venture-design",
+      "skill_id": "venture-diligence",
+      "coverage": "partial_instruction_only",
+      "execution_verified": false,
+      "note": "Catalog mapping does not assert methodology fidelity or executed competence"
+    },
+    {
+      "method_id": "market-sizing",
+      "capability_id": "market-intelligence",
+      "skill_id": "market-landscape",
+      "coverage": "partial_instruction_only",
+      "execution_verified": false,
+      "note": "Catalog mapping does not assert methodology fidelity or executed competence"
+    },
+    {
+      "method_id": "market-segmentation",
+      "capability_id": "market-intelligence",
+      "skill_id": "market-landscape",
+      "coverage": "partial_instruction_only",
+      "execution_verified": false,
+      "note": "Catalog mapping does not assert methodology fidelity or executed competence"
+    },
+    {
+      "method_id": "competitive-landscape",
+      "capability_id": "market-intelligence",
+      "skill_id": "market-landscape",
+      "coverage": "partial_instruction_only",
+      "execution_verified": false,
+      "note": "Catalog mapping does not assert methodology fidelity or executed competence"
+    },
+    {
+      "method_id": "porter-five-forces",
+      "capability_id": "market-intelligence",
+      "skill_id": "market-landscape",
+      "coverage": "partial_instruction_only",
+      "execution_verified": false,
+      "note": "Catalog mapping does not assert methodology fidelity or executed competence"
+    },
+    {
+      "method_id": "pestle",
+      "capability_id": "market-intelligence",
+      "skill_id": "market-landscape",
+      "coverage": "partial_instruction_only",
+      "execution_verified": false,
+      "note": "Catalog mapping does not assert methodology fidelity or executed competence"
+    },
+    {
+      "method_id": "risk-assumption-map",
+      "capability_id": "experimentation",
+      "skill_id": "experiment-design",
+      "coverage": "partial_instruction_only",
+      "execution_verified": false,
+      "note": "Catalog mapping does not assert methodology fidelity or executed competence"
+    },
+    {
+      "method_id": "pricing-discovery",
+      "capability_id": "commercial",
+      "skill_id": "commercial-offer",
+      "coverage": "partial_instruction_only",
+      "execution_verified": false,
+      "note": "Catalog mapping does not assert methodology fidelity or executed competence"
+    },
+    {
+      "method_id": "north-star",
+      "capability_id": "product",
+      "skill_id": "product-discovery",
+      "coverage": "partial_instruction_only",
+      "execution_verified": false,
+      "note": "Catalog mapping does not assert methodology fidelity or executed competence"
+    },
+    {
+      "method_id": "ab-testing",
+      "capability_id": "experimentation",
+      "skill_id": "experiment-design",
+      "coverage": "partial_instruction_only",
+      "execution_verified": false,
+      "note": "Catalog mapping does not assert methodology fidelity or executed competence"
+    },
+    {
+      "method_id": "outcome-roadmapping",
+      "capability_id": "product",
+      "skill_id": "product-requirements",
+      "coverage": "partial_instruction_only",
+      "execution_verified": false,
+      "note": "Catalog mapping does not assert methodology fidelity or executed competence"
+    },
+    {
+      "method_id": "working-backwards",
+      "capability_id": "product",
+      "skill_id": "strategic-options",
+      "coverage": "partial_instruction_only",
+      "execution_verified": false,
+      "note": "Catalog mapping does not assert methodology fidelity or executed competence"
+    },
+    {
+      "method_id": "shape-up",
+      "capability_id": "product",
+      "skill_id": null,
+      "coverage": "no_first_party_skill",
+      "execution_verified": false,
+      "note": "Catalog mapping does not assert methodology fidelity or executed competence"
+    },
+    {
+      "method_id": "okr",
+      "capability_id": "organization",
+      "skill_id": "operating-model",
+      "coverage": "partial_instruction_only",
+      "execution_verified": false,
+      "note": "Catalog mapping does not assert methodology fidelity or executed competence"
+    },
+    {
+      "method_id": "business-capability",
+      "capability_id": "organization",
+      "skill_id": "operating-model",
+      "coverage": "partial_instruction_only",
+      "execution_verified": false,
+      "note": "Catalog mapping does not assert methodology fidelity or executed competence"
+    },
+    {
+      "method_id": "premortem",
+      "capability_id": "strategy",
+      "skill_id": "adversarial-review",
+      "coverage": "partial_instruction_only",
+      "execution_verified": false,
+      "note": "Catalog mapping does not assert methodology fidelity or executed competence"
+    },
+    {
+      "method_id": "pretotype",
+      "capability_id": "experimentation",
+      "skill_id": "experiment-design",
+      "coverage": "partial_instruction_only",
+      "execution_verified": false,
+      "note": "Catalog mapping does not assert methodology fidelity or executed competence"
+    },
+    {
+      "method_id": "design-sprint",
+      "capability_id": "customer-discovery",
+      "skill_id": null,
+      "coverage": "no_first_party_skill",
+      "execution_verified": false,
+      "note": "Catalog mapping does not assert methodology fidelity or executed competence"
+    },
+    {
+      "method_id": "commercial-gtm",
+      "capability_id": "commercial",
+      "skill_id": "go-to-market",
+      "coverage": "partial_instruction_only",
+      "execution_verified": false,
+      "note": "Catalog mapping does not assert methodology fidelity or executed competence"
+    },
+    {
+      "method_id": "portfolio-options",
+      "capability_id": "finance",
+      "skill_id": "financial-scenarios",
+      "coverage": "partial_instruction_only",
+      "execution_verified": false,
+      "note": "Catalog mapping does not assert methodology fidelity or executed competence"
+    }
+  ]
+}
