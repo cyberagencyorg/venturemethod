@@ -65,6 +65,16 @@ class CompositionTests(unittest.TestCase):
             self.assertEqual(unit['status'],'blocked_for_evidence_or_provider')
             self.assertTrue(any('recorded sources' in b for b in unit['blockers']))
 
+    def test_ost_rejects_desk_research_as_customer_interview(self):
+        with tempfile.TemporaryDirectory() as td:
+            case=self.make_case(Path(td))
+            source=core.add_source(case,'Desk research','local:desk-1','report')
+            core.add_claim(case,'The article estimates churn',[source['id']])
+            unit=composition.compose(case,goals=['discover_need'],
+                         method_ids=['opportunity-solution-tree'],evidence='observed')['work_units'][0]
+            self.assertEqual(unit['status'],'blocked_for_evidence_or_provider')
+            self.assertTrue(any('desk research alone' in b for b in unit['blockers']))
+
     def test_missing_method_provider_is_explicit(self):
         with tempfile.TemporaryDirectory() as td:
             case = self.make_case(Path(td))
