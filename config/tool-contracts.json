@@ -19,6 +19,15 @@
       "data_scope": "one engagement"
     },
     {
+      "id": "local-source-capture",
+      "effect": "draft",
+      "availability": "local",
+      "description": "Operator-mediated capture of authorized local text sources, exact excerpt checks and review draft generation",
+      "approval": "operator authorizes local source; human reviewer required for factual claims and external use",
+      "data_scope": "one private engagement",
+      "execution": "manual CLI research commands; not a network fetch or AI agent"
+    },
+    {
       "id": "external-research",
       "effect": "read",
       "availability": "unimplemented",
