@@ -123,3 +123,18 @@ class ResearchTests(unittest.TestCase):
         self.assertTrue(any('artifact snapshot' in e for e in status['errors']))
         with self.assertRaisesRegex(ValueError,'audit failed'):
             research.brief(self.case)
+
+    def test_duplicate_import_refuses_corrupted_previous_snapshot(self):
+        prior=self.ingest()
+        research._snapshot_path(self.case,prior['snapshot_sha256']).write_text('modified snapshot')
+        with self.assertRaisesRegex(ValueError,'Corrupted'):
+            self.ingest()
+
+    def test_replaced_snapshot_directory_symlink_is_rejected(self):
+        prior=self.ingest()
+        directory=self.case/'research'/'snapshots'
+        outside=self.root/'outside'
+        directory.rename(outside)
+        directory.symlink_to(outside, target_is_directory=True)
+        with self.assertRaisesRegex(ValueError,'escaped engagement'):
+            research._captured_text(self.case,core.read_json(self.case/'sources.json')[0])
