@@ -62,3 +62,9 @@ Do not treat registry metadata as enforcement. An actual agent runtime must enfo
 Actual tool invocation, sources fetched or independently verified, skill loading/execution, concurrent collaboration, execution receipts, task retries, role handoffs, user authentication, high-quality document generation, and meaningful professional evaluations. All work units are marked `manual_execution_only` and proposals are `proposed_not_executed`.
 
 The next slice should run one bounded research-to-output case through an authorized adapter, compare results to a manual baseline, and carry a consequential evidence update into a revised artifact. Do that before introducing autonomous execution across more domains.
+
+## Bounded research execution (first local adapter)
+
+The separate `vm.py research` subcommand now performs operator-mediated text capture, exact-excerpt association, evidence auditing, and immutable review-draft generation. See [research capture](RESEARCH_CAPTURE.md) for the commands, limitations and update behavior.
+
+It is recorded as `local-source-capture` in the tool registry with a local draft effect. It does **not** run an agent, fetch a website, verify authenticity or authorize a publication. A composed method plan remains planning-only; the operator chooses and runs the research steps explicitly. An execution receipt and a live adapter binding are future work.
