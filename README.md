@@ -1,12 +1,12 @@
-# Venture Method
+# Khan's Venture Method Framework
 
-**A working framework for people who have to figure things out, make them work, and keep improving them.**
+**An adaptive, AI-native framework for venture architecture, product leadership, business strategy, and cross-functional execution.**
 
-Created by **Brad Khan**. Designed for human practitioners and AI agents.
+Created by Brad Khan. Also called **Venture Method**. Built for professional use by people working alone, with teams, or with AI agents.
 
 You might be assessing a company, designing a venture, leading product, advising an executive team, or investigating an unfamiliar market. The assignment rarely fits within one discipline. You need to work out what is happening, decide which questions matter, find the right expertise, produce useful work, and follow through.
 
-Venture Method is an attempt to make that process reusable. It brings established methods, specialist skills, research, work products, and a persistent record of decisions into one adaptable way of working.
+Khan's Venture Method Framework is designed to make that work reusable. It brings established methods, specialist skills, research, work products, and a persistent record of decisions into one adaptable way of working.
 
 You can start with one question or run a long engagement. The methods change with the problem. The knowledge carries forward.
 
