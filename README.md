@@ -10,7 +10,7 @@ Khan's Venture Method Framework is designed to make that work reusable. It bring
 
 You can start with one question or run a long engagement. The methods change with the problem. The knowledge carries forward.
 
-[About the project](ABOUT.md) · [What belongs in the framework](docs/FRAMEWORK_SCOPE.md) · [Getting started](docs/GETTING_STARTED.md) · [Current capabilities](docs/CAPABILITY_STATUS.md)
+[About the project](ABOUT.md) · [Framework scope](docs/FRAMEWORK_SCOPE.md) · [Adversarial architecture review](docs/ADVERSARIAL_ARCHITECTURE_REVIEW.md) · [Getting started](docs/GETTING_STARTED.md) · [Current capabilities](docs/CAPABILITY_STATUS.md)
 
 ## What you can use it for
 
