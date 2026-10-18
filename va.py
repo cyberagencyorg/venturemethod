@@ -9,7 +9,7 @@ from src.va.core import (ROOT, TYPES, PROFILES, safe_engagement, new_engagement,
     add_source, add_claim, add_decision, add_hypothesis, add_option, add_action,
     add_outcome, plan, quality_check, report, validate_skills, skill_metadata,
     update_engagement, add_entity, add_review, trace, BUNDLES)
-from src.va import ledger, routing, artifacts, skillforge, skill_evals, methodology, change_model, ost, demo, composition
+from src.va import ledger, routing, artifacts, skillforge, skill_evals, methodology, change_model, ost, demo, composition, research
 
 
 def printer(v): print(json.dumps(v, indent=2, ensure_ascii=False))
@@ -77,6 +77,15 @@ def main(argv=None):
     comp.add_argument('--method', action='append', default=[])
     comp.add_argument('--evidence', choices=methodology.EVIDENCE, default='minimal')
     comp.add_argument('--save', action='store_true', help='Save immutable proposal under private engagement')
+    res=sub.add_parser('research', help='Capture text evidence and prepare traceable draft briefs (no web/model calls)')
+    res.add_argument('action', choices=['import','claim','brief','audit'])
+    res.add_argument('engagement')
+    res.add_argument('--file', type=Path)
+    res.add_argument('--title'); res.add_argument('--locator')
+    res.add_argument('--kind', default='document'); res.add_argument('--publisher',default='unverified')
+    res.add_argument('--published-at')
+    res.add_argument('--source'); res.add_argument('--text'); res.add_argument('--excerpt')
+    res.add_argument('--question'); res.add_argument('--preview', action='store_true')
     sub.add_parser('capabilities', help='Validate and display work composition coverage')
     sub.add_parser('methods', help='Show v0.2 methods registry')
     fw=sub.add_parser('frameworks', help='Compare v0.3 methodology candidates; explicit goal, no silent winner')
@@ -172,6 +181,20 @@ def main(argv=None):
         elif ns.command == 'compose':
             printer(composition.compose(case, goals=ns.goal, method_ids=ns.method,
                                         evidence=ns.evidence, save=ns.save))
+        elif ns.command == 'research':
+            if ns.action == 'import':
+                if not all((ns.file, ns.title, ns.locator)):
+                    raise ValueError('research import requires --file --title --locator')
+                printer(research.import_file(case,ns.file,title=ns.title,locator=ns.locator,
+                       source_type=ns.kind,publisher=ns.publisher,published_at=ns.published_at))
+            elif ns.action == 'claim':
+                if not all((ns.source, ns.text, ns.excerpt)):
+                    raise ValueError('research claim requires --source --text --excerpt')
+                printer(research.add_excerpt_claim(case,ns.source,ns.text,ns.excerpt))
+            elif ns.action == 'brief': printer(research.brief(case,question=ns.question or '',save=not ns.preview))
+            else:
+                result=research.audit(case);printer(result)
+                if not result['passed']:return 2
         elif ns.command == 'capabilities': printer(composition.inventory())
         elif ns.command == 'methods': printer(json.loads((ROOT/'config'/'methods.json').read_text(encoding='utf8')))
         elif ns.command == 'frameworks': printer(methodology.compare(ns.goal,ns.evidence))
