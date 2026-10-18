@@ -1,0 +1,126 @@
+{
+  "schema_version": "1.0",
+  "status": "design_contracts_only",
+  "description": "Role definitions used for planning. No runtime agent creation, authorization or tool execution.",
+  "roles": [
+    {
+      "id": "lead",
+      "title": "Engagement lead",
+      "responsibility": "define scope, coordinate work, review constraints",
+      "allowed_tool_effects": [
+        "read",
+        "draft"
+      ],
+      "approval_authority": "none; named human review required",
+      "escalate_on": [
+        "missing_evidence",
+        "side_effect_request",
+        "unavailable_tool",
+        "consequential_decision"
+      ],
+      "max_delegation_depth": 0
+    },
+    {
+      "id": "researcher",
+      "title": "Researcher",
+      "responsibility": "collect and distinguish source evidence from inference",
+      "allowed_tool_effects": [
+        "read",
+        "draft"
+      ],
+      "approval_authority": "none; named human review required",
+      "escalate_on": [
+        "missing_evidence",
+        "side_effect_request",
+        "unavailable_tool",
+        "consequential_decision"
+      ],
+      "max_delegation_depth": 0
+    },
+    {
+      "id": "specialist",
+      "title": "Domain specialist",
+      "responsibility": "apply a documented method with caveats",
+      "allowed_tool_effects": [
+        "read",
+        "draft"
+      ],
+      "approval_authority": "none; named human review required",
+      "escalate_on": [
+        "missing_evidence",
+        "side_effect_request",
+        "unavailable_tool",
+        "consequential_decision"
+      ],
+      "max_delegation_depth": 0
+    },
+    {
+      "id": "analyst",
+      "title": "Analyst/modeler",
+      "responsibility": "calculate and challenge numerical assumptions",
+      "allowed_tool_effects": [
+        "read",
+        "draft"
+      ],
+      "approval_authority": "none; named human review required",
+      "escalate_on": [
+        "missing_evidence",
+        "side_effect_request",
+        "unavailable_tool",
+        "consequential_decision"
+      ],
+      "max_delegation_depth": 0
+    },
+    {
+      "id": "operator",
+      "title": "Execution coordinator",
+      "responsibility": "prepare approved handoffs and receive outcome records",
+      "allowed_tool_effects": [
+        "read",
+        "draft"
+      ],
+      "approval_authority": "none; named human review required",
+      "escalate_on": [
+        "missing_evidence",
+        "side_effect_request",
+        "unavailable_tool",
+        "consequential_decision"
+      ],
+      "max_delegation_depth": 0
+    },
+    {
+      "id": "critic",
+      "title": "Independent critic",
+      "responsibility": "evaluate alternatives, inputs and output quality",
+      "allowed_tool_effects": [
+        "read",
+        "draft"
+      ],
+      "approval_authority": "none; named human review required",
+      "escalate_on": [
+        "missing_evidence",
+        "side_effect_request",
+        "unavailable_tool",
+        "consequential_decision"
+      ],
+      "max_delegation_depth": 0
+    },
+    {
+      "id": "steward",
+      "title": "Knowledge steward",
+      "responsibility": "maintain provenance, revisions and stale status",
+      "allowed_tool_effects": [
+        "read",
+        "draft"
+      ],
+      "approval_authority": "none; named human review required",
+      "escalate_on": [
+        "missing_evidence",
+        "side_effect_request",
+        "unavailable_tool",
+        "consequential_decision"
+      ],
+      "max_delegation_depth": 0
+    }
+  ]
+}
