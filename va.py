@@ -9,7 +9,7 @@ from src.va.core import (ROOT, TYPES, PROFILES, safe_engagement, new_engagement,
     add_source, add_claim, add_decision, add_hypothesis, add_option, add_action,
     add_outcome, plan, quality_check, report, validate_skills, skill_metadata,
     update_engagement, add_entity, add_review, trace, BUNDLES)
-from src.va import ledger, routing, artifacts, skillforge, skill_evals, methodology, change_model, ost, demo
+from src.va import ledger, routing, artifacts, skillforge, skill_evals, methodology, change_model, ost, demo, composition
 
 
 def printer(v): print(json.dumps(v, indent=2, ensure_ascii=False))
@@ -71,6 +71,13 @@ def main(argv=None):
     se=sub.add_parser('skill-eval',help='Prepare or summarize externally executed blinded skill evaluations')
     se.add_argument('action',choices=['prepare','summarize'])
     se.add_argument('--skill'); se.add_argument('--workspace',required=True)
+    comp=sub.add_parser('compose', help='Plan explicitly selected methods, roles and tools; no execution')
+    comp.add_argument('engagement')
+    comp.add_argument('--goal', action='append', required=True, choices=methodology.GOALS)
+    comp.add_argument('--method', action='append', default=[])
+    comp.add_argument('--evidence', choices=methodology.EVIDENCE, default='minimal')
+    comp.add_argument('--save', action='store_true', help='Save immutable proposal under private engagement')
+    sub.add_parser('capabilities', help='Validate and display work composition coverage')
     sub.add_parser('methods', help='Show v0.2 methods registry')
     fw=sub.add_parser('frameworks', help='Compare v0.3 methodology candidates; explicit goal, no silent winner')
     fw.add_argument('--goal', choices=methodology.GOALS, required=True)
@@ -162,6 +169,10 @@ def main(argv=None):
                 if not ns.skill: raise ValueError('--skill required for prepare')
                 printer(skill_evals.prepare(ns.skill,workspace))
             else: printer(skill_evals.summarize(workspace))
+        elif ns.command == 'compose':
+            printer(composition.compose(case, goals=ns.goal, method_ids=ns.method,
+                                        evidence=ns.evidence, save=ns.save))
+        elif ns.command == 'capabilities': printer(composition.inventory())
         elif ns.command == 'methods': printer(json.loads((ROOT/'config'/'methods.json').read_text(encoding='utf8')))
         elif ns.command == 'frameworks': printer(methodology.compare(ns.goal,ns.evidence))
     except (ValueError, FileNotFoundError, FileExistsError, json.JSONDecodeError, KeyError) as exc:

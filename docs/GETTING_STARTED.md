@@ -58,3 +58,16 @@ The generated briefs are local, immutable, content-addressed Markdown drafts. `a
 Skill instructions live under `skills/*/SKILL.md`. The portable adapter is at `.agents/skills/venturemethod/SKILL.md`. Use reviewed instructions and scoped context with your preferred compatible agent. Hermes can be tested first, but no particular model or runtime is required by the CLI. Do not grant an agent unrestricted credentials or write access to reviewed shared skills.
 
 See [skill governance](SKILL_GOVERNANCE.md) and [security](SECURITY.md) for boundaries.
+
+## 6. Compose a work proposal across methods and capabilities
+
+The new [composition guide](WORK_COMPOSITION.md) describes how to choose goals and inspect methods, agents, skills, tool needs and open gaps. The command plans work; it never silently runs a model or agent:
+
+```bash
+python vm.py capabilities
+python vm.py compose example-business --goal map_market
+python vm.py compose example-business --goal map_market \
+  --method market-sizing --evidence minimal --save
+```
+
+A saved proposal is tied to the engagement's current source/claim snapshot and registry versions, so it can be compared with a later proposal without overwriting the earlier reasoning. The operator remains responsible for review and execution.
