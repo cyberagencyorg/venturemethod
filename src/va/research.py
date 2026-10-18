@@ -42,7 +42,10 @@ def _captured_text(case: Path, src: dict) -> str:
     if 'snapshot_sha256' not in src:
         raise ValueError('Source was registered without a captured text snapshot')
     path = _snapshot_path(case, src['snapshot_sha256'])
-    # No symlink traversal through material created outside the controlled flow.
+    # Never follow symlinked parent directories, even if replaced after capture.
+    if ((case / 'research').is_symlink() or path.parent.is_symlink()
+            or not path.parent.resolve().is_relative_to(case.resolve())):
+        raise ValueError(f'Snapshot storage escaped engagement: {src["id"]}')
     if path.is_symlink() or not path.is_file():
         raise ValueError(f'Missing or unsafe source snapshot: {src["id"]}')
     raw = path.read_bytes()
@@ -81,6 +84,7 @@ def import_file(case: Path, filename: Path, *, title: str, locator: str,
     same_locator = [s for s in _records(case, 'sources') if s.get('locator') == locator and 'snapshot_sha256' in s]
     for old in same_locator:
         if old['snapshot_sha256'] == sha:
+            _captured_text(case, old)  # Check stored bytes before reusing an old identity.
             return {'source_id': old['id'], 'snapshot_sha256': sha, 'created': False,
                     'possible_changes': [], 'note': 'Identical snapshot already captured for this locator'}
     dest = _snapshot_path(case, sha)
