@@ -9,7 +9,7 @@ from src.va.core import (ROOT, TYPES, PROFILES, safe_engagement, new_engagement,
     add_source, add_claim, add_decision, add_hypothesis, add_option, add_action,
     add_outcome, plan, quality_check, report, validate_skills, skill_metadata,
     update_engagement, add_entity, add_review, trace, BUNDLES)
-from src.va import ledger, routing, artifacts, skillforge, skill_evals, methodology, change_model, ost, demo, composition, research, retrieval, research_benchmark
+from src.va import ledger, routing, artifacts, skillforge, skill_evals, methodology, change_model, ost, demo, composition, research, retrieval, research_benchmark, operator
 
 
 def printer(v): print(json.dumps(v, indent=2, ensure_ascii=False))
@@ -18,6 +18,21 @@ def printer(v): print(json.dumps(v, indent=2, ensure_ascii=False))
 def main(argv=None):
     p = argparse.ArgumentParser(prog='va', description='Evidence-to-decision Venture Method workbench')
     sub = p.add_subparsers(dest='command', required=True)
+    sub.add_parser('doctor', help='Check offline readiness and show the first useful command')
+    first = sub.add_parser('start', help='Create a real private engagement and record its objective in one command')
+    first.add_argument('name'); first.add_argument('--type', required=True, choices=TYPES)
+    first.add_argument('--objective', required=True); first.add_argument('--industry', default='unspecified')
+    first.add_argument('--mode', default='quick', choices=list(PROFILES))
+    first.add_argument('--owner', default='unassigned'); first.add_argument('--output', default='')
+    status = sub.add_parser('status', help='Show engagement progress, integrity and next useful actions')
+    status.add_argument('engagement')
+    pkt = sub.add_parser('packet', help='Create an evidence-scoped packet for a human or external agent')
+    pkt.add_argument('engagement'); pkt.add_argument('--question', default='')
+    pkt.add_argument('--plan', help='Saved composition-<hash>.json filename from engagement/plans/')
+    pkt.add_argument('--preview', action='store_true')
+    subm = sub.add_parser('submit', help='Preserve a human/agent Markdown draft for independent review')
+    subm.add_argument('engagement'); subm.add_argument('--file', type=Path, required=True)
+    subm.add_argument('--author', default='operator_or_external_agent')
     d = sub.add_parser('demo', help='Create an explicitly fictional, private end-to-end example')
     d.add_argument('--name', default='Fictional Harbor Supplies Demo')
     n = sub.add_parser('new', help='Create isolated local engagement')
@@ -110,7 +125,20 @@ def main(argv=None):
     ns = p.parse_args(argv)
     try:
         case = safe_engagement(ns.engagement) if hasattr(ns,'engagement') else None
-        if ns.command == 'demo': printer(demo.build(ns.name))
+        if ns.command == 'doctor':
+            result = operator.doctor(); printer(result)
+            if not result['ready_for_local_work']: return 2
+        elif ns.command == 'start':
+            printer(operator.start(ns.name, ns.type, ns.objective, industry=ns.industry,
+                                   mode=ns.mode, owner=ns.owner, requested_output=ns.output))
+        elif ns.command == 'status':
+            result=operator.status(case)
+            printer(result)
+            if not all(result['integrity'][k] for k in ('journal','source_material','work_artifacts')): return 2
+        elif ns.command == 'packet': printer(operator.packet(case,question=ns.question,
+                                                    save=not ns.preview,plan_name=ns.plan))
+        elif ns.command == 'submit': printer(operator.submit(case,ns.file,author=ns.author))
+        elif ns.command == 'demo': printer(demo.build(ns.name))
         elif ns.command == 'new': print(new_engagement(ns.name, ns.type, ns.industry, ns.mode))
         elif ns.command == 'ost':
             opts={}

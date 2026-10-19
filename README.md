@@ -12,6 +12,20 @@ You can start with one question or run a long engagement. The methods change wit
 
 [About the project](ABOUT.md) · [Framework scope](docs/FRAMEWORK_SCOPE.md) · [Adversarial architecture review](docs/ADVERSARIAL_ARCHITECTURE_REVIEW.md) · [Getting started](docs/GETTING_STARTED.md) · [Current capabilities](docs/CAPABILITY_STATUS.md)
 
+## Start using it
+
+Clone this private repository and run the operator checks from its root (Python 3.11+; no API key required):
+
+```bash
+python vm.py doctor
+python vm.py start "First Client Assessment" --type client --objective "Decide whether a limited pilot is justified" --owner "Engagement principal"
+python vm.py status first-client-assessment
+```
+
+Capture permitted research using `research import` or the restricted `research fetch` command, attach exact-source excerpts with `research claim`, then run `python vm.py packet first-client-assessment`. Give the private packet to your chosen human or compatible agent and use `python vm.py submit first-client-assessment --file REPORT.md` to preserve its returned draft for independent review. The CLI does **not** execute Hermes, authenticate an approval, or publish documents.
+
+[Complete first-engagement walkthrough](docs/FIRST_ENGAGEMENT.md).
+
 ## What you can use it for
 
 | Situation | Work you might need |

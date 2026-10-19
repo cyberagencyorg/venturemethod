@@ -4,6 +4,8 @@
 
 Python 3.11 or newer. No third-party Python packages are required for the offline commands below. From the repository root, run `python vm.py --help` for supported operations.
 
+For work on an actual company, client or venture, begin with [the first-engagement guide](FIRST_ENGAGEMENT.md). It covers a complete local operator workflow from setup through research capture, optional method selection, human/agent handoff, and an unapproved draft returned for review.
+
 ## 1. Inspect a fully fictional work cycle
 
 ```bash
