@@ -15,3 +15,4 @@ jobs:
       - run: python va.py skills check
       - run: python va.py methods > /dev/null
       - run: python vm.py doctor
+      - run: python vm.py adopt --task "product customer discovery" --phase in-flight > /dev/null
