@@ -12,6 +12,18 @@ You can start with one question or run a long engagement. The methods change wit
 
 [About the project](ABOUT.md) · [Framework scope](docs/FRAMEWORK_SCOPE.md) · [Adversarial architecture review](docs/ADVERSARIAL_ARCHITECTURE_REVIEW.md) · [Getting started](docs/GETTING_STARTED.md) · [Current capabilities](docs/CAPABILITY_STATUS.md)
 
+## Use Venture Method from any project
+
+Point an LLM or compatible agent with repository access at [ADOPT.md](ADOPT.md). It can use selected methods and skills to help with **an existing project, including one already in progress**, without changing the host repo, requiring a new engagement, or adopting a particular agent runtime.
+
+For a local, read-only set of pointers:
+
+```bash
+python vm.py adopt --task "Improve discovery on a product already in delivery" --phase in-flight
+```
+
+The suggestion tool uses transparent lexical matches, not a claim of expert method selection. It creates no records and makes no external calls. [See the optional adoption protocol](ADOPT.md). A private GitHub link is accessible only to models or agents that have been granted access.
+
 ## Start using it
 
 Clone this private repository and run the operator checks from its root (Python 3.11+; no API key required):

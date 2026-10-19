@@ -1,0 +1,29 @@
+{
+  "schema_version": "1.0",
+  "name": "Khan's Venture Method Framework",
+  "short_name": "Venture Method",
+  "description": "An adaptive, agent-compatible framework of professional methods, skills and evolving engagement knowledge.",
+  "manifest_type": "project-specific-adoption-map",
+  "standard_claim": "This manifest is not a standardized auto-discovery protocol.",
+  "entrypoints": {
+    "adoption": "ADOPT.md",
+    "project_agents": "AGENTS.md",
+    "portable_skill": ".agents/skills/venturemethod/SKILL.md",
+    "framework_about": "ABOUT.md",
+    "first_engagement": "docs/FIRST_ENGAGEMENT.md"
+  },
+  "catalogs": {
+    "skills": "config/skills-registry.json",
+    "frameworks": "config/frameworks-v3.json",
+    "method_to_skill": "config/work-composition.json",
+    "roles": "config/agent-roles.json",
+    "tool_contracts": "config/tool-contracts.json"
+  },
+  "adoption_modes": ["consult", "selective", "ongoing_engagement"],
+  "default": "consult",
+  "permission_model": "read_only_until_user_authorizes_specific_changes",
+  "agent_runtime": "none_required",
+  "engagement_creation": "opt_in",
+  "deployment": "local_or_linked_repository",
+  "limitation": "A model cannot use a private repository it cannot access. Skill selection and role definitions do not execute an agent or enforce permissions."
+}

@@ -9,7 +9,7 @@ from src.va.core import (ROOT, TYPES, PROFILES, safe_engagement, new_engagement,
     add_source, add_claim, add_decision, add_hypothesis, add_option, add_action,
     add_outcome, plan, quality_check, report, validate_skills, skill_metadata,
     update_engagement, add_entity, add_review, trace, BUNDLES)
-from src.va import ledger, routing, artifacts, skillforge, skill_evals, methodology, change_model, ost, demo, composition, research, retrieval, research_benchmark, operator
+from src.va import ledger, routing, artifacts, skillforge, skill_evals, methodology, change_model, ost, demo, composition, research, retrieval, research_benchmark, operator, adoption
 
 
 def printer(v): print(json.dumps(v, indent=2, ensure_ascii=False))
@@ -18,6 +18,11 @@ def printer(v): print(json.dumps(v, indent=2, ensure_ascii=False))
 def main(argv=None):
     p = argparse.ArgumentParser(prog='va', description='Evidence-to-decision Venture Method workbench')
     sub = p.add_subparsers(dest='command', required=True)
+    use = sub.add_parser('adopt', help='Read-only guidance for using selected Venture Method capabilities in any project')
+    use.add_argument('--task', required=True, help='Existing task or project objective; no files read')
+    use.add_argument('--phase', choices=adoption.PHASES, default='in-flight')
+    use.add_argument('--limit', type=int, default=4, help='Maximum skill and method suggestions (1-8)')
+    use.add_argument('--json', action='store_true', help='Output structured adoption guidance')
     sub.add_parser('doctor', help='Check offline readiness and show the first useful command')
     first = sub.add_parser('start', help='Create a real private engagement and record its objective in one command')
     first.add_argument('name'); first.add_argument('--type', required=True, choices=TYPES)
@@ -125,7 +130,11 @@ def main(argv=None):
     ns = p.parse_args(argv)
     try:
         case = safe_engagement(ns.engagement) if hasattr(ns,'engagement') else None
-        if ns.command == 'doctor':
+        if ns.command == 'adopt':
+            info = adoption.orient(ns.task, phase=ns.phase, limit=ns.limit)
+            if ns.json: printer(info)
+            else: print(adoption.markdown(info))
+        elif ns.command == 'doctor':
             result = operator.doctor(); printer(result)
             if not result['ready_for_local_work']: return 2
         elif ns.command == 'start':
