@@ -82,7 +82,7 @@ python vm.py new "Example Company" --type company --industry logistics --mode qu
 python vm.py plan example-company
 ```
 
-The local implementation includes engagement records, method metadata, 26 original skill specifications, draft decision briefs, proposed revisions, basic dependency inspection, and structural tests. It cannot yet conduct independent research, run arbitrary agent workflows, produce verified financial analyses, or manage a team with authenticated approvals. See [capability status](docs/CAPABILITY_STATUS.md).
+The local implementation includes engagement records, method metadata, 26 original portable skill specifications and 34 cataloged methods, draft decision briefs, proposed revisions, basic dependency inspection, and structural tests. It cannot yet conduct independent research, run arbitrary agent workflows, produce verified financial analyses, or manage a team with authenticated approvals. See [capability status](docs/CAPABILITY_STATUS.md).
 
 ## Built to travel
 
