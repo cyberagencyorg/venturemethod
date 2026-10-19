@@ -24,9 +24,10 @@ class DocumentationConsistencyTests(unittest.TestCase):
         readme = (core.ROOT / 'README.md').read_text(encoding='utf8')
         actual_skills = sum(1 for p in (core.ROOT / 'skills').iterdir() if (p / 'SKILL.md').is_file())
         actual_methods = len(methodology.load_catalog())
-        self.assertIn(f'{actual_skills} original portable skill', readme)
-        self.assertIn(f'{actual_methods} methods', readme)
-        self.assertIn('does **not** yet perform autonomous research', readme)
+        self.assertRegex(readme, rf'\b{actual_skills} original (?:portable )?skill')
+        self.assertRegex(readme, rf'\b{actual_methods} (?:cataloged )?methods')
+        self.assertTrue('cannot yet conduct independent research' in readme or
+                        'does **not** yet perform autonomous research' in readme)
         self.assertIn('Brad Khan', readme)
         self.assertIn('Venture Method', readme)
 
