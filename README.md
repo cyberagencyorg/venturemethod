@@ -1,36 +1,54 @@
-# Venture Method
+# Khan's Venture Method Framework
 
-**The right methods. Better decisions. Knowledge that keeps up.**
+**An adaptive, AI-native framework for venture architecture, product leadership, business strategy, and cross-functional execution.**
 
-**Venture Method is Brad Khan's adaptive, AI-native, agent-compatible framework for investigating opportunities, developing ventures, shaping products, and making evidence-grounded decisions across markets, capital, and organizations.**
+Created by Brad Khan. Also called **Venture Method**. Built for professional use by people working alone, with teams, or with AI agents.
 
-For venture builders, founders, CEOs, CPOs, investors, family offices, researchers, and operators who routinely cross disciplines and need their work to stay connected as things change. Start with a company, idea, market, product, or mandate. Select methods that actually fit the question. Work from evidence to options, decisions, execution, and revision.
+You might be assessing a company, designing a venture, leading product, advising an executive team, or investigating an unfamiliar market. The assignment rarely fits within one discipline. You need to work out what is happening, decide which questions matter, find the right expertise, produce useful work, and follow through.
 
-**It is not another collection of prompts or a rigid, one-size-fits-all product process.** Established methods remain distinct. Specialized skills can be evaluated and improved. Knowledge and decisions have a history. You can work locally, manually, or with your preferred compatible agent.
+Khan's Venture Method Framework is designed to make that work reusable. It brings established methods, specialist skills, research, work products, and a persistent record of decisions into one adaptable way of working.
 
-> **Current release: private experimental framework, v0.6.** The offline CLI, method catalog, typed engagement records, draft decision briefs, Opportunity Solution Tree, integrity checks, and revision-impact inspection work locally. It does **not** yet perform autonomous research, execute AI agents, independently validate evidence, authenticate approvals, or provide a hosted service.
+You can start with one question or run a long engagement. The methods change with the problem. The knowledge carries forward.
 
-[Run the fictional demonstration](#try-it-in-a-minute) · [The case for Venture Method](ABOUT.md) · [Method selection](docs/METHOD_SELECTION.md) · [Architecture](docs/ARCHITECTURE.md) · [Contribute](CONTRIBUTING.md)
+[About the project](ABOUT.md) · [Framework scope](docs/FRAMEWORK_SCOPE.md) · [Adversarial architecture review](docs/ADVERSARIAL_ARCHITECTURE_REVIEW.md) · [Getting started](docs/GETTING_STARTED.md) · [Current capabilities](docs/CAPABILITY_STATUS.md)
 
-## Why another framework?
+## What you can use it for
 
-A strategy deck, discovery tree, PRD, market report, and financial model may all describe the same situation. Too often they are produced independently. New evidence arrives, but no one knows which assumptions, decisions, or deliverables it affects.
+| Situation | Work you might need |
+| --- | --- |
+| **Building a venture** | Opportunity research, customer discovery, business model design, experiments, pricing, capital options, launch planning |
+| **Leading a product** | Research synthesis, Opportunity Solution Trees, product strategy, requirements, prioritization, operating cadence, measurement |
+| **Running or advising a company** | Market and organizational assessment, commercial strategy, process improvement, finance, hiring, marketing, sales |
+| **Evaluating an investment** | Industry analysis, diligence, scenario modelling, risks, competing theses, follow-up questions |
+| **Doing client work** | A scoped investigation, proposal, strategy, delivery plan, or ongoing advisory engagement |
 
-And before any of those artifacts are created, there is another question: **which intellectual tools are appropriate for this problem?** A market-entry question is not a product discovery exercise. A customer interview does not validate an entire business model. A canvas is not a business. A roadmap is not a strategy.
+These are areas the framework is designed to support. They are not all automated in the current release.
 
-Venture Method connects five disciplines of work:
+## How it works
 
-1. **Understand the situation.** Define the mandate, find relevant sources, distinguish observations from interpretations, and identify what remains unknown.
-2. **Choose deliberately.** Compare frameworks and methods by the question they answer, their prerequisites, and their limits. Do not run every framework by default.
-3. **Develop and test options.** Use research, models, hypotheses, experiments, commercial analysis, product discovery, or organizational diagnosis as warranted.
-4. **Record decisions and consequences.** Preserve alternatives, the evidence considered, and the conditions that would reopen a decision.
-5. **Keep learning.** Propose changes when knowledge evolves, identify downstream work requiring review, and retain the previous record.
+Start by describing the mandate. It might be a company name, a problem, a market, an idea, or a specific deliverable.
 
-The aim is not more documents. It is **better judgment, less repeated setup, and work that remains intelligible after the original session ends**.
+Venture Method helps organize the work around a few practical questions:
 
-## Try it in a minute
+1. **What do we need to understand?** Establish context, distinguish evidence from assumptions, and identify missing information.
+2. **How should we approach it?** Choose from established frameworks and methods according to their purpose, evidence requirements, costs, and limitations.
+3. **What work needs doing?** Use appropriate specialist skills and workflows. Research, strategic analysis, product discovery, financial modelling, sales, marketing, and operational work may all be relevant.
+4. **What did we decide and do?** Keep the reasons, alternatives, approvals, work products, and results together.
+5. **What changed?** Revisit affected assumptions and decisions as new information arrives, without erasing the earlier record.
 
-Python 3.11+ is required. The core demo has no third-party Python dependencies and makes **no model or network calls**.
+You don't have to run all five as a formal sequence. A small task should stay small.
+
+### Methods, skills, and knowledge
+
+A framework such as an Opportunity Solution Tree helps organize a product outcome, customer opportunities, solutions, and assumption tests. An interview skill helps conduct or analyze the research behind it. A workflow may coordinate those skills with review and follow-up. The engagement's knowledge should survive all of them.
+
+Venture Method keeps these concerns separate so you can replace a skill, switch agents, or choose another method without losing the work.
+
+The project currently draws on product management, venture design, strategic analysis, systems thinking, commercial operations, and investment disciplines. [Method selection](docs/METHOD_SELECTION.md) explains how to compare approaches. [Research references](docs/RESEARCH_AND_METHODS.md) credits the external work we study.
+
+## Try the current prototype
+
+The repository contains an **offline experimental implementation**, not a finished autonomous advisor. Python 3.11+ is required for the local CLI. The demonstration is fictional and makes no network or model calls.
 
 ```bash
 python vm.py demo
@@ -39,95 +57,31 @@ python vm.py impact fictional-harbor-supplies-demo --id CLM-0001
 python vm.py audit fictional-harbor-supplies-demo
 ```
 
-The demo creates an **explicitly fictional** client engagement under the gitignored `engagements/` directory. It includes invented interview notes, a claim, hypothesis, option, draft decision, reviewable Opportunity Solution Tree, two immutable working briefs, and a proposed claim revision. Follow the chain to see what would need reconsideration when new information contradicts an earlier assumption.
+The example includes customer evidence, a hypothesis, a decision, an Opportunity Solution Tree, and a proposed change. You can inspect how the earlier decision remains intact while its supporting claim is reconsidered.
 
-To compare methods instead of generating a project:
+To compare applicable methods or start an engagement:
 
 ```bash
 python vm.py frameworks --goal map_market --evidence minimal
 python vm.py frameworks --goal discover_need --evidence observed
-python vm.py skills list
-```
-
-The selector displays candidate methods and their applicability cautions. It does **not** choose a supposedly correct framework on your behalf or run the framework automatically.
-
-### Start your own engagement
-
-```bash
 python vm.py new "Example Company" --type company --industry logistics --mode quick
-python vm.py intake example-company \
-  --objective "Understand the main growth constraint" \
-  --approval-owner "Engagement owner" \
-  --risk-level medium
-python vm.py route example-company
 python vm.py plan example-company
 ```
 
-[Detailed commands and examples](docs/GETTING_STARTED.md)
+The local implementation includes engagement records, method metadata, 26 original skill specifications, draft decision briefs, proposed revisions, basic dependency inspection, and structural tests. It cannot yet conduct independent research, run arbitrary agent workflows, produce verified financial analyses, or manage a team with authenticated approvals. See [capability status](docs/CAPABILITY_STATUS.md).
 
-## One framework, different work
+## Built to travel
 
-| Your role | A question it helps structure | Relevant work |
-|---|---|---|
-| **Founder or venture builder** | Is this a venture worth pursuing? | Customer discovery, business models, uncertainty tests, capital options |
-| **Product manager or CPO** | Which outcomes and opportunities should the team pursue? | Continuous discovery, Opportunity Solution Trees, prioritization, experiments |
-| **CEO or fractional executive** | What is actually constraining the organization? | Operating models, market assessment, systems diagnosis, strategic choices |
-| **VC, family office, or investment team** | What should we believe before committing capital? | Diligence, market structure, assumptions, scenario analysis, decision history |
-| **Researcher or advisor** | How do I turn unfamiliar context into credible work? | Source review, methods selection, documented reasoning, reviewable deliverables |
+Venture Method should work with a person operating manually, Hermes, or another compatible agent. Its methods and engagement records should not depend on a particular model, dashboard, CRM, or project management application.
 
-These are intended use cases, not claims that the current offline prototype replaces specialist judgment or investment review.
+Specialist libraries have plenty to teach us. We study the PM skill collections by [Paweł Huryn](https://github.com/phuryn/pm-skills) and [Product on Purpose](https://github.com/product-on-purpose/pm-skills), [Anthropic's knowledge-work plugins](https://github.com/anthropics/knowledge-work-plugins), and other sources. Their skills are not all included here. Each integration needs a defined role, license review, version pin, and real evaluation.
 
-## Methods, skills, and workflows are not the same thing
+For software delivery, creative production, CRM work, or other specialist execution, the framework should hand work to a suitable system and bring the results back. It doesn't need to become every one of those systems.
 
-A **framework** organizes thinking. A **method** specifies how to investigate or decide. A **skill** packages instructions and supporting resources for an agent. A **workflow** coordinates methods, skills, people, approvals, and repeated learning.
+## Contributing
 
-The repository currently catalogs **34 methods** and includes **26 original portable skill specifications**. Among the represented traditions are Teresa Torres's continuous discovery and Opportunity Solution Trees; Jobs to Be Done; Strategyzer canvases and experiments; product operating models; Wardley Mapping; market and competitive analysis; real options; scenarios; and venture diligence.
+The framework is being developed for real use first. Contributions should improve the quality of a method, the usefulness of a workflow, the reliability of the knowledge record, or the results of a representative case. Adding another skill name is not an improvement by itself.
 
-The method catalog is **selection metadata**, not proof that all 34 methods have complete executable implementations. Only some are supported by working local commands. See [method selection](docs/METHOD_SELECTION.md), [capability status](docs/CAPABILITY_STATUS.md), and [research and attribution](docs/RESEARCH_AND_METHODS.md).
+See [ABOUT.md](ABOUT.md), [CONTRIBUTING.md](CONTRIBUTING.md), and the [scope and design rules](docs/FRAMEWORK_SCOPE.md).
 
-The project studies and may interoperate with [Huryn's PM Skills](https://github.com/phuryn/pm-skills), [Product on Purpose](https://github.com/product-on-purpose/pm-skills), [Dean Peters's PM Skills](https://github.com/deanpeters/Product-Manager-Skills), [PM Brain](https://github.com/phuryn/pm-brain), [BMAD](https://github.com/bmad-code-org/BMAD-METHOD), [Spec Kit](https://github.com/github/spec-kit), and the [Agent Skills standard](https://agentskills.io/specification). They are independent works. Their skills are **not** bundled wholesale, and upstream popularity is not treated as evidence of quality. Attribution, permissions, version pins, and evaluation are required before adopting third-party material.
-
-## Knowledge that stays revisable
-
-```text
-Source -> Claim -> Hypothesis / Option -> Decision -> Action -> Outcome
-            |                                |
-            +---- Opportunity tree           +---- Deliverable
-                            New information
-                                  |
-                         Proposed change
-                                  |
-                   Dependency review and decision
-```
-
-Source and claim references are engagement-scoped. The local journal preserves recorded history. Revisions are proposed as new records rather than silently overwriting their predecessors. A dependency command identifies **explicitly linked** downstream records that require consideration.
-
-This is **not** yet a collaborative knowledge platform: concurrent editing, authenticated approval, semantic contradiction detection, automated refresh, and selective regeneration of published artifacts remain future capabilities. Read the [change-control design](docs/LIVING_KNOWLEDGE_AND_CHANGE_CONTROL_V3.md).
-
-## What works today
-
-| Available locally | Not yet implemented |
-|---|---|
-| Private engagement initialization and intake | Automated public/private source ingestion and verification |
-| Deterministic capability routing and method comparison | Expert-level agentic framework application |
-| Evidence-linked claims, options, hypotheses, decisions and outcomes | Authenticated approvals, team collaboration and permissions service |
-| Local hash-chained journals and reference checks | Production-grade transactional knowledge service |
-| Working-draft Opportunity Solution Trees with proposed changes | Automated customer interview extraction and expert validation |
-| Immutable Markdown decision briefs and context packs | Native slides, spreadsheets, financial models or external publication |
-| Skill registry, review scaffolding, structural tests | Real comparative AI evaluations and autonomous agent execution |
-
-**Local tests:** run `python -m unittest discover -s tests -v` and `python vm.py skills check`. Structural test success does not establish business accuracy or professional output quality.
-
-## Portable by design
-
-The core runs locally with Python and human-operated commands. Skill instructions follow a portable folder convention and can be made available to supported agent tools. Hermes is a useful first adapter, **not** a required runtime. Open ASS and separate creative tools can receive approved handoffs without becoming dependencies.
-
-Client data in `engagements/` is ignored by Git by default. Do not commit sensitive case files, install unreviewed agent skills, or treat a source reference as factual verification. See [security](docs/SECURITY.md) and [skill governance](docs/SKILL_GOVERNANCE.md).
-
-## Help build the quality bar
-
-This project is meant to be useful to one serious practitioner first, and eventually portable to others. We welcome improvements grounded in strong methods, realistic cases, reproducible evaluations, and careful review.
-
-Read [the project's purpose](ABOUT.md), [quality and contribution standards](CONTRIBUTING.md), and [capability gaps](docs/CAPABILITY_STATUS.md). Please **do not** add a skill merely to increase the count.
-
-**Release note:** The repository does not yet include a public redistribution license. Before publishing or accepting external contributions, the owner should choose and add an appropriate license, then review all third-party materials.
+**Status:** Private development repository. No public redistribution license has been chosen. The current tests verify local behavior and structure, not professional competence or factual accuracy.

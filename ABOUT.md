@@ -1,101 +1,61 @@
-# About Venture Method
+# About Khan's Venture Method Framework
 
-## Serious work rarely fits inside one discipline
+I work across ventures, products, companies, and technology. The work changes constantly, but a lot of the preparation repeats: learn the industry, understand the people involved, find reliable information, decide which methods make sense, assemble the right expertise, and produce something that can actually be used.
 
-A venture can fail because the market was misunderstood, the customer problem was misidentified, the business model was unsound, the product was built too early, the operating model made execution impossible, or capital arrived with the wrong terms.
+Then the context changes. A new customer interview challenges an assumption. A competitor makes a move. A regulation changes. A plan gets approved, but the reasoning behind it disappears into a slide deck. The next project starts and we do much of the same work again.
 
-No single methodology addresses all of those problems. No one professional discipline has a monopoly on the answers.
+I wanted a better way to work.
 
-Yet the work is usually fragmented. Researchers create reports. Strategists create decks. Product managers create roadmaps. Finance teams create models. Operators inherit decisions whose original assumptions are difficult to recover. The same questions get researched again, often without benefiting from what was already learned.
+**Khan's Venture Method Framework is my attempt to make complex professional work cumulative, adaptable, and easier to execute well, whether I'm working alone or with other people and AI agents.**
 
-**Venture Method is Brad Khan's framework for making this work more coherent, reusable, and accountable.**
+It is intended to help someone move from an unfamiliar situation to a sound understanding of it, select and apply suitable methods, carry out the work, make informed choices, and maintain what they learn.
 
-It combines disciplined investigation, suitable management and product methods, explicit decisions, durable knowledge, and reusable agent capabilities into a framework that can start small and become more rigorous when the stakes demand it.
+## The work is wider than a job title
 
-It is for people who need to cross boundaries without losing depth: entrepreneurs, venture builders, executives, product leaders, investors, family offices, researchers, and advisors.
+A venture architect may need to do market research, interview customers, design a business model, investigate financing, assemble a team, and test distribution.
 
-## The principle
+A fractional CPO may enter the same company and need to understand its commercial constraints before making any product recommendations. A CEO may need an operating model and a hiring plan. An investment team may need diligence rather than a product roadmap. A founder may simply need a good answer to whether an idea is worth pursuing.
 
-**The framework should improve the quality of decisions, not the quantity of output.**
+Those situations share a need for disciplined inquiry and competent follow-through. They do not share a single fixed process.
 
-It should help answer:
+There are already excellent bodies of work in each discipline. Teresa Torres's continuous discovery, Jobs to Be Done, Strategyzer's business design, Wardley Mapping, product operating models, systems thinking, scenario planning, real options, and investment diligence answer different kinds of questions. I want to make them easier to choose, understand, apply, and combine where it makes sense. Their differences are important.
 
-- What situation are we actually dealing with, and what evidence supports that understanding?
-- Which decisions matter now, and which are premature?
-- Which framework or method is appropriate, and what would make it inappropriate?
-- What alternatives deserve attention, including doing nothing?
-- What evidence would change our view?
-- Which actions follow, who is accountable, and what did they achieve?
-- What must be revisited as customers, markets, institutions, and organizations change?
+## What I want the framework to do
 
-Sometimes the right result is a one-page brief. Sometimes it is a months-long venture development process. Sometimes it is a recommendation to stop.
+First, help establish a useful picture of the situation. That means real research when research is needed, clear treatment of uncertainty, and the ability to tell an observed fact from somebody's interpretation.
 
-The process should adapt to the decision, not the other way around.
+Second, help choose how to proceed. A famous framework isn't automatically the right one. Sometimes an interview program makes sense. Sometimes the next step is financial modelling, an operations review, or a competitor analysis. Sometimes the best next step is a phone call. The process should be proportionate to the problem.
 
-## What makes it different
+Third, make expertise reusable. AI skills can package specialist procedures, instructions, tools, and examples. They should be selected for the job and improved through evaluation. The point isn't to collect as many as possible. A capable system should support product, strategy, finance, marketing, sales, operations, research, and other work without treating one discipline as the default.
 
-**Methods are chosen, not imposed.** Continuous discovery, an Opportunity Solution Tree, business model design, strategic positioning, systems diagnosis, competitive analysis, and investment diligence are useful in different circumstances. The system should preserve the intent and limitations of each instead of blending them into a universal checklist.
+Fourth, keep the work together. Research, hypotheses, decisions, deliverables, actions, and outcomes belong to the same evolving engagement. If new evidence undermines a pricing assumption, the affected forecast, plan, and decision should be identifiable. Previous versions still matter because they explain what we knew at the time.
 
-**Research is connected to decisions.** Observations, claims, hypotheses, options, choices, actions, and outcomes should be distinguishable and traceable. A statement does not become true because it appears in a polished report.
+Finally, leave room for the practitioner. An experienced operator should be able to override a recommendation, bring their own methods, change the depth of the process, and decide which actions an agent may take. A useful framework should improve professional judgment and capacity, not conceal its own assumptions behind automation.
 
-**Knowledge is alive.** New information can contradict earlier assumptions. Decisions may need to be reopened. A financial model or board presentation may no longer reflect the best current understanding. Changes should be proposed, reviewed, recorded, and propagated only where justified.
+## The boundary
 
-**Expertise can be improved.** Agent skills are useful packaging for repeatable procedures, but a skill file is not professional competence. Quality requires strong references, explicit inputs, useful outputs, comparative tests, specialist review, and revision based on actual performance.
+Venture Method owns the approach to the work: engagement context, method selection, skill composition, research discipline, knowledge history, review, and evaluation.
 
-**The user remains in control.** Agents can research, draft, compare, challenge, and prepare work for review. They should not fabricate interviews, approve their own consequential recommendations, assume access to confidential records, or take irreversible actions without authorization.
+It does not need to replace a CRM, an accounting package, a coding agent, a video studio, or a company's existing project management system. Those tools do particular jobs. Venture Method should be able to work with them.
 
-**Portability matters.** Models, agent tools, interfaces, and vendors will change. The enduring assets should be the methods, records, evaluation procedures, and knowledge under the user's control.
+This also gives it a clear development boundary. A new operational capability belongs here when it is a reusable method, skill, or workflow that can serve different engagements. An entire application for running sales or accounting belongs elsewhere, with an adapter where needed.
 
-## Who this is for
+## What good would look like
 
-A **solo venture architect** should be able to enter a new problem, systematically assemble the necessary expertise, and maintain several projects without rebuilding research and workflows from scratch.
+I'd like to enter a company, industry, or venture problem and get to useful work quickly. The framework should help expose what is unknown, locate the appropriate methods and skills, and produce materials that an experienced practitioner would be willing to put their name on.
 
-A **fractional CPO or CEO** should be able to understand an organization, work across product, market, finance, teams, and operations, and leave behind decisions and practices that remain usable after the engagement.
+That standard has to be tested with real cases. A polished report with invented facts is a failure. So is an elaborate workflow that takes more effort to operate than the task itself. I want evaluations that compare methods and agent skills against real alternatives, examine substantive quality, and account for the human time required.
 
-A **founder** should be able to distinguish an attractive idea from a validated opportunity, choose practical experiments, and avoid premature investment in a solution.
+I'm also interested in what this can enable beyond my own work. A founder, product leader, advisor, investor, or small team should be able to adapt the framework to their context without adopting my particular tools or organizational structure. The framework should remain usable locally and should support different agent runtimes.
 
-A **family office or venture investor** should be able to compare opportunities, maintain assumptions and decisions over time, and commission research without confusing a plausible narrative with adequate diligence.
+## Where it stands
 
-A **venture studio** should eventually be able to compound what it learns across markets and companies while keeping confidential context, investment conflicts, and client permissions separate. Local knowledge, language, relationships, and institutions matter especially when evaluating unfamiliar jurisdictions.
+This repository currently implements part of that idea: an offline CLI, engagement records, a method catalog, original skill specifications, a working-draft Opportunity Solution Tree, decision briefs, and basic revision and dependency inspection.
 
-A **product manager** should have access to serious discovery, strategy, experimentation, prioritization, and delivery practices without being forced into a single school's vocabulary.
+It does not yet provide autonomous professional research, operational agent execution, verified financial analysis, live collaboration, or reliable cross-disciplinary evaluations. Those are development goals, not present capabilities.
 
-## What it is not
+The first audience is me, using it for actual work. The broader test is whether other experienced practitioners find it useful, can inspect how it works, and can improve it without sacrificing rigor.
 
-It is not a replacement for good judgment, customer access, specialist expertise, legal advice, or accountable leadership. It is not a universal PM method, a collection of unexamined prompts, a fund-management platform, or an excuse to run complex processes for trivial tasks.
+**Brad Khan**
 
-It is also not a finished enterprise product. The current local repository provides real but limited scaffolding: typed records, method metadata, an offline CLI, proposed revisions, local Opportunity Solution Trees, structural checks, and working drafts. Research automation, real model execution, collaboration, production permissions, and professional outcome benchmarks remain incomplete.
-
-## The standard worth pursuing
-
-A mature version should let someone bring an unfamiliar situation and progress from initial inquiry to defensible decisions, competent execution, and continuing learning. It should be able to explain not just **what** it recommends, but:
-
-- Why this question was prioritized.
-- Which evidence and assumptions it relied on.
-- Why a particular method was selected over alternatives.
-- Where specialist review or more research is needed.
-- What changed since the previous decision.
-- Which follow-on work must now be reconsidered.
-
-It should be good enough to be trusted for serious preparation, yet honest enough to say when the evidence is insufficient.
-
-**The ambition is not to automate thinking away. It is to make rigorous, cross-disciplinary work more accessible, repeatable, inspectable, and improvable.**
-
-## Principles for development
-
-1. **Reality before narrative.** Separate facts, reports, interpretations, and hypotheses.
-2. **Methods before machinery.** Know why a method is needed before automating it.
-3. **Depth when earned.** Match effort to uncertainty, reversibility, consequences, and available evidence.
-4. **Alternatives matter.** Include deferral, partnership, process change, acquisition, and stopping, not only building.
-5. **Changes are accountable.** Preserve what was believed, what changed, who reviewed it, and what follows.
-6. **Quality is measured.** Prefer meaningful cases and human evaluation over vanity skill counts.
-7. **Human agency remains central.** The system prepares judgment and execution rather than silently assuming authority.
-8. **Interfaces are replaceable.** Keep knowledge and methods usable without a specific agent or dashboard.
-9. **Privacy is structural.** Reusable know-how should not require cross-client data exposure.
-10. **Keep it useful.** The first test is whether it saves an actual practitioner time while improving the work.
-
-## Explore the repository
-
-Start at [README](README.md) to run the fictional demo. Then see [method selection](docs/METHOD_SELECTION.md), [capability status](docs/CAPABILITY_STATUS.md), [architecture](docs/ARCHITECTURE.md), and [contribution standards](CONTRIBUTING.md).
-
-Venture Method is created by **Brad Khan** and currently developed in the **Cyber Agency** GitHub organization. The core methodology and knowledge model are intended to remain usable without any particular operator, host, dashboard, or model provider.
+Creator, Venture Method

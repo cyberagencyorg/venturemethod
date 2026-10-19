@@ -1,14 +1,16 @@
-# Venture Method identity and editorial standard
+# Khan's Venture Method Framework: identity and editorial standard
 
-**Name:** Venture Method
+**Full name:** Khan's Venture Method Framework
+
+**Short name:** Venture Method
 
 **Created by:** Brad Khan
 
 **Canonical repository:** `cyberagencyorg/venturemethod` (private during development)
 
-**Short description:** Brad Khan's adaptive, AI-native, agent-compatible framework for research, strategy, product leadership, venture building, and organizational intelligence.
+**Short description:** An adaptive, AI-native framework for venture architecture, product leadership, business strategy, and cross-functional execution.
 
-**Tagline:** The right methods. Better decisions. Knowledge that keeps up.
+**Positioning:** A portable way to bring professional methods, specialist capabilities, engagement knowledge, and accountable execution together. Avoid generic slogan formulas and claims of autonomy not demonstrated in the repository.
 
 ## Who it serves
 
