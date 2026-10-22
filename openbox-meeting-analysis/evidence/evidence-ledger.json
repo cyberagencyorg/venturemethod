@@ -1,0 +1,275 @@
+{
+  "scope": "Independent analysis of the 21 October 2026 OpenBox developer meeting only",
+  "source_video": "/home/bk/Documents/openbox/Catchup - 2026_10_21 10_41 PDT - Recording.mp4",
+  "evidence_scale": {
+    "strong": "Direct statement corroborated by a clear on-screen artifact, or multiple consistent direct statements",
+    "moderate": "Clear direct statement without independent corroboration, or internal artifact not operationally verified",
+    "limited": "Second-hand, ambiguous, future-contingent, or ASR-sensitive statement"
+  },
+  "entries": [
+    {
+      "id": "E001",
+      "category": "strategy",
+      "claim": "OpenBox presents itself as a runtime governance and attestation platform for AI agents.",
+      "timestamp": "00:04:44-00:05:20",
+      "evidence_type": "spoken and visual artifact",
+      "strength": "strong",
+      "frame": "../media/frames/frame-00-05-00.jpg",
+      "status": "demonstrated-as-positioning",
+      "caveat": "Architecture/positioning was shown; runtime behavior was not demonstrated."
+    },
+    {
+      "id": "E002",
+      "category": "architecture",
+      "claim": "The proposed open-core split opens the PEP and verdict/attestation format while retaining decision, administration/control, identity/risk and verification services as proprietary value.",
+      "timestamp": "00:04:44-00:06:55",
+      "evidence_type": "spoken and visual proposal",
+      "strength": "strong",
+      "frame": "../media/frames/frame-00-05-30.jpg",
+      "status": "proposed",
+      "caveat": "License and timing were still under review."
+    },
+    {
+      "id": "E003",
+      "category": "architecture",
+      "claim": "PEP release gates include interface stability, decoupling, secret scrubbing, security policy, conformance tests and fail-closed behavior.",
+      "timestamp": "00:06:03-00:06:55",
+      "evidence_type": "visual checklist",
+      "strength": "strong",
+      "frame": "../media/frames/frame-00-06-30.jpg",
+      "status": "proposed-release-criteria",
+      "caveat": "Completion was not established."
+    },
+    {
+      "id": "E004",
+      "category": "product",
+      "claim": "An internal inventory asserts 87 features across nine areas: 62 live on main, five live with caveats, four staging/own repo, and 16 on feature branches.",
+      "timestamp": "00:10:03-00:10:31",
+      "evidence_type": "visual internal inventory",
+      "strength": "moderate",
+      "frame": "../media/frames/frame-00-10-15.jpg",
+      "status": "asserted",
+      "caveat": "No features were independently tested."
+    },
+    {
+      "id": "E005",
+      "category": "product",
+      "claim": "The team decided to productize the broad platform into understandable products/sub-brands organized around user and problem.",
+      "timestamp": "00:09:25-00:16:20",
+      "evidence_type": "direct discussion",
+      "strength": "strong",
+      "frame": "../media/frames/frame-00-10-15.jpg",
+      "status": "directional-decision",
+      "caveat": "The product taxonomy was due after the meeting and not final."
+    },
+    {
+      "id": "E006",
+      "category": "product",
+      "claim": "OpenBox Gate is the proposed first product wedge: local policy enforcement for coding-agent tool calls with approvals and verifiable proof.",
+      "timestamp": "00:10:50-00:11:26; 00:40:24-00:42:32",
+      "evidence_type": "spoken and visual product plan",
+      "strength": "strong",
+      "frame": "../media/frames/frame-00-10-45.jpg",
+      "status": "proposed-priority",
+      "caveat": "The terminal interaction in the mockup is labeled illustrative."
+    },
+    {
+      "id": "E007",
+      "category": "commercial",
+      "claim": "The commercial thesis is free individual use, then paid Team and Enterprise controls; a displayed Team price of about $15/seat/month is explicitly a placeholder.",
+      "timestamp": "00:24:37-00:25:45; 00:40:24-00:42:32",
+      "evidence_type": "direct discussion and pricing artifact",
+      "strength": "strong",
+      "frame": "../media/frames/frame-00-40-30.jpg",
+      "status": "hypothesis",
+      "caveat": "No willingness-to-pay, margin, conversion or retention evidence was presented."
+    },
+    {
+      "id": "E008",
+      "category": "commercial",
+      "claim": "Billing was incomplete and explicitly prevented prior monetization; Gate plus billing was targeted for the end of the following week.",
+      "timestamp": "00:24:46-00:25:21; 00:29:45-00:30:15",
+      "evidence_type": "direct statement",
+      "strength": "moderate",
+      "frame": null,
+      "status": "constraint-and-target",
+      "caveat": "No implementation status or release test was shown."
+    },
+    {
+      "id": "E009",
+      "category": "customer",
+      "claim": "A Vietnamese development-house general manager reportedly fears cross-client leakage by developers and their tools and is seeking controls.",
+      "timestamp": "00:37:04-00:38:45",
+      "evidence_type": "participant report of customer conversation",
+      "strength": "moderate",
+      "frame": null,
+      "status": "problem-evidence",
+      "caveat": "The customer was not present; buying process and willingness to pay were not established."
+    },
+    {
+      "id": "E010",
+      "category": "product",
+      "claim": "Engineering said existing technology could address that dev-house problem, but more work was needed to provide a direct solution.",
+      "timestamp": "00:38:45-00:39:09",
+      "evidence_type": "direct engineering response",
+      "strength": "moderate",
+      "frame": null,
+      "status": "readiness-caveat",
+      "caveat": "Required work was not decomposed."
+    },
+    {
+      "id": "E011",
+      "category": "customer",
+      "claim": "Only two named external organizations were reported to have tried getting the system running.",
+      "timestamp": "00:42:39-00:43:32",
+      "evidence_type": "direct discussion with confirmation",
+      "strength": "moderate",
+      "frame": null,
+      "status": "asserted-adoption",
+      "caveat": "Names are ASR-sensitive; attempts are not equivalent to production use or payment."
+    },
+    {
+      "id": "E012",
+      "category": "customer",
+      "claim": "One external setup received a custom SDK built in roughly a week; the other remained in SDK/Cloudflare troubleshooting and was awaiting a reply.",
+      "timestamp": "00:43:33-00:45:28",
+      "evidence_type": "direct status report",
+      "strength": "moderate",
+      "frame": null,
+      "status": "asserted-implementation-status",
+      "caveat": "Production status, usage and commercial terms were not shown."
+    },
+    {
+      "id": "E013",
+      "category": "commercial",
+      "claim": "Existing integrations/relationships had not converted into traction, and referral analytics were not available without tagged links.",
+      "timestamp": "00:23:08-00:24:25",
+      "evidence_type": "direct admission",
+      "strength": "moderate",
+      "frame": null,
+      "status": "observed-gap",
+      "caveat": "No analytics system was inspected."
+    },
+    {
+      "id": "E014",
+      "category": "commercial",
+      "claim": "The immediate revenue target was phrased as showing one million ARR within a quarter ending around January.",
+      "timestamp": "00:35:05-00:35:41",
+      "evidence_type": "direct statement verified by second ASR pass",
+      "strength": "moderate",
+      "frame": null,
+      "status": "aspiration",
+      "caveat": "No pipeline or price-volume model supported it."
+    },
+    {
+      "id": "E015",
+      "category": "commercial",
+      "claim": "The proposed viral channel includes paying developers/influencers to review Gate and provide testimonials, with suggested spend from $100 to $10,000.",
+      "timestamp": "00:58:41-01:04:04",
+      "evidence_type": "direct proposal verified by second ASR pass",
+      "strength": "strong",
+      "frame": null,
+      "status": "proposed",
+      "caveat": "Disclosure rules, editorial independence and success metrics were not discussed."
+    },
+    {
+      "id": "E016",
+      "category": "commercial",
+      "claim": "A paid directory/repository placement at $150/month for three months was proposed as a pilot.",
+      "timestamp": "01:12:08-01:13:58",
+      "evidence_type": "direct report",
+      "strength": "moderate",
+      "frame": null,
+      "status": "planned-experiment",
+      "caveat": "Attribution and success thresholds were not stated."
+    },
+    {
+      "id": "E017",
+      "category": "discovery",
+      "claim": "The first seed cohort would be recruited manually through every employee's network, targeting one developer in a credible company per week.",
+      "timestamp": "01:19:01-01:24:31",
+      "evidence_type": "direct plan verified by second ASR pass",
+      "strength": "strong",
+      "frame": null,
+      "status": "planned",
+      "caveat": "Network-sourced trial is useful for learning but is not evidence of organic demand."
+    },
+    {
+      "id": "E018",
+      "category": "product",
+      "claim": "A participant required a designed onboarding experience: concierge support, one narrow use case, fast installation, and immediate visible proof/audit playback.",
+      "timestamp": "01:24:32-01:26:53",
+      "evidence_type": "direct challenge verified by second ASR pass",
+      "strength": "strong",
+      "frame": null,
+      "status": "accepted-requirement",
+      "caveat": "No task-level owner, metric or test plan was recorded."
+    },
+    {
+      "id": "E019",
+      "category": "metrics",
+      "claim": "The team wanted roughly 40 people it could call users in November while acknowledging it did not yet have usage-depth metrics.",
+      "timestamp": "01:27:24-01:28:14",
+      "evidence_type": "direct statement verified by second ASR pass",
+      "strength": "strong",
+      "frame": null,
+      "status": "adoption-target",
+      "caveat": "A login/installation threshold is materially weaker than retained or outcome-producing use."
+    },
+    {
+      "id": "E020",
+      "category": "organization",
+      "claim": "Product owners were proposed for each offer, spanning page, marketing, customer feedback and backlog; another participant challenged conflating product management with sales and questioned staffing capacity.",
+      "timestamp": "00:26:36-00:32:26",
+      "evidence_type": "direct proposal and explicit challenge",
+      "strength": "strong",
+      "frame": null,
+      "status": "unresolved-operating-model",
+      "caveat": "The proposal was partly reframed as a future-state organization."
+    },
+    {
+      "id": "E021",
+      "category": "organization",
+      "claim": "Tahir is named owner of the developer GTM plan and sets most near-term priorities and deadlines in the meeting.",
+      "timestamp": "00:42:00; throughout",
+      "evidence_type": "visual artifact and meeting behavior",
+      "strength": "strong",
+      "frame": "../media/frames/frame-00-42-00.jpg",
+      "status": "observed",
+      "caveat": "This meeting alone cannot establish the company's general decision model."
+    },
+    {
+      "id": "E022",
+      "category": "product",
+      "claim": "Watermarking/fingerprinting was considered for productization as IP governance, but its repeatability versus bespoke-project status remained unresolved.",
+      "timestamp": "00:48:01-00:49:35",
+      "evidence_type": "direct discussion",
+      "strength": "moderate",
+      "frame": null,
+      "status": "opportunity",
+      "caveat": "Customer name and timing are ASR-sensitive; no generalized demand evidence was presented."
+    },
+    {
+      "id": "E023",
+      "category": "commercial",
+      "claim": "Security language was judged more compelling and better funded than governance for developers and managers.",
+      "timestamp": "00:53:19-00:55:12",
+      "evidence_type": "direct strategic discussion",
+      "strength": "moderate",
+      "frame": null,
+      "status": "positioning-hypothesis",
+      "caveat": "No message test, win/loss data or buyer study was presented."
+    },
+    {
+      "id": "E024",
+      "category": "roadmap",
+      "claim": "Immediate outputs were a final product taxonomy/sub-brands, website, tactical plans and ownership by early November.",
+      "timestamp": "01:11:25-01:11:56; 01:29:59-01:30:18",
+      "evidence_type": "direct commitment",
+      "strength": "moderate",
+      "frame": null,
+      "status": "near-term-plan",
+      "caveat": "The meeting did not present a sequenced, capacity-based product roadmap."
+    }
+  ]
+}
