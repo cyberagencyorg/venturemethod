@@ -14,6 +14,16 @@ from typing import Any
 
 from .core import ROOT
 
+PACKAGE_LIBRARY = Path(__file__).resolve().parent / "_library"
+
+
+def library_path(relative: str) -> Path:
+    """Source checkout or wheel-bundled read-only reference library."""
+    source = ROOT / relative
+    if source.is_file():
+        return source
+    return PACKAGE_LIBRARY / relative
+
 SCHEMA_VERSION = "1.0.0"
 MAX_CONTEXT_BYTES = 128 * 1024
 MAX_DOCUMENT_BYTES = 32768
@@ -29,7 +39,7 @@ class ContractError(ValueError):
 
 
 def _load(name: str) -> Any:
-    return json.loads((ROOT / name).read_text(encoding="utf-8"))
+    return json.loads(library_path(name).read_text(encoding="utf-8"))
 
 
 def _check_id(value: Any, label: str) -> str:
@@ -85,8 +95,8 @@ def method_get(method_id: str) -> dict:
 def skill_get(skill_id: str) -> dict:
     item = catalog()["skills"][_check_id(skill_id, "skill ID")]
     rel = Path(item["path"]) / "SKILL.md"
-    root = ROOT.resolve()
-    absolute = (ROOT / rel).resolve()
+    root = (ROOT if (ROOT / rel).is_file() else PACKAGE_LIBRARY).resolve()
+    absolute = (root / rel).resolve()
     if not absolute.is_relative_to(root) or not absolute.is_file():
         raise ContractError("Skill path missing or outside catalog")
     content = absolute.read_text(encoding="utf-8")
@@ -149,6 +159,9 @@ def validate_host(state: dict) -> dict:
         raise ContractError("Host task is required")
     if not isinstance(state.get("project"), str) or not 1 <= len(state["project"]) <= 120:
         raise ContractError("Host project identifier is required")
+    allowed = {"schema_version", "task", "project", "authorization", "resources", "gaps", "covered_capabilities"}
+    if set(state) - allowed:
+        raise ContractError("Unexpected host contract properties")
     if state.get("authorization") != "host_read_only":
         raise ContractError("Only explicitly authorized read-only host context is permitted")
     resources = state.get("resources")
@@ -159,11 +172,13 @@ def validate_host(state: dict) -> dict:
     if len(resources) > MAX_DOCUMENTS or len(gaps) > 24 or len(covered) > 40:
         raise ContractError("Host context too large")
     c = catalog()
+    if len(covered) != len(set(str(x) for x in covered)):
+        raise ContractError("Duplicate covered capabilities")
     if any(not isinstance(x, str) or x not in c["capabilities"] for x in covered):
         raise ContractError("Unknown covered capability")
     refs = set()
     for resource in resources:
-        if not isinstance(resource, dict) or not isinstance(resource.get("id"), str):
+        if not isinstance(resource, dict) or set(resource) - {"id", "sha256", "text", "path"} or not isinstance(resource.get("id"), str):
             raise ContractError("Invalid resource")
         if not SAFE_REF.fullmatch(resource["id"]) or resource["id"] in refs:
             raise ContractError("Unsafe or duplicate resource ID")
@@ -178,7 +193,7 @@ def validate_host(state: dict) -> dict:
     if len(json.dumps(state, ensure_ascii=False).encode("utf8")) > MAX_CONTEXT_BYTES:
         raise ContractError("Host state exceeds budget")
     for gap in gaps:
-        if not isinstance(gap, dict) or gap.get("capability_id") not in c["capabilities"]:
+        if not isinstance(gap, dict) or set(gap) - {"capability_id", "status", "priority", "reason", "evidence_refs", "skill_id"} or gap.get("capability_id") not in c["capabilities"]:
             raise ContractError("Unknown gap capability")
         if gap.get("status") not in ("unmet", "covered", "uncertain"):
             raise ContractError("Gap must have explicit status")
@@ -240,8 +255,9 @@ def assess(state: dict) -> dict:
         decision = "consult"
         exclusions += [{"capability_id": other[1], "reason": "lower_priority"}
                        for other in candidates[1:]]
-    resource_fingerprints = sorted((r["id"], r["sha256"]) for r in host["resources"])
-    digest = hashlib.sha256(json.dumps(resource_fingerprints, separators=(",", ":")).encode()).hexdigest()
+    # Bind the entire assessment to exact task, gaps and inputs, not hashes alone.
+    digest = hashlib.sha256(json.dumps(host, ensure_ascii=False, sort_keys=True,
+                                    separators=(",", ":")).encode("utf-8")).hexdigest()
     return {
         "schema_version": SCHEMA_VERSION, "project": host["project"],
         "decision": decision, "selected": chosen, "exclusions": exclusions,

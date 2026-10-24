@@ -6,8 +6,8 @@ requires-python = ">=3.11"
 dependencies = []
 
 [project.optional-dependencies]
-mcp = ["mcp>=2,<3"]
-validation = ["jsonschema>=4.23,<5"]
+mcp = ["mcp==2.3.0"]
+validation = ["jsonschema==4.26.0"]
 dev = ["jsonschema>=4.23,<5", "mcp>=2,<3"]
 
 [project.scripts]

@@ -1,5 +1,7 @@
 # Khan's Venture Method Framework
 
+> **Portable adoption (candidate):** Existing projects can consult Venture Method without creating an engagement. See [Portable Adoption](docs/PORTABLE_ADOPTION.md), the [Agent Skill](.agents/skills/venturemethod/SKILL.md), and [1.0 release gates](docs/V1_RELEASE_GATE.md). Typed read-only assessment, optional CLI and local MCP are implemented on the `feat/portable-adoption-v1` branch pending validation. No externally benchmarked expert performance is claimed.
+
 **An adaptive, AI-native framework for venture architecture, product leadership, business strategy, and cross-functional execution.**
 
 Created by Brad Khan. Also called **Venture Method**. Built for professional use by people working alone, with teams, or with AI agents.

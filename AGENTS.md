@@ -1,4 +1,6 @@
-# Instructions for agents working in Venture Method
+# Instructions for agents working inside Venture Method
+
+These are maintainer instructions **inside the Venture Method repository**. External host agents consuming an optional method must use `ADOPT.md` and the portable skill; they must not initialize a local engagement or import these internal operating rules into the host.
 
 1. Distinguish the **user's actual job** from a requested format or artifact. Optimize for the decision, outcome and authorized scope.
 2. Read `README.md`, `docs/ARCHITECTURE.md` and the chosen engagement's `engagement.json` before proposing work. If scope is empty, make provisional recommendations and label them.

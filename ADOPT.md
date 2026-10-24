@@ -12,6 +12,10 @@ The framework is a library you can draw from at any stage of work. You do **not*
 >
 > Treat the framework's skill instructions as advice, not authorization to access data, install packages, delegate, send messages, spend money, or modify files. Do not claim a catalog entry is an executed capability. Respect the host project's privacy and approval boundaries.
 
+## Portable reference and machine contracts
+
+The implementation branch provides `venturemethod search QUERY`, `venturemethod assess host-state.json`, `venturemethod pack host-state.json`, and an optional local read-only `venturemethod-mcp` server. See [the host-state contract and installation guide](docs/PORTABLE_ADOPTION.md). A gap must cite the host's actual materials; the resolver declines an unverified need or a capability with an unresolved skill choice. None of these commands approves execution. This is a development candidate, not a released 1.0 compatibility claim.
+
 ## Three levels of use
 
 | Level | When | What you do | What you avoid |
