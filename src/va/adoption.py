@@ -22,7 +22,7 @@ DOMAIN_EXAMPLES = {
     'capital': ('venture-diligence', 'real-options', 'shell-scenarios'),
     'operations': ('business-capability', 'causal-loop', 'leverage-points'),
     'growth': ('commercial-gtm', 'pricing-discovery', 'business-model-canvas'),
-    'brand': ('commercial-gtm', 'business-model-canvas', 'wardley-mapping'),
+    'brand': ('competitive-positioning-alternatives-first', 'commercial-gtm', 'wardley-mapping'),
     'institutional': ('pestle', 'wardley-mapping', 'market-sizing'),
     'delivery': ('outcome-roadmapping', 'shape-up', 'working-backwards'),
 }
@@ -36,6 +36,7 @@ DOMAIN_GOALS = {
     'operations': 'transform_org',
     'growth': 'design_business',
     'brand': 'choose_strategy',
+    'editorial': 'choose_strategy',
     'institutional': 'map_market',
     'delivery': 'plan_delivery',
 }
