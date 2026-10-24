@@ -1,10 +1,10 @@
 # Version 1.0 release gate: implementation and independent evidence
 
-Technical verification: 2026-10-24 on implementation branch `feat/portable-adoption-v1`. The code is versioned \`0.9.0\`; **1.0 is not yet certified or released**.
+Technical verification: 2026-10-24 on implementation branch `feat/portable-adoption-v1`. The code is versioned `0.9.0`; **1.0 is not yet certified or released**.
 
 | Requirement | Available evidence | Status |
 | --- | --- | --- |
-| Portable reference format | Pinned official \`skills-ref\` validator runs on all 26 first-party skills and the portable adapter | Automated verified |
+| Portable reference format | Pinned official `skills-ref` validator runs on all 26 first-party skills and the portable adapter | Automated verified |
 | Typed contracts | 12 JSON Schema 2020-12 definitions, Python and Node validation, cross-reference and negative tests | Automated verified |
 | Host assessment and composition | Explicit file snapshots, source-anchored gaps, no-op, typed plans, bounded multi-domain prerequisites | Automated verified on fixtures |
 | External distribution | Self-contained Agent Skill, integrity checks, isolated wheel and pinned external Open ASS host smoke | Automated verified |
@@ -15,7 +15,7 @@ Technical verification: 2026-10-24 on implementation branch `feat/portable-adopt
 | Repeated results and performance | No verified end-to-end baseline improvements, human attention/cost or regression outcomes | BLOCKED |
 | Version 1.0 approval | Requires accountable decision after evidence review | BLOCKED |
 
-See \`docs/V1_HOST_VALIDATION_RUNBOOK.md\` and \`evals/portable/PROTOCOL.md\`.
+See `docs/V1_HOST_VALIDATION_RUNBOOK.md` and `evals/portable/PROTOCOL.md`.
 
 Do not equate a successful structured test, a valid skill directory, a compiled JSON Schema, a local MCP handshake or an agent self-review with verified professional competence. No one has yet authenticated specialist execution, tested actual host migration boundaries, or approved 1.0.
 
@@ -24,3 +24,5 @@ Do not merge an unverified claim into the main branch. PR #13 remains the indepe
 Reproducibility: [compatibility matrix](COMPATIBILITY_MATRIX_2026-10-24.md) and CI for PR #14. Issue #16 owns independent agent trials. Static host checkout compatibility is not an agent benchmark.
 
 CI threat boundary: the external-host smoke test must not execute source code from the cloned external repository. The source checkout is only a fixture for portable installation/validation, with workflow token persistence disabled.
+
+Current stabilization evidence is listed in [the implementation review](V1_STABILIZATION_2026-10-24.md). Tested on commit `6a70fc78f6b92de2164eccba3f76df3c08d38815`: 151 passing tests, 12 typed schemas, multi-gap CLI, semantic composition validation and external static host installation. Version 1.0 still requires issue #16 acceptance.

@@ -26,6 +26,20 @@ python vm.py adopt --task "Improve discovery on a product already in delivery" -
 
 The suggestion tool uses transparent lexical matches, not a claim of expert method selection. It creates no records and makes no external calls. [See the optional adoption protocol](ADOPT.md). A private GitHub link is accessible only to models or agents that have been granted access.
 
+### Portable advisory consumption (candidate 0.9.0)
+
+From an approved checkout or installed wheel, external host agents can obtain bounded read-only guidance:
+
+```bash
+venturemethod search "evidence-audit"
+venturemethod snapshot --root /absolute/host --file README.md --project host-project --task "Review existing claims"
+venturemethod propose --context /private/host-state.json --capability engagement --skill evidence-audit --resource-id file:README.md --quote "exact excerpt from README" --reason "What this evidence does not resolve"
+venturemethod compose /private/host-state.json
+venturemethod verify-composition /private/composition.json
+```
+
+The `snapshot`, `propose`, and `compose` commands print JSON without modifying the host. When working across multiple capabilities, pass `--depends-on CAPABILITY_ID` while proposing additional gaps, then compose the resulting state. The commands require exact source context and do not assess truth or grant authority by themselves. See [the portable adoption protocol](docs/PORTABLE_ADOPTION.md) and [the 1.0 stabilization review](docs/V1_STABILIZATION_2026-10-24.md).
+
 ## Start using it
 
 Clone this private repository and run the operator checks from its root (Python 3.11+; no API key required):
