@@ -32,7 +32,7 @@ try {
       }
     }
   });
-  assert.equal(result.isError, undefined);
+  assert.notEqual(result.isError, true);
   const payload = result.structuredContent ?? JSON.parse(result.content[0].text);
   assert.equal(payload.decision,"none");
   assert.deepEqual(payload.effects,[]);
