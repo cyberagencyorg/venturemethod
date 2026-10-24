@@ -35,7 +35,7 @@ venturemethod export-skill --destination /absolute/host/.agents/skills/ventureme
 venturemethod export-skill --destination /absolute/host/.agents/skills/venturemethod --apply
 ```
 
-The exporter refuses existing nonempty destinations and symlinked paths. It never overwrites an installed skill or project file. Rollback is to remove only the newly exported `venturemethod/` directory. The export embeds the adoption instructions, first-party skills and catalog for offline progressive loading; a Python runtime is **not** needed by the host merely to read them. Discovery remains host/version dependent and must be tested in the real harness.
+The exporter refuses existing nonempty destinations and symlinked paths. It never overwrites an installed skill or project file. Rollback is to remove only the newly exported `venturemethod/` directory. The export embeds a purpose-built host guide with valid bundle-relative paths, first-party skills, and the catalog for offline progressive loading; a Python runtime is **not** needed by the host merely to read them. Discovery remains host/version dependent and must be tested in the real harness.
 
 ## Inspect a real host project without manufacturing requirements
 

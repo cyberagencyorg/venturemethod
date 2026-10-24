@@ -72,7 +72,7 @@
       "origin": "original",
       "status": "draft-validated-structure",
       "trust": "first-party",
-      "release": "0.1.0"
+      "release": "0.2.0"
     },
     {
       "name": "venture-diligence",
@@ -112,7 +112,7 @@
       "origin": "original",
       "status": "draft-validated-structure",
       "trust": "first-party",
-      "release": "0.1.0"
+      "release": "0.2.0"
     },
     {
       "name": "artifact-quality",

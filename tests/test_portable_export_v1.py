@@ -17,6 +17,11 @@ class ExportTests(unittest.TestCase):
             result = export_skill(target, apply=True)
             self.assertTrue((target / "SKILL.md").is_file())
             self.assertTrue((target / "references" / "ADOPT.md").is_file())
+            portable_guide = (target / "references" / "ADOPT.md").read_text()
+            self.assertIn("skills/evidence-audit.md", portable_guide)
+            for name in ("evidence-audit", "product-requirements", "adversarial-review"):
+                self.assertTrue((target / "references" / "skills" / f"{name}.md").is_file())
+            self.assertNotIn("skills/evidence-audit/SKILL.md", portable_guide)
             self.assertTrue((target / "assets" / "catalog.json").is_file())
             self.assertTrue((target / "references" / "skills" / "evidence-audit.md").is_file())
             self.assertEqual(result["effects"], ["create_new_skill_directory"])
