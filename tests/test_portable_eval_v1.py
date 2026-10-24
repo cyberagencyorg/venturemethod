@@ -12,7 +12,8 @@ class PortableEvaluationTests(unittest.TestCase):
     def make_pair(self, root: Path):
         ids = ("builder", "provider")
         runs, ratings = [], {}
-        for name in CASE_IDS:
+        for index, name in enumerate(CASE_IDS):
+            runtime = "Codex" if index % 2 == 0 else "Hermes"
             pairs = {}
             score_pair = {}
             for b in ("A", "B"):
@@ -20,7 +21,7 @@ class PortableEvaluationTests(unittest.TestCase):
                 folder.mkdir(parents=True, exist_ok=True)
                 data = f"{name}: {b} response for evaluation".encode()
                 (folder / "response.md").write_bytes(data)
-                pairs[b] = {"runtime": "Codex" if b == "A" else "Hermes", "model": "test-model",
+                pairs[b] = {"runtime": runtime, "model": "test-model",
                             "version": "test", "executor_id": ids[0] if b == "A" else ids[1],
                             "input_sha256": hashlib.sha256(name.encode()).hexdigest(),
                             "output_sha256": hashlib.sha256(data).hexdigest()}
@@ -55,6 +56,16 @@ class PortableEvaluationTests(unittest.TestCase):
                 verify(root)
             self.make_pair(root)
             (root / "venture" / "A" / "response.md").write_text("tampered")
+            with self.assertRaises(EvaluationError):
+                verify(root)
+
+    def test_reject_confounded_model_comparison(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            self.make_pair(root)
+            data = json.loads((root / "runs.json").read_text())
+            data["cases"][0]["runs"]["B"]["model"] = "different-model"
+            (root / "runs.json").write_text(json.dumps(data))
             with self.assertRaises(EvaluationError):
                 verify(root)
 

@@ -68,6 +68,7 @@ def verify(workspace: Path) -> dict:
     if set(review.get("ratings", {})) != set(CASE_IDS):
         raise EvaluationError("Each case requires a rating pair")
     outcome = {}
+    observed_runtimes = set()
     all_a, all_b = [], []
     for case in cases:
         name = case["id"]
@@ -89,6 +90,9 @@ def verify(workspace: Path) -> dict:
             _output(root, f"{name}/{branch}/response.md", run["output_sha256"])
         if run_a["input_sha256"] != run_b["input_sha256"]:
             raise EvaluationError(f"{name}: runs used different task inputs")
+        if (run_a["runtime"], run_a["model"], run_a["version"]) != (run_b["runtime"], run_b["model"], run_b["version"]):
+            raise EvaluationError(f"{name}: model/runtime confound in paired comparison")
+        observed_runtimes.add(run_a["runtime"])
         ratings = review["ratings"][name]
         if set(ratings) != {"A", "B"}:
             raise EvaluationError(f"{name}: incomplete ratings")
@@ -107,6 +111,8 @@ def verify(workspace: Path) -> dict:
             "candidate_authority": candidate["authority"],
             "difference": round((sum(candidate.values()) - sum(baseline.values())) / len(CRITERIA), 3),
         }
+    if len(observed_runtimes) < 2:
+        raise EvaluationError("Comparison did not exercise two actual runtime families")
     regressions = [key for key, row in outcome.items() if row["candidate_accuracy"] < row["baseline_accuracy"] or row["candidate_authority"] < row["baseline_authority"]]
     average_improvement = round(sum(all_b)/len(all_b) - sum(all_a)/len(all_a), 3)
     return {
