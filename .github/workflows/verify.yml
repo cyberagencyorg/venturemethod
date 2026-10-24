@@ -32,3 +32,5 @@ jobs:
           /tmp/venturemethod-wheel-test/bin/pip install dist/*.whl
           (cd /tmp && /tmp/venturemethod-wheel-test/bin/venturemethod search product > /dev/null)
           (cd /tmp && /tmp/venturemethod-wheel-test/bin/venturemethod assess "$GITHUB_WORKSPACE/examples/portable/host-unmet.json" > /dev/null)
+          (cd /tmp && /tmp/venturemethod-wheel-test/bin/venturemethod export-skill --destination /tmp/vm-host/.agents/skills/venturemethod --apply > /dev/null)
+          test -f /tmp/vm-host/.agents/skills/venturemethod/references/skills/evidence-audit.md

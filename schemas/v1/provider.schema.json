@@ -1,0 +1,153 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "$id": "https://github.com/cyberagencyorg/venturemethod/schemas/v1/provider.schema.json",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "id",
+    "kind",
+    "version",
+    "license",
+    "source",
+    "capability_ids",
+    "skill_ids",
+    "permissions",
+    "maturity"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9-]{0,63}$"
+    },
+    "kind": {
+      "enum": [
+        "first_party_skill",
+        "external_skill",
+        "human_specialist",
+        "tool_adapter"
+      ]
+    },
+    "version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "license": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source": {
+      "type": "string",
+      "minLength": 1
+    },
+    "capability_ids": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9-]{0,63}$"
+      }
+    },
+    "skill_ids": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9-]{0,63}$"
+      }
+    },
+    "permissions": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "effects",
+        "scopes"
+      ],
+      "properties": {
+        "effects": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "read",
+              "draft",
+              "external_write",
+              "execute"
+            ]
+          }
+        },
+        "scopes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "maturity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "specified",
+        "available",
+        "installed",
+        "executed",
+        "independently_evaluated"
+      ],
+      "properties": {
+        "specified": {
+          "type": "boolean"
+        },
+        "available": {
+          "type": "boolean"
+        },
+        "installed": {
+          "type": "boolean"
+        },
+        "executed": {
+          "type": "boolean"
+        },
+        "independently_evaluated": {
+          "type": "boolean"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "independently_evaluated": {
+                "const": true
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "executed": {
+                "const": true
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "executed": {
+                "const": true
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "installed": {
+                "const": true
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}
