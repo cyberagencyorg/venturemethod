@@ -1,0 +1,6 @@
+{
+  "schema_version": "1.0",
+  "description": "Project-owned mechanical writing restrictions; customize in the consuming project. No implicit approval or publication.",
+  "forbidden_phrases": [],
+  "forbidden_characters": []
+}
