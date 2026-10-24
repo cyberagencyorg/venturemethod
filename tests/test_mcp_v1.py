@@ -1,6 +1,7 @@
 """A genuine MCP protocol round trip without external network or host credentials."""
 import asyncio
 import hashlib
+import json
 import unittest
 from mcp import Client
 from src.va.mcp_server import mcp
@@ -26,7 +27,8 @@ class MCPRoundTripTests(unittest.TestCase):
                 }
                 result = await client.call_tool("project_assess", {"host_state": assess_state})
                 self.assertFalse(result.is_error)
-                self.assertEqual(result.structured_content["decision"], "none")
+                payload = result.structured_content or json.loads(result.content[0].text)
+                self.assertEqual(payload["decision"], "none")
         asyncio.run(exercise())
 
 
