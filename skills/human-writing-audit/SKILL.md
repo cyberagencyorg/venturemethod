@@ -6,7 +6,16 @@ description: "Audit near-final prose for generic AI-like constructions, staged i
 
 **Purpose:** Remove model-generated language patterns while retaining the source author's argument, facts and intended voice.
 
-## Procedure
+## When to use
+Use only after the substantive argument and copy are sound and a final linguistic audit is required.
+
+## Inputs
+Near-final prose, original draft, owner-approved voice examples and project forbidden-language rules.
+
+## Quality gates
+No source claim lost, no new fact invented, no owner-rejected constructions, and no universal stylistic standard substituted for a documented author preference.
+
+## Method
 1. Read the original, accepted voice/context and near-final draft before marking defects.
 2. Identify whole-paragraph patterns, not only individual disliked words: strawman contrasts, importance announcements, ornamental fragments, rhythmic triads, repeated openings, excess connectors and conclusion recaps.
 3. Require each retained sentence to add something the reader did not already know. Preserve exceptions supported by the author's sample or a real logical contrast.
@@ -23,7 +32,7 @@ description: "Audit near-final prose for generic AI-like constructions, staged i
 - Faux candor, universal claims and interchangeable consultancy language.
 - A closing paragraph that merely restates the preceding one.
 
-## Output
+## Outputs
 Edited text, with only material residual concerns disclosed. Do not append a summary if the task was solely to prepare paste-ready copy.
 
 ## Boundary
