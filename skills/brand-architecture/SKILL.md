@@ -14,6 +14,10 @@ A company, founder or venture needs identity research, offer architecture, messa
 
 Entity and subbrand relationships, actual audience, business model, founder intent, existing copy/assets, research, constraints, channel inventory.
 
+## Positioning and editorial skill boundaries
+
+Read host-approved brand context first. Use `marketing-context` for durable prior decisions and exclusions; `competitive-positioning` for buyer alternatives and category selection; `marketing-copywriting` only after the commercial argument exists. This skill retains the higher-level entity architecture and channel consistency decision. Do not replace approved founder or institutional voice with generic agency language. See `docs/POSITIONING_COPY_AND_VOICE.md`.
+
 ## Method
 
 1. Separate identity, ontology of the enterprise, market positioning, visual expression and editorial voice before producing copy.
