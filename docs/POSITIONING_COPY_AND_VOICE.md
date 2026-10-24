@@ -13,6 +13,10 @@ These are six **first-party, review-stage Agent Skills**, adapted from five open
 | Repeated owner correction | Record restriction in canonical context; update only the affected copy; rerun narrow editorial check |
 | Enterprise claim, market claim or client proof disputed | `evidence-audit` then the relevant editor |
 
+## Approved visual identity and host assets
+
+If the consuming project has an established logo, visual tokens, source images or a host-specific brand-director skill, read those before page, deck, research-cover or profile work. Do not use a general copy or positioning skill as permission to rewrite a locked identity. See [Host brand kit contract](HOST_BRAND_KIT_CONTRACT.md).
+
 ## Source-of-truth contract
 - **Host owned:** the consuming project owns the canonical marketing context. Venture Method ships a reusable template, not its clients' private context.
 - **Existing file first:** read previous accepted copy, actual owner's language, market evidence, approval status and explicit rejections before generating.
