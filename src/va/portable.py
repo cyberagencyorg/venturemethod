@@ -60,6 +60,12 @@ def catalog() -> dict:
     caps = [item["id"] for item in links]
     if len(set(ids)) != len(ids) or len(set(names)) != len(names) or len(set(caps)) != len(caps):
         raise ContractError("Duplicate catalog identifier")
+    for kind, candidates in (("method", ids), ("skill", names), ("capability", caps)):
+        for ident in candidates:
+            _check_id(ident, kind)
+    for skill in skills:
+        if skill.get("path") != f"skills/{skill['name']}":
+            raise ContractError(f"Invalid first-party skill path for {skill['name']}")
     for item in links:
         for skill in item["eligible_skill_ids"]:
             if skill not in names:

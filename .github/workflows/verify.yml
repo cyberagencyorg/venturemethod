@@ -38,3 +38,5 @@ jobs:
           (cd /tmp && /tmp/venturemethod-wheel-test/bin/venturemethod assess "$GITHUB_WORKSPACE/examples/portable/host-unmet.json" > /dev/null)
           (cd /tmp && /tmp/venturemethod-wheel-test/bin/venturemethod export-skill --destination /tmp/vm-host/.agents/skills/venturemethod --apply > /dev/null)
           test -f /tmp/vm-host/.agents/skills/venturemethod/references/skills/evidence-audit.md
+          /tmp/venturemethod-wheel-test/bin/venturemethod verify-export --destination /tmp/vm-host/.agents/skills/venturemethod > /dev/null
+          skills-ref validate /tmp/vm-host/.agents/skills/venturemethod

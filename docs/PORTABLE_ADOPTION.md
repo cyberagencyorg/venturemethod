@@ -73,3 +73,7 @@ See \`docs/V1_RELEASE_GATE.md\` for the release-blocking live-agent, independent
 ## Security and evidence improvements
 
 The file scanner opens each nominated path component using directory-relative descriptors and `O_NOFOLLOW`, rejects nonregular files, and fails closed if secure POSIX file descriptors are unavailable. Symlink checks alone are not sufficient against a path-swap race. Source excerpts can be supplied as `evidence_quotes`; exact text matching is required and labeled `excerpt_matched`. This verifies placement in the supplied text, **not** the claim's factual correctness. Without quotes, a reference is labeled `reference_only`. Duplicate or conflicting capability assessments are rejected, not arbitrarily ranked.
+
+## Verifying a distributed skill
+
+Use `venturemethod verify-export --destination /absolute/host/.agents/skills/venturemethod --expected-sha256 DIGEST` with the digest from the trusted export dry run. This checks each file and detects unexpected files or modifications. Without a separately retained expected digest, a modified manifest could conceal changes; the check does not establish author identity or source authenticity. The exporter refuses existing destinations, including empty folders. Fresh exports use exclusive file creation rather than overwrites.

@@ -6,7 +6,7 @@ import json
 import sys
 from pathlib import Path
 from .portable import ContractError, assess, catalog_search, context_pack, inspect_paths, method_get, skill_get
-from .portable_export import export_skill
+from .portable_export import export_skill, verify_export
 
 
 def main(argv=None) -> int:
@@ -30,6 +30,9 @@ def main(argv=None) -> int:
     export = sub.add_parser("export-skill", help="Dry-run or explicitly export a self-contained agent skill")
     export.add_argument("--destination", type=Path, required=True)
     export.add_argument("--apply", action="store_true", help="Create the new skill directory")
+    verify = sub.add_parser("verify-export", help="Verify every exported file against its manifest and optional trusted bundle digest")
+    verify.add_argument("--destination", type=Path, required=True)
+    verify.add_argument("--expected-sha256", type=str)
     args = parser.parse_args(argv)
     try:
         if args.command == "search":
@@ -45,6 +48,8 @@ def main(argv=None) -> int:
             obj = assess(state) if args.command == "assess" else context_pack(state, args.max_chars)
         elif args.command == "export-skill":
             obj = export_skill(args.destination, apply=args.apply)
+        elif args.command == "verify-export":
+            obj = verify_export(args.destination, expected_bundle_sha256=args.expected_sha256)
         elif args.command == "method":
             obj = method_get(args.id)
         else:
