@@ -554,6 +554,23 @@
       "kind": "portfolio-method",
       "cadence": "iterative",
       "verified_in_runtime": false
+    },
+    {
+      "id": "competitive-positioning-alternatives-first",
+      "title": "Alternative-first Competitive Positioning",
+      "goals": [
+        "choose_strategy",
+        "design_business_model",
+        "launch_offer"
+      ],
+      "minimum_evidence": "provisional",
+      "fit": "Offer or company positioning that requires competitive clarity, buyer fit and market framing",
+      "avoid": "Starting from headline, generic differentiation, invented competitors or no identifiable buyer choice",
+      "output": "Alternatives matrix, differentiated capabilities, buyer value, best-fit segment and category options",
+      "source": "https://www.aprildunford.com/post/a-quickstart-guide-to-positioning",
+      "kind": "strategic-method",
+      "cadence": "on-positioning-change",
+      "verified_in_runtime": false
     }
   ]
 }
