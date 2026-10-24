@@ -6,6 +6,12 @@ description: "Find a defensible position for an offering or company before messa
 
 **Purpose:** Resolve buyer-relevant differentiation and category context before anyone writes a tagline, homepage hero or agency description.
 
+## When to use
+Use for positioning, market-category selection, product/service differentiation, best-fit audience and market messaging whose value has not yet been established.
+
+## Inputs
+Project marketing context, buyer jobs, alternatives actually considered, verified capability, commercial evidence and existing decisions.
+
 ## Prerequisites
 Read the canonical project marketing context and accepted company identity. If neither exists, invoke `marketing-context` narrowly. Reuse `brand-architecture` for parent/subbrand questions.
 
@@ -22,7 +28,7 @@ Read the canonical project marketing context and accepted company identity. If n
 ## Outputs
 Competitive alternatives table, attribute-to-value map, best-fit buyer description, market frame options and recommended hypothesis with evidence gaps.
 
-## Hard gates
+## Quality gates
 - Never start from a clever headline.
 - No market category selected before alternatives, differentiated capability, value and best-fit buyer.
 - Company purpose, brand philosophy, product differentiation and website messaging are distinct artifacts.
