@@ -48,3 +48,7 @@ Publish or privately retain the following only if authorized:
 5. A release decision by the accountable owner, with residual risks, rollback and unsupported claims explicitly listed.
 
 Until these exist, keep the release candidate below version 1.0, even with green CI.
+
+## Current implementation entry points
+
+File-first consultation does not require Python. For optional machine-readable use, `venturemethod snapshot` generates an authorized host-state draft from exact files; `venturemethod propose` requires a source excerpt and names the capability and skill; `venturemethod plan` produces a typed, non-executable work contract. Use `venturemethod providers` to inspect declared versus actually installed/executed/evaluated states. The local MCP exposes the equivalent work planning and provider registry. These paths are verified in synthetic and CLI fixtures, not yet in independent agent harnesses.
