@@ -2,7 +2,8 @@
 import json
 import unittest
 from pathlib import Path
-from jsonschema import Draft202012Validator
+from jsonschema import Draft202012Validator, ValidationError
+import copy
 from src.va.composition_v1 import compose
 from src.va.portable import ContractError
 
@@ -41,6 +42,57 @@ class CompositionTests(unittest.TestCase):
         ws=json.loads((ROOT/"schemas/v1/work-unit.schema.json").read_text())
         for x in plan["units"]:
             Draft202012Validator(ws).validate(x["unit"])
+
+
+    def test_advisory_schema_rejects_privilege_escalation_and_invalid_unit(self):
+        plan = compose(host())
+        composition_schema = json.loads((ROOT/"schemas/v1/composition-plan.schema.json").read_text())
+        validator = Draft202012Validator(composition_schema)
+        validator.validate(plan)
+        cases = [
+            ("authorized_effects", ["execute"]),
+            ("authorized_effects", ["external_write"]),
+            ("allowed_tools", ["shell"]),
+            ("phase", "arbitrary"),
+        ]
+        for key, value in cases:
+            bad = copy.deepcopy(plan)
+            bad["units"][0]["unit"][key] = value
+            with self.subTest(key=key, value=value), self.assertRaises(ValidationError):
+                validator.validate(bad)
+        bad = copy.deepcopy(plan)
+        bad["units"][0]["unit"]["review"]["status"] = "accepted"
+        with self.assertRaises(ValidationError):
+            validator.validate(bad)
+        bad = copy.deepcopy(plan)
+        bad["units"][0]["unit"]["review"]["required_before_effects"] = False
+        with self.assertRaises(ValidationError):
+            validator.validate(bad)
+        bad = copy.deepcopy(plan)
+        bad["units"][0]["unit"]["unexpected"] = "escape"
+        with self.assertRaises(ValidationError):
+            validator.validate(bad)
+        bad = copy.deepcopy(plan)
+        bad["units"] = []
+        with self.assertRaises(ValidationError):
+            validator.validate(bad)
+        empty = compose({**host(), "gaps": []})
+        validator.validate(empty)
+        empty["units"] = copy.deepcopy(plan["units"])
+        with self.assertRaises(ValidationError):
+            validator.validate(empty)
+
+    def test_advisory_contract_derives_from_canonical_work_schema(self):
+        import copy
+        comp = json.loads((ROOT/"schemas/v1/composition-plan.schema.json").read_text())
+        canonical = json.loads((ROOT/"schemas/v1/work-unit.schema.json").read_text())
+        canonical.pop("$id", None)
+        canonical.pop("$schema", None)
+        canonical["properties"]["allowed_tools"] = {"const": []}
+        canonical["properties"]["authorized_effects"] = {"const": []}
+        canonical["properties"]["review"]["properties"]["status"] = {"const": "pending"}
+        canonical["properties"]["review"]["properties"]["required_before_effects"] = {"const": True}
+        self.assertEqual(comp["$defs"]["advisory_work_unit"], canonical)
 
     def test_limit_includes_dependencies_and_excludes_remaining(self):
         plan=compose(host(),max_units=2)

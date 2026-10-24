@@ -28,7 +28,7 @@ jobs:
       - run: python vm.py adopt --task "product customer discovery" --phase in-flight > /dev/null
       - run: venturemethod assess examples/portable/host-unmet.json > /dev/null
       - run: venturemethod plan examples/portable/host-unmet.json > /dev/null
-      - run: venturemethod compose examples/portable/host-unmet.json > /dev/null
+      - run: venturemethod compose examples/portable/host-unmet.json > /tmp/venturemethod-composition.json
       - run: venturemethod providers > /dev/null
       - run: venturemethod assess examples/portable/host-covered.json > /dev/null
       - uses: actions/setup-node@v4
@@ -36,6 +36,8 @@ jobs:
           node-version: '22'
       - run: npm install --no-save ajv@8.17.1 @modelcontextprotocol/client@2.4.0
       - run: node scripts/contract-interop.mjs
+        env:
+          VM_COMPOSITION_FILE: /tmp/venturemethod-composition.json
       - run: node scripts/mcp-node-roundtrip.mjs
       - run: python -m pip install build
       - run: python -m build --wheel

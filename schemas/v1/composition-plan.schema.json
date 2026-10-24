@@ -48,20 +48,7 @@
         "additionalProperties": false,
         "properties": {
           "unit": {
-            "type": "object",
-            "required": [
-              "schema_version",
-              "id",
-              "host_project",
-              "objective",
-              "phase",
-              "selected_capabilities",
-              "allowed_tools",
-              "authorized_effects",
-              "review",
-              "stop_when",
-              "outputs"
-            ]
+            "$ref": "#/$defs/advisory_work_unit"
           },
           "capability_id": {
             "type": "string"
@@ -122,5 +109,158 @@
         "type": "string"
       }
     }
-  }
+  },
+  "$defs": {
+    "advisory_work_unit": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version",
+        "id",
+        "host_project",
+        "objective",
+        "phase",
+        "existing_artifacts",
+        "selected_capabilities",
+        "allowed_tools",
+        "authorized_effects",
+        "review",
+        "stop_when",
+        "outputs"
+      ],
+      "properties": {
+        "schema_version": {
+          "const": "1.0.0"
+        },
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9-]{0,63}$"
+        },
+        "host_project": {
+          "type": "string",
+          "minLength": 1
+        },
+        "objective": {
+          "type": "string",
+          "minLength": 1
+        },
+        "phase": {
+          "enum": [
+            "starting",
+            "in_flight",
+            "review",
+            "continuous",
+            "unknown"
+          ]
+        },
+        "existing_artifacts": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "selected_capabilities": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9-]{0,63}$"
+          }
+        },
+        "allowed_tools": {
+          "const": []
+        },
+        "authorized_effects": {
+          "const": []
+        },
+        "review": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "owner",
+            "status",
+            "required_before_effects"
+          ],
+          "properties": {
+            "owner": {
+              "type": "string",
+              "minLength": 1
+            },
+            "status": {
+              "const": "pending"
+            },
+            "required_before_effects": {
+              "const": true
+            }
+          }
+        },
+        "stop_when": {
+          "type": "string",
+          "minLength": 1
+        },
+        "outputs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "budget": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "seconds": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "usd": {
+              "type": "number",
+              "minimum": 0
+            }
+          }
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "no_intervention"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "then": {
+        "properties": {
+          "units": {
+            "maxItems": 0
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "advisory_composition"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "then": {
+        "properties": {
+          "units": {
+            "minItems": 1
+          }
+        }
+      }
+    }
+  ]
 }

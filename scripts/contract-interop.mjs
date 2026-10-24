@@ -13,5 +13,23 @@ for (const [name, type] of [["host-unmet","host-state"],["host-covered","host-st
   const instance = JSON.parse(readFileSync("examples/portable/" + name + ".json", "utf8"));
   if (!validators[type](instance)) throw new Error(name + ": " + ajv.errorsText(validators[type].errors));
 }
+const composedPath = process.env.VM_COMPOSITION_FILE;
+if (composedPath) {
+  const plan = JSON.parse(readFileSync(composedPath, "utf8"));
+  if (!validators["composition-plan"](plan)) {
+    throw new Error("Generated composition rejected: " + ajv.errorsText(validators["composition-plan"].errors));
+  }
+  if (plan.units.length) {
+    const unsafe = structuredClone(plan);
+    unsafe.units[0].unit.allowed_tools = ["shell"];
+    if (validators["composition-plan"](unsafe)) throw new Error("Advisory schema permits shell tools");
+    unsafe.units[0].unit.allowed_tools = [];
+    unsafe.units[0].unit.authorized_effects = ["external_write"];
+    if (validators["composition-plan"](unsafe)) throw new Error("Advisory schema permits external writes");
+    const invalidReview = structuredClone(plan);
+    invalidReview.units[0].unit.review.status = "accepted";
+    if (validators["composition-plan"](invalidReview)) throw new Error("Advisory schema permits self-approved work");
+  }
+}
 if (Object.keys(validators).length < 11) throw new Error("Missing published schemas");
 console.log("Validated", Object.keys(validators).length, "JSON Schema contracts in Node.js");
