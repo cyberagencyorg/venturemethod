@@ -341,7 +341,10 @@ def provider_catalog() -> dict:
     for row in composition["method_links"]:
         if row["method_id"] not in c["methods"] or row["capability_id"] not in c["capabilities"]:
             raise ContractError("Method link references an unknown catalog identity")
-        if row["skill_id"] not in c["skills"] or row["skill_id"] not in c["capabilities"][row["capability_id"]]["eligible_skill_ids"]:
+        if row["skill_id"] is None:
+            if row.get("coverage") != "no_first_party_skill":
+                raise ContractError("Unmapped method lacks an explicit coverage gap")
+        elif row["skill_id"] not in c["skills"] or row["skill_id"] not in c["capabilities"][row["capability_id"]]["eligible_skill_ids"]:
             raise ContractError("Method link has no declared first-party skill mapping")
         if row.get("execution_verified") is not False:
             raise ContractError("Metadata cannot assert unverified execution")
