@@ -16,7 +16,7 @@ try {
   const listing = await client.listTools();
   const names = listing.tools.map(tool => tool.name).sort();
   assert.deepEqual(names, [
-    "catalog_search_tool","context_pack_tool","method_get_tool",
+    "catalog_search_tool","composition_plan_tool","context_pack_tool","method_get_tool",
     "project_assess","providers_get_tool","skill_get_tool","work_plan_tool",
   ]);
   const result = await client.callTool({
@@ -46,6 +46,16 @@ try {
   assert.notEqual(planning.isError,true);
   const planValue = planning.structuredContent ?? JSON.parse(planning.content[0].text);
   assert.equal(planValue.status,"no_intervention");
+  const composed = await client.callTool({
+    name:"composition_plan_tool",
+    arguments:{host_state:{
+      schema_version:"1.0.0",project:"node-protocol-interop",task:"No intervention required",
+      authorization:"host_read_only",resources:[],gaps:[],covered_capabilities:["product"]
+    }}
+  });
+  assert.notEqual(composed.isError,true);
+  const composition = composed.structuredContent ?? JSON.parse(composed.content[0].text);
+  assert.equal(composition.status,"no_intervention");
   const search = await client.callTool({name:"catalog_search_tool",arguments:{query:"product"}});
   assert.notEqual(search.isError,true);
   console.log("Node MCP client and Python stdio server interoperated with no writes.");

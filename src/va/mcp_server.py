@@ -8,6 +8,7 @@ from __future__ import annotations
 from mcp.server import MCPServer
 
 from .portable import catalog_search, method_get, skill_get, assess, context_pack, work_plan, provider_catalog
+from .composition_v1 import compose
 
 mcp = MCPServer("Khan's Venture Method", instructions=(
     "Read-only professional reference library. Host owns context and authority. "
@@ -57,6 +58,13 @@ def work_plan_tool(host_state: dict) -> dict:
 def providers_get_tool() -> dict:
     """Return versioned first-party skill provider maturity and permissions."""
     return provider_catalog()
+
+
+
+@mcp.tool()
+def composition_plan_tool(host_state: dict, max_units: int = 3) -> dict:
+    """Propose bounded evidence-based work units with explicit prerequisites. No execution."""
+    return compose(host_state, max_units=max_units)
 
 
 def main() -> None:

@@ -7,6 +7,7 @@ import sys
 from pathlib import Path
 from .portable import ContractError, assess, catalog_search, context_pack, inspect_paths, method_get, skill_get, snapshot_project, propose_gap, work_plan, provider_catalog
 from .portable_export import export_skill, verify_export
+from .composition_v1 import compose
 
 
 def main(argv=None) -> int:
@@ -23,6 +24,9 @@ def main(argv=None) -> int:
     pack = sub.add_parser("pack", help="Build bounded reference packet")
     pack.add_argument("context", type=Path)
     pack.add_argument("--max-chars", type=int, default=8000)
+    composition = sub.add_parser("compose", help="Propose up to eight ordered advisory capabilities with explicit dependencies")
+    composition.add_argument("context", type=Path)
+    composition.add_argument("--limit", type=int, default=3)
     plan = sub.add_parser("plan", help="Produce a typed, non-executable work proposal")
     plan.add_argument("context", type=Path)
     providers = sub.add_parser("providers", help="Inspect canonical first-party provider maturity")
@@ -59,7 +63,7 @@ def main(argv=None) -> int:
         elif args.command == "snapshot":
             obj = snapshot_project(project=args.project, task=args.task,
                                    root=args.root, paths=args.files)
-        elif args.command in ("assess", "pack", "propose", "plan"):
+        elif args.command in ("assess", "pack", "propose", "plan", "compose"):
             # No filesystem crawling. The file is explicitly provided by the caller.
             if args.context.stat().st_size > 131072:
                 raise ContractError("Context file exceeds budget")
@@ -70,6 +74,8 @@ def main(argv=None) -> int:
                 obj = context_pack(state, args.max_chars)
             elif args.command == "plan":
                 obj = work_plan(state)
+            elif args.command == "compose":
+                obj = compose(state, max_units=args.limit)
             else:
                 obj = propose_gap(state, capability_id=args.capability,
                                   skill_id=args.skill, resource_id=args.resource_id,

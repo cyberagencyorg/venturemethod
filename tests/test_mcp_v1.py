@@ -15,7 +15,7 @@ class MCPRoundTripTests(unittest.TestCase):
                 names = {item.name for item in available.tools}
                 self.assertEqual(names, {
                     "catalog_search_tool", "method_get_tool", "skill_get_tool",
-                    "project_assess", "context_pack_tool", "work_plan_tool", "providers_get_tool"
+                    "project_assess", "context_pack_tool", "work_plan_tool", "providers_get_tool", "composition_plan_tool"
                 })
                 res = await client.call_tool("method_get_tool", {"method_id": "opportunity-solution-tree"})
                 self.assertFalse(res.is_error)
@@ -33,6 +33,10 @@ class MCPRoundTripTests(unittest.TestCase):
                 self.assertFalse(planned.is_error)
                 work_result = planned.structured_content or json.loads(planned.content[0].text)
                 self.assertEqual(work_result["status"], "no_intervention")
+                composed = await client.call_tool("composition_plan_tool", {"host_state": assess_state})
+                self.assertFalse(composed.is_error)
+                comp_value = composed.structured_content or json.loads(composed.content[0].text)
+                self.assertEqual(comp_value["status"], "no_intervention")
         asyncio.run(exercise())
 
 

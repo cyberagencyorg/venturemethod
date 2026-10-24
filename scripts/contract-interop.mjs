@@ -13,5 +13,5 @@ for (const [name, type] of [["host-unmet","host-state"],["host-covered","host-st
   const instance = JSON.parse(readFileSync("examples/portable/" + name + ".json", "utf8"));
   if (!validators[type](instance)) throw new Error(name + ": " + ajv.errorsText(validators[type].errors));
 }
-if (Object.keys(validators).length < 10) throw new Error("Missing published schemas");
+if (Object.keys(validators).length < 11) throw new Error("Missing published schemas");
 console.log("Validated", Object.keys(validators).length, "JSON Schema contracts in Node.js");
