@@ -38,6 +38,10 @@ Capture permitted research using `research import` or the restricted `research f
 
 [Complete first-engagement walkthrough](docs/FIRST_ENGAGEMENT.md).
 
+## Brand positioning and copy
+
+Venture Method now includes original, unbenchmarked skills for durable marketing context, alternative-first positioning, buyer-oriented copy, voice preservation, substantive editing and final linguistic review. See [Positioning, copy and voice](docs/POSITIONING_COPY_AND_VOICE.md). A consuming project keeps its own canonical context and approved copy; this library supplies methods, not replacement brand decisions.
+
 ## What you can use it for
 
 | Situation | Work you might need |
