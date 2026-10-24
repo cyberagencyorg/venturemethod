@@ -17,7 +17,7 @@ class PortableEvaluationTests(unittest.TestCase):
             score_pair = {}
             for b in ("A", "B"):
                 folder = root / name / b
-                folder.mkdir(parents=True)
+                folder.mkdir(parents=True, exist_ok=True)
                 data = f"{name}: {b} response for evaluation".encode()
                 (folder / "response.md").write_bytes(data)
                 pairs[b] = {"runtime": "Codex" if b == "A" else "Hermes", "model": "test-model",
