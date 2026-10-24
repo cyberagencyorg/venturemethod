@@ -6,10 +6,13 @@ description: "Preserve an existing personal or corporate voice during rewrite, l
 
 **Purpose:** Retain the author's actual argument and authority while improving language for the reader and channel.
 
+## When to use
+Use on any rewrite where the author's point of view, vocabulary, intensity or voice could be changed, especially after explicit owner corrections.
+
 ## Inputs
 Original text; owner-approved context and restrictions; at least one authentic accepted sample where available; required regional spelling; audience and intended action.
 
-## Procedure
+## Method
 1. Inventory non-negotiable claims, distinctive terms, emotional intensity, stance, degree of certainty and omitted subjects before editing.
 2. Compare authentic accepted samples with rejected rewrites. Record sentence behavior and rhetorical choices, not merely voice adjectives.
 3. Preserve author's position, specificity, unusual but accurate vocabulary, criticism and ambition. Never soften by default, add faux bravado or editorialize against an absent objection.
@@ -21,7 +24,7 @@ Original text; owner-approved context and restrictions; at least one authentic a
 ## Outputs
 Revised copy, preserved-claim checklist, material meaning changes needing approval and updated voice notes for the canonical project context.
 
-## Rejection conditions
+## Quality gates
 - Material claims silently removed or added.
 - Distinctive point of view flattened into general professional language.
 - Generic style substituted for actual source examples.
