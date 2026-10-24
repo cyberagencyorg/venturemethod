@@ -44,6 +44,29 @@ class CompositionTests(unittest.TestCase):
             Draft202012Validator(ws).validate(x["unit"])
 
 
+
+    def test_structural_verifier_rejects_tampered_identity_and_dependencies(self):
+        from src.va.composition_v1 import verify_composition
+        source = compose(host())
+        self.assertEqual(verify_composition(source)["status"], "verified_advisory_structure")
+        for edit in ("tools", "effect", "approval", "reorder", "duplicate", "mismatch"):
+            bad = copy.deepcopy(source)
+            first = bad["units"][0]
+            if edit == "tools":
+                first["unit"]["allowed_tools"] = ["shell"]
+            elif edit == "effect":
+                first["unit"]["authorized_effects"] = ["execute"]
+            elif edit == "approval":
+                first["unit"]["review"]["status"] = "accepted"
+            elif edit == "reorder":
+                bad["units"] = bad["units"][::-1]
+            elif edit == "duplicate":
+                bad["units"][1]["capability_id"] = bad["units"][0]["capability_id"]
+            else:
+                first["unit"]["host_project"] = "unrelated"
+            with self.subTest(edit=edit), self.assertRaises(ContractError):
+                verify_composition(bad)
+
     def test_advisory_schema_rejects_privilege_escalation_and_invalid_unit(self):
         plan = compose(host())
         composition_schema = json.loads((ROOT/"schemas/v1/composition-plan.schema.json").read_text())

@@ -102,7 +102,7 @@ def compose(host_state: dict, max_units: int = 3) -> dict:
             "evidence_refs": gap["evidence_refs"],
             "evidence_verification": "excerpt_matched" if gap.get("evidence_quotes") else "reference_only",
         })
-    return {
+    result = {
         "schema_version": SCHEMA_VERSION, "project": host["project"],
         "context_sha256": context_hash,
         "status": "advisory_composition" if units else "no_intervention",
@@ -115,4 +115,78 @@ def compose(host_state: dict, max_units: int = 3) -> dict:
             "Every unit retains zero tool rights and requires host review.",
             "Composition proposes an order; no agents or actions were executed.",
         ],
+    }
+    verify_composition(result)
+    return result
+
+
+def verify_composition(plan: dict) -> dict:
+    """Check cross-unit relationships and advisory restrictions.
+
+    A validated document is not an authorization, trusted signature, or proof
+    that any capability was executed. Structural JSON Schema validation
+    remains a separate compatibility check.
+    """
+    import re
+    if not isinstance(plan, dict) or plan.get("schema_version") != SCHEMA_VERSION:
+        raise ContractError("Invalid composition version")
+    if not isinstance(plan.get("project"), str) or not plan["project"].strip():
+        raise ContractError("Composition project missing")
+    digest = plan.get("context_sha256")
+    if not isinstance(digest, str) or not re.fullmatch(r"[0-9a-f]{64}", digest):
+        raise ContractError("Invalid source context fingerprint")
+    units = plan.get("units")
+    excluded = plan.get("excluded")
+    if not isinstance(units, list) or not isinstance(excluded, list) or len(units) > 8:
+        raise ContractError("Invalid composition inventory")
+    if plan.get("effects") != [] or plan.get("host_authority") != "retained":
+        raise ContractError("Composition attempts to elevate host authority")
+    status = plan.get("status")
+    if status not in ("no_intervention", "advisory_composition"):
+        raise ContractError("Invalid composition status")
+    if (status == "no_intervention") != (len(units) == 0):
+        raise ContractError("Composition status disagrees with work units")
+    seen, work_ids = set(), set()
+    for item in units:
+        if not isinstance(item, dict):
+            raise ContractError("Malformed composition unit")
+        cap = item.get("capability_id")
+        work = item.get("unit")
+        if not isinstance(cap, str) or cap in seen or not isinstance(work, dict):
+            raise ContractError("Repeated or malformed capability in composition")
+        if work.get("id") in work_ids or not isinstance(work.get("id"), str):
+            raise ContractError("Duplicate or invalid work unit identity")
+        work_ids.add(work["id"])
+        if work.get("host_project") != plan["project"] or work.get("selected_capabilities") != [cap]:
+            raise ContractError("Work unit not bound to the declared project and capability")
+        if work.get("schema_version") != SCHEMA_VERSION:
+            raise ContractError("Work unit contract version mismatch")
+        if work.get("allowed_tools") != [] or work.get("authorized_effects") != []:
+            raise ContractError("Advisory composition cannot grant tool or execution rights")
+        review = work.get("review")
+        if not isinstance(review, dict) or review.get("status") != "pending" or review.get("required_before_effects") is not True:
+            raise ContractError("Work unit must remain pending host review")
+        deps = item.get("depends_on")
+        if not isinstance(deps, list) or len(deps) != len(set(str(x) for x in deps)) or any(
+            not isinstance(dep, str) or dep not in seen for dep in deps
+        ):
+            raise ContractError("Prerequisites must be distinct, present, and ordered before dependents")
+        if item.get("evidence_verification") not in ("excerpt_matched", "reference_only"):
+            raise ContractError("Unsupported evidence grade")
+        if not isinstance(item.get("evidence_refs"), list) or not item["evidence_refs"]:
+            raise ContractError("Unanchored composition unit")
+        seen.add(cap)
+    excluded_ids = set()
+    for item in excluded:
+        if not isinstance(item, dict) or not isinstance(item.get("capability_id"), str) or not isinstance(item.get("reason"), str):
+            raise ContractError("Malformed exclusion")
+        if item["capability_id"] in seen or item["capability_id"] in excluded_ids:
+            raise ContractError("Selected and excluded capabilities cannot overlap")
+        excluded_ids.add(item["capability_id"])
+    return {
+        "status": "verified_advisory_structure",
+        "units": len(units),
+        "context_sha256": digest,
+        "authorization": "none",
+        "warning": "Structural validation is not independent source verification, permission, or executed competence.",
     }

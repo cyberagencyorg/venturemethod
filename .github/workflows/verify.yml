@@ -29,6 +29,7 @@ jobs:
       - run: venturemethod assess examples/portable/host-unmet.json > /dev/null
       - run: venturemethod plan examples/portable/host-unmet.json > /dev/null
       - run: venturemethod compose examples/portable/host-unmet.json > /tmp/venturemethod-composition.json
+      - run: venturemethod verify-composition /tmp/venturemethod-composition.json > /dev/null
       - run: venturemethod providers > /dev/null
       - run: venturemethod assess examples/portable/host-covered.json > /dev/null
       - uses: actions/setup-node@v4

@@ -108,3 +108,5 @@ Use `venturemethod verify-export --destination /absolute/host/.agents/skills/ven
 ## Cross-catalog discovery
 
 `venturemethod search QUERY` and the read-only MCP discovery tool index capability identifiers/titles, first-party skill IDs and linked methodology titles. The response includes matched skill and method IDs, canonical capability IDs, and an explicit warning that keyword matches are not evidence of suitability. It never chooses a provider or executes a method. `schemas/v1/discovery.schema.json` defines the versioned response.
+
+`venturemethod verify-composition proposal.json` performs a separate semantic consistency check on dependencies, unique work units, pending host approvals, and zero execution authority. It rejects mutated or reordered proposal documents. This check does not authenticate the agent or establish permission to execute.

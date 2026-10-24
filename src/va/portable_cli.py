@@ -7,7 +7,7 @@ import sys
 from pathlib import Path
 from .portable import ContractError, assess, catalog_search, context_pack, inspect_paths, method_get, skill_get, snapshot_project, propose_gap, work_plan, provider_catalog
 from .portable_export import export_skill, verify_export
-from .composition_v1 import compose
+from .composition_v1 import compose, verify_composition
 
 
 def main(argv=None) -> int:
@@ -24,6 +24,8 @@ def main(argv=None) -> int:
     pack = sub.add_parser("pack", help="Build bounded reference packet")
     pack.add_argument("context", type=Path)
     pack.add_argument("--max-chars", type=int, default=8000)
+    verify_plan = sub.add_parser("verify-composition", help="Reject inconsistent or privilege-bearing composition artifacts")
+    verify_plan.add_argument("plan", type=Path)
     composition = sub.add_parser("compose", help="Propose up to eight ordered advisory capabilities with explicit dependencies")
     composition.add_argument("context", type=Path)
     composition.add_argument("--limit", type=int, default=3)
@@ -60,6 +62,10 @@ def main(argv=None) -> int:
         elif args.command == "inspect":
             obj = {"resources": inspect_paths(args.root, args.files),
                    "disclosure_warning": "Contains authorized project text. Do not upload without host permission."}
+        elif args.command == "verify-composition":
+            if args.plan.stat().st_size > 131072:
+                raise ContractError("Composition document exceeds size limit")
+            obj = verify_composition(json.loads(args.plan.read_text(encoding="utf-8")))
         elif args.command == "snapshot":
             obj = snapshot_project(project=args.project, task=args.task,
                                    root=args.root, paths=args.files)
