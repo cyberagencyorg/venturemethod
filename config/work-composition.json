@@ -98,7 +98,10 @@
       "eligible_skill_ids": [
         "go-to-market",
         "commercial-offer",
-        "brand-architecture"
+        "brand-architecture",
+        "marketing-context",
+        "competitive-positioning",
+        "marketing-copywriting"
       ],
       "required_tool_ids": [
         "engagement-read"
@@ -166,12 +169,16 @@
       "id": "marketing-operations",
       "title": "Marketing and campaign operations",
       "default_role": "operator",
-      "eligible_skill_ids": [],
+      "eligible_skill_ids": [
+        "brand-voice-preservation",
+        "copy-editing",
+        "human-writing-audit"
+      ],
       "required_tool_ids": [
         "engagement-read"
       ],
-      "execution_boundary": "specialist_external",
-      "status": "gap_no_first_party_skill"
+      "execution_boundary": "advisory",
+      "status": "partial_editorial_skills_only_no_campaign_execution"
     },
     {
       "id": "people-operations",
@@ -457,6 +464,14 @@
       "coverage": "partial_instruction_only",
       "execution_verified": false,
       "note": "Catalog mapping does not assert methodology fidelity or executed competence"
+    },
+    {
+      "method_id": "competitive-positioning-alternatives-first",
+      "capability_id": "commercial",
+      "skill_id": "competitive-positioning",
+      "coverage": "partial_instruction_only",
+      "execution_verified": false,
+      "note": "April Dunford alternative-first positioning method; no buyer validation inferred"
     }
   ]
 }
