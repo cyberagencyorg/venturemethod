@@ -1,0 +1,40 @@
+"""A genuine MCP protocol round trip without external network or host credentials."""
+import asyncio
+import hashlib
+import json
+import unittest
+from mcp import Client
+from src.va.mcp_server import mcp
+
+
+class MCPRoundTripTests(unittest.TestCase):
+    def test_read_only_tool_registration_and_live_protocol(self):
+        async def exercise():
+            async with Client(mcp) as client:
+                available = await client.list_tools()
+                names = {item.name for item in available.tools}
+                self.assertEqual(names, {
+                    "catalog_search_tool", "method_get_tool", "skill_get_tool",
+                    "project_assess", "context_pack_tool", "work_plan_tool", "providers_get_tool"
+                })
+                res = await client.call_tool("method_get_tool", {"method_id": "opportunity-solution-tree"})
+                self.assertFalse(res.is_error)
+                assess_state = {
+                    "schema_version": "1.0.0", "project": "test", "task": "Review a draft",
+                    "authorization": "host_read_only", "covered_capabilities": [],
+                    "resources": [{"id": "file:README.md", "sha256": hashlib.sha256(b"ok").hexdigest()}],
+                    "gaps": []
+                }
+                result = await client.call_tool("project_assess", {"host_state": assess_state})
+                self.assertFalse(result.is_error)
+                payload = result.structured_content or json.loads(result.content[0].text)
+                self.assertEqual(payload["decision"], "none")
+                planned = await client.call_tool("work_plan_tool", {"host_state": assess_state})
+                self.assertFalse(planned.is_error)
+                work_result = planned.structured_content or json.loads(planned.content[0].text)
+                self.assertEqual(work_result["status"], "no_intervention")
+        asyncio.run(exercise())
+
+
+if __name__ == "__main__":
+    unittest.main()

@@ -1,0 +1,26 @@
+{
+  "schema_version": "1.0.0",
+  "project": "fictional-product-review",
+  "task": "Review a completed, approved requirements spec",
+  "authorization": "host_read_only",
+  "covered_capabilities": [
+    "product"
+  ],
+  "resources": [
+    {
+      "id": "doc:spec",
+      "sha256": "cdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcd"
+    }
+  ],
+  "gaps": [
+    {
+      "capability_id": "product",
+      "status": "covered",
+      "priority": "high",
+      "reason": "The accepted specification already meets the defined criteria",
+      "evidence_refs": [
+        "doc:spec"
+      ]
+    }
+  ]
+}

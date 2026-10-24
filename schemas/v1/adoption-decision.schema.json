@@ -1,0 +1,220 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "$id": "https://github.com/cyberagencyorg/venturemethod/schemas/v1/adoption-decision.schema.json",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "project",
+    "decision",
+    "selected",
+    "exclusions",
+    "context_sha256",
+    "state",
+    "effects",
+    "host_authority",
+    "limitations"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "project": {
+      "type": "string"
+    },
+    "decision": {
+      "enum": [
+        "consult",
+        "none"
+      ]
+    },
+    "selected": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "capability_id",
+            "skill_id",
+            "instruction_path",
+            "skill_status",
+            "evidence_refs",
+            "reason",
+            "priority",
+            "execution_verified",
+            "evidence_verification"
+          ],
+          "properties": {
+            "capability_id": {
+              "type": "string"
+            },
+            "skill_id": {
+              "type": "string"
+            },
+            "instruction_path": {
+              "type": "string"
+            },
+            "skill_status": {
+              "type": "string"
+            },
+            "evidence_refs": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9:._/-]{0,159}$"
+              }
+            },
+            "reason": {
+              "type": "string"
+            },
+            "priority": {
+              "enum": [
+                "critical",
+                "high",
+                "medium",
+                "low"
+              ]
+            },
+            "execution_verified": {
+              "const": false
+            },
+            "evidence_verification": {
+              "enum": [
+                "excerpt_matched",
+                "reference_only"
+              ]
+            }
+          }
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "exclusions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "capability_id",
+          "reason"
+        ],
+        "properties": {
+          "capability_id": {
+            "type": "string"
+          },
+          "reason": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "context_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "state": {
+      "const": "advisory_only"
+    },
+    "effects": {
+      "const": []
+    },
+    "host_authority": {
+      "const": "retained"
+    },
+    "limitations": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "decision": {
+            "const": "none"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "selected": {
+            "type": "null"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "decision": {
+            "const": "consult"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "selected": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "capability_id",
+              "skill_id",
+              "instruction_path",
+              "skill_status",
+              "evidence_refs",
+              "reason",
+              "priority",
+              "execution_verified",
+              "evidence_verification"
+            ],
+            "properties": {
+              "capability_id": {
+                "type": "string"
+              },
+              "skill_id": {
+                "type": "string"
+              },
+              "instruction_path": {
+                "type": "string"
+              },
+              "skill_status": {
+                "type": "string"
+              },
+              "evidence_refs": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z0-9][A-Za-z0-9:._/-]{0,159}$"
+                }
+              },
+              "reason": {
+                "type": "string"
+              },
+              "priority": {
+                "enum": [
+                  "critical",
+                  "high",
+                  "medium",
+                  "low"
+                ]
+              },
+              "execution_verified": {
+                "const": false
+              },
+              "evidence_verification": {
+                "enum": [
+                  "excerpt_matched",
+                  "reference_only"
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}

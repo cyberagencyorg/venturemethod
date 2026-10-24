@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "$id": "https://github.com/cyberagencyorg/venturemethod/schemas/v1/method.schema.json",
+  "additionalProperties": true,
+  "required": [
+    "id",
+    "title",
+    "goals",
+    "minimum_evidence",
+    "fit",
+    "avoid",
+    "output",
+    "source",
+    "kind",
+    "cadence",
+    "verified_in_runtime"
+  ],
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "goals": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string"
+      }
+    },
+    "minimum_evidence": {
+      "enum": [
+        "minimal",
+        "provisional",
+        "observed",
+        "verified"
+      ]
+    },
+    "fit": {
+      "type": "string"
+    },
+    "avoid": {
+      "type": "string"
+    },
+    "output": {
+      "type": "string"
+    },
+    "source": {
+      "type": "string",
+      "format": "uri"
+    },
+    "kind": {
+      "type": "string"
+    },
+    "cadence": {
+      "type": "string"
+    },
+    "verified_in_runtime": {
+      "type": "boolean"
+    }
+  }
+}
