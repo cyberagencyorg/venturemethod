@@ -6,13 +6,17 @@ description: Convert evidenced product intent and constraints into testable requ
 
 **Purpose:** Make product decisions implementable and verifiable without replacing prior decisions, claiming customer validation or prescribing technologies prematurely.
 
-## Before writing
+## When to use
 
 Read the host's existing roadmap, product requirements, accepted decisions, user context and delivery constraints only with existing host authorization. If the task is a narrow improvement to a current specification, preserve its structure and edit that gap only. If an accepted spec already meets the requested outcome, **decline process expansion**.
 
 Identify the real decision, intended user, primary outcome, boundaries, known evidence and unresolved assumptions. Never treat a stakeholder's assertion as customer research.
 
-## Working method
+## Inputs
+
+Use an evidenced product task, accepted decisions, existing specification, operating constraints, relevant customer observations and a specific expected outcome. Unknowns must remain marked as unknown, and missing customer research cannot be manufactured.
+
+## Method
 
 1. **Specify the problem, not just a feature.** State affected user/workflow, current deficiency, intended outcome and what observation supports it. Name the decision owner.
 2. **Preserve accepted constraints.** List relevant decisions, exclusions, integrations, legal/security/privacy obligations, operational owners and existing system interfaces. Do not restart discovery to justify a template.
@@ -22,13 +26,13 @@ Identify the real decision, intended user, primary outcome, boundaries, known ev
 6. **Review tradeoffs and rollout.** Document non-goals, sequence/dependencies, migration, instrumentation, launch/rollback criteria, responsible owner and unresolved questions. Request only missing information that would materially change implementation.
 7. **Handoff proportionately.** Produce a bounded PRD, specification patch or acceptance matrix suitable for the actual downstream team. Mark draft versus approved content explicitly.
 
-## Minimal acceptance record
+## Outputs
 
 \`requirement_id | user/scenario | expected behavior | constraints | acceptance test | evidence/decision ref | owner | status\`.
 
 Include what is out of scope and the checks that would invalidate or revise an accepted requirement. If the original evidence is missing, state that plainly and give the lowest-cost next check. No fabricated users, interviews, rates, benchmarks or approvals.
 
-## Avoid
+## Quality gates
 
 - Rewriting accepted requirements without an identified deficiency or approval.
 - Conflating a compliant draft with verified implementation.

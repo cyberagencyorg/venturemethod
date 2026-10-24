@@ -6,13 +6,13 @@ description: Audit decision-critical claims for source authenticity, correct int
 
 **Purpose:** Determine which material claims a decision-maker can rely on, which need qualification, and which must not be published or acted on yet.
 
-## Applicability and stopping rules
+## When to use
 
 Use this when the task depends on factual assertions, research reports, sourced recommendations, diligence, legal/financial estimates or contradictory materials. For a trivial rewrite of accepted copy with no new factual claims, **do not invoke this procedure**.
 
 Respect the active host's objective, evidence, prior decisions and permissions. Do not create a new engagement, change its documentation structure, or restart research simply because this skill exists. Without approved access to original sources, return an explicitly limited desk review rather than an assurance of truth.
 
-## Minimum inputs
+## Inputs
 
 - What decision or output will rely on the assertions, and when.
 - The actual document, claims or source excerpts to inspect.
@@ -20,7 +20,7 @@ Respect the active host's objective, evidence, prior decisions and permissions. 
 - Allowed access and publication boundary, relevant dates and sensitivity.
 - Acceptance threshold appropriate to the stakes. Missing inputs stay missing.
 
-## Procedure
+## Method
 
 1. **Select material claims.** Extract only propositions capable of changing the decision, risk, economics or external communication. Preserve the exact wording and where it appears. Separate direct observations, publisher statements, estimates, model inferences, assumptions and forecasts.
 2. **Resolve source identity.** For each claim, record the issuer, original locator, version/edition, original publish or observation time, accessed time where available, quotation/excerpt range and reuse rights. A link or hash is not proof of truth.
@@ -30,7 +30,7 @@ Respect the active host's objective, evidence, prior decisions and permissions. 
 6. **Trace implications.** Identify the actual existing decisions or artifacts depending on affected claims. Recommend targeted corrections, not automatic rewrites. Only the host's approval owner can release, publish or commit.
 7. **Stop when sufficient.** Deliver the smallest claim-by-claim assessment that resolves the user's decision. Do not continue collecting sources once the chosen threshold is satisfied.
 
-## Output contract
+## Outputs
 
 Use the host's existing identifiers, or minimal local IDs when none exist. For every material item provide:
 
@@ -38,7 +38,7 @@ Use the host's existing identifiers, or minimal local IDs when none exist. For e
 
 Finish with: (1) publication/decision blockers, (2) claims usable with caveats, (3) unresolved uncertainty, (4) specific approval owner or "not provided". Cite actual original material, not just a parent research summary. Avoid repeating entire documents.
 
-## Failure conditions
+## Quality gates
 
 - Confident factual verdict based only on an AI summary or fabricated access.
 - Invented interview, market statistic, source date, quote, URL, identity or accuracy check.
