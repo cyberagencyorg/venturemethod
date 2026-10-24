@@ -100,3 +100,7 @@ Use `venturemethod verify-export --destination /absolute/host/.agents/skills/ven
 ## Typed work proposals and provider maturity
 
 `venturemethod plan host-state.json` or the MCP `work_plan_tool` translates a justified assessment into a `schemas/v1/work-unit.schema.json` proposal. The proposal retains the host project, precise objective, existing artifact references, one proposed capability, zero newly authorized effects, pending host review, and explicit stopping rules. A no-op assessment generates no work unit. `venturemethod providers` (or MCP `providers_get_tool`) derives first-party provider records with specification, availability, installation, execution, and independent-evaluation statuses kept separate. **These outputs cannot authorize a host tool or attest professional competence.**
+
+## Multiple capabilities without inventing an agent team
+
+`venturemethod compose host-state.json --limit 3` or `composition_plan_tool` accepts multiple separately evidenced gaps, optional `depends_on` capability IDs, and explicit skill choices. The result is a bounded topologically ordered set of pending **advisory** work units. Each grants zero new rights, preserves host authority, and documents excluded capabilities or unresolved prerequisites. Cyclic dependencies fail closed. No automatic crew, scheduler, delegation or write action is created. If no capability is justified, composition returns `no_intervention`.

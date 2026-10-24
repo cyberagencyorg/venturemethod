@@ -1,0 +1,126 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/cyberagencyorg/venturemethod/schemas/v1/composition-plan.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "project",
+    "context_sha256",
+    "status",
+    "units",
+    "excluded",
+    "effects",
+    "host_authority",
+    "limitations"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "project": {
+      "type": "string",
+      "minLength": 1
+    },
+    "context_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "status": {
+      "enum": [
+        "no_intervention",
+        "advisory_composition"
+      ]
+    },
+    "units": {
+      "type": "array",
+      "maxItems": 8,
+      "items": {
+        "type": "object",
+        "required": [
+          "unit",
+          "capability_id",
+          "skill_id",
+          "depends_on",
+          "evidence_refs",
+          "evidence_verification"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "unit": {
+            "type": "object",
+            "required": [
+              "schema_version",
+              "id",
+              "host_project",
+              "objective",
+              "phase",
+              "selected_capabilities",
+              "allowed_tools",
+              "authorized_effects",
+              "review",
+              "stop_when",
+              "outputs"
+            ]
+          },
+          "capability_id": {
+            "type": "string"
+          },
+          "skill_id": {
+            "type": "string"
+          },
+          "depends_on": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string"
+            }
+          },
+          "evidence_refs": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "evidence_verification": {
+            "enum": [
+              "excerpt_matched",
+              "reference_only"
+            ]
+          }
+        }
+      }
+    },
+    "excluded": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "capability_id",
+          "reason"
+        ],
+        "properties": {
+          "capability_id": {
+            "type": "string"
+          },
+          "reason": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "effects": {
+      "const": []
+    },
+    "host_authority": {
+      "const": "retained"
+    },
+    "limitations": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

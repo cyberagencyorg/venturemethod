@@ -235,7 +235,7 @@ def validate_host(state: dict) -> dict:
         raise ContractError("Host state exceeds budget")
     gap_ids = set()
     for gap in gaps:
-        if not isinstance(gap, dict) or set(gap) - {"capability_id", "status", "priority", "reason", "evidence_refs", "skill_id", "evidence_quotes"} or gap.get("capability_id") not in c["capabilities"]:
+        if not isinstance(gap, dict) or set(gap) - {"capability_id", "status", "priority", "reason", "evidence_refs", "skill_id", "evidence_quotes", "depends_on"} or gap.get("capability_id") not in c["capabilities"]:
             raise ContractError("Unknown gap capability")
         if gap["capability_id"] in gap_ids:
             raise ContractError("Contradictory or duplicate capability assessments must be reconciled")
@@ -261,6 +261,11 @@ def validate_host(state: dict) -> dict:
             source_text = resource_by_id[rid].get("text")
             if source_text is None or quote not in source_text:
                 raise ContractError("Evidence anchor is not an exact excerpt in supplied text")
+        deps = gap.get("depends_on", [])
+        if not isinstance(deps, list) or len(deps) > 12 or len(deps) != len(set(str(x) for x in deps)):
+            raise ContractError("Invalid or duplicate dependency list")
+        if any(not isinstance(dep, str) or dep not in c["capabilities"] or dep == gap["capability_id"] for dep in deps):
+            raise ContractError("Dependency must reference a distinct known capability")
         if "skill_id" in gap:
             if gap["skill_id"] not in c["capabilities"][gap["capability_id"]]["eligible_skill_ids"]:
                 raise ContractError("Selected skill does not implement the declared capability")
