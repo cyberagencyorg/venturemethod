@@ -3,11 +3,16 @@ on:
   pull_request:
   push:
     branches: [main, feat/portable-adoption-v1]
+permissions:
+  contents: read
 jobs:
   test:
+    timeout-minutes: 20
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
@@ -52,5 +57,5 @@ jobs:
           venturemethod export-skill --destination /tmp/vm-openass-host/.agents/skills/venturemethod --apply > /dev/null
           venturemethod verify-export --destination /tmp/vm-openass-host/.agents/skills/venturemethod > /dev/null
           skills-ref validate /tmp/vm-openass-host/.agents/skills/venturemethod
-          (cd /tmp/vm-openass-host && python3 scripts/context.py check)
+          test -f /tmp/vm-openass-host/AGENTS.md
           git -C /tmp/vm-openass-host diff --quiet HEAD

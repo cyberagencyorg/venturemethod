@@ -22,3 +22,5 @@ Do not equate a successful structured test, a valid skill directory, a compiled 
 Do not merge an unverified claim into the main branch. PR #13 remains the independent review.
 
 Reproducibility: [compatibility matrix](COMPATIBILITY_MATRIX_2026-10-24.md) and CI for PR #14. Issue #16 owns independent agent trials. Static host checkout compatibility is not an agent benchmark.
+
+CI threat boundary: the external-host smoke test must not execute source code from the cloned external repository. The source checkout is only a fixture for portable installation/validation, with workflow token persistence disabled.

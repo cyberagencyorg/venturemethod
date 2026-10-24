@@ -11,7 +11,7 @@ Verified CI revision: cb30a7dcd9962030b8b4e4e70065a0a39737e0b2.
 | Python MCP server | In-memory SDK protocol discovery, no-op and typed read-only calls | Not a real human-directed agent |
 | Node MCP v2 client | Actual stdio round trip into Python server, including composition | No model-driven tool selection |
 | Agent Skills | Pinned official validator checks 26 first-party skills and portable adapter | Native harness discovery is untested |
-| External Open ASS host | Pinned public BradKhan/open-ASS checkout at 35f10ba4cb7556b96f98e334ecce64a5f945c975; explicit exported skill, integrity and official format validation, host context check, no tracked changes | Agent discovery or independent execution not proven |
+| External Open ASS host | Pinned public BradKhan/open-ASS checkout at 35f10ba4cb7556b96f98e334ecce64a5f945c975; explicit exported skill, integrity and official format validation, no execution of host code, no tracked changes | Agent discovery or independent execution not proven |
 | Data contracts | 11 JSON Schema 2020-12 contracts; Python and Node validation | No complete externally executed signed work receipt |
 
 ## CI result
@@ -23,3 +23,5 @@ External host checkout compatibility verifies static distribution only. It is no
 ## Blocked release gates
 
 Independent Codex/Hermes agent evaluation, blinded baseline comparisons, real host permission probes, and accountable release approval remain unverified. See issue #16 and docs/V1_HOST_VALIDATION_RUNBOOK.md.
+
+Security adjustment: workflow permissions are limited to contents:read; GitHub checkout credentials are not persisted. External-host smoke uses pinned source as static fixture only and does not execute external repository scripts.
