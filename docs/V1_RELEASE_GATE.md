@@ -1,18 +1,22 @@
-# Version 1.0 release gate: evidence, not an aspirational tag
+# Version 1.0 release gate: implementation and independent evidence
 
-Version 1.0 is **NOT approved** merely because schema tests and MCP wiring pass. Do not change the advertised version to 1.0 until these gates are satisfied with recorded evidence.
+Last technical verification: 2026-10-24, implementation branch \`feat/portable-adoption-v1\`. The code is versioned \`0.9.0\`; **1.0 is not yet certified or released**.
 
-| Gate | Evidence required | Status |
+| Requirement | Available evidence | Status |
 | --- | --- | --- |
-| Protocol correctness | Automated JSON Schema checks, round-trip MCP tool tests, packaged CLI install | Not yet verified in CI |
-| Agent Skills conformance | Current skills-ref validator and actual native discovery in two unrelated hosts | Unverified |
-| External adoption | Real Codex and Hermes (or a documented distinct second host) consume identical pinned revision from outside repo; no forced local workflow | Unverified |
-| Host state fidelity | Unmet, covered, uncertain and unauthorized tests on an in-flight external repo; reviewer checks source references | Deterministic fixtures only |
-| Specialist outcome | Minimum four blind baseline-vs-skill tasks including a no-intervention case, scored by independent reviewer; no material factual/safety regression | Unverified |
-| Permissions | Host file boundary, symlink, traversal, injection, unauthorized tool attempts and data-leak probes across actual runtimes | Unit coverage only |
-| Compatibility | One complete file-only reference path, one real MCP host invocation, written install/rollback instructions, versions pinned | Unverified |
-| Quality | Correctly preserve earlier decisions, cite source evidence, avoid invented specialist credentials, improve task outcome vs baseline | Unverified |
+| Portable reference format | Pinned official \`skills-ref\` validator runs on all 26 first-party skills and the portable adapter | Automated verified |
+| Typed contracts | 10 JSON Schema 2020-12 definitions, Python and Node validation, cross-reference and negative tests | Automated verified |
+| Bounded host assessment | Evidence-linked explicit host-state contract, correct abstention, controlled scan and integrity checks | Automated verified on fixtures |
+| External distribution | Explicit self-contained skill export with non-overwrite and rollback path; Python wheel installation from outside checkout | Automated verified |
+| Tool interoperability | Python SDK v2 in-memory test, Node SDK v2 to Python server over stdio, only read-only tools | Automated verified |
+| Specialist quality | Paired evaluation structure and independent reviewer rubric exist, no live independent agent results | BLOCKED |
+| Real host adoption | No documented native skill discovery and use in both Codex and Hermes on actual host project | BLOCKED |
+| Tool/authority security in real runtimes | Unit path/symlink/authorization checks exist, but no hostile input or write-attempt traces in live harnesses | BLOCKED |
+| Repeated results and performance | No verified end-to-end baseline improvements, human attention/cost or regression outcomes | BLOCKED |
+| Version 1.0 approval | Requires accountable decision after evidence review | BLOCKED |
 
-Keep outputs, case definitions, host/runtime/model versions, tool permission manifests, file hash, observed timings/costs (if measurable), and reviewer rubrics. Publish anonymized evidence only with permission. Prefer an honest failed case to an invented pass.
+See \`docs/V1_HOST_VALIDATION_RUNBOOK.md\` and \`evals/portable/PROTOCOL.md\`.
 
-**Merge and version policy:** This branch is implementation development. Treat \`0.9.x\` as release candidate until the table is backed by live evidence. PR #13 is audit-only and remains independent. Do not declare the entire method/skill catalog independently evaluated from a single successful task.
+Do not equate a successful structured test, a valid skill directory, a compiled JSON Schema, a local MCP handshake or an agent self-review with verified professional competence. No one has yet authenticated specialist execution, tested actual host migration boundaries, or approved 1.0.
+
+Do not merge an unverified claim into the main branch. PR #13 remains the independent review.
