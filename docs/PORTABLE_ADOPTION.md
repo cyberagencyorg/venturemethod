@@ -25,6 +25,18 @@ venturemethod pack examples/portable/host-unmet.json
 
 The \`inspect\` command prints authorized project text to stdout. **Do not pipe it into an external model or store it in another location without the host's disclosure permission.** No files or folders are read unless explicitly passed.
 
+## Self-contained native Agent Skill export
+
+The copy inside `.agents/skills/` in this repository is useful to an agent already browsing this checkout, but another host will not discover a random private GitHub repository automatically. Use the CLI from a trusted checkout or installed wheel to create a self-contained skill under an explicitly authorized host directory:
+
+```sh
+venturemethod export-skill --destination /absolute/host/.agents/skills/venturemethod
+# Inspect the printed file/sha plan first. Then, only with permission:
+venturemethod export-skill --destination /absolute/host/.agents/skills/venturemethod --apply
+```
+
+The exporter refuses existing nonempty destinations and symlinked paths. It never overwrites an installed skill or project file. Rollback is to remove only the newly exported `venturemethod/` directory. The export embeds the adoption instructions, first-party skills and catalog for offline progressive loading; a Python runtime is **not** needed by the host merely to read them. Discovery remains host/version dependent and must be tested in the real harness.
+
 ## Host contract
 
 \`host-state.schema.json\` requires a named project/task, \`authorization: host_read_only\`, source records with SHA-256, covered capability IDs and a list of capability gaps marked \`unmet\`, \`covered\` or \`uncertain\`. Every gap has an explicit priority, rationale, and source references. This is *input from the host*, not a verified finding from Venture Method.

@@ -21,7 +21,7 @@ class BuildWithReferences(build_py):
                     dest = target_root / source.relative_to(REPO)
                     dest.parent.mkdir(parents=True, exist_ok=True)
                     copy2(source, dest)
-        for name in ("ADOPT.md", "ABOUT.md"):
+        for name in ("ADOPT.md", "ABOUT.md", "docs/PORTABLE_ADOPTION.md"):
             dest = target_root / name
             dest.parent.mkdir(parents=True, exist_ok=True)
             copy2(REPO / name, dest)

@@ -6,6 +6,7 @@ import json
 import sys
 from pathlib import Path
 from .portable import ContractError, assess, catalog_search, context_pack, inspect_paths, method_get, skill_get
+from .portable_export import export_skill
 
 
 def main(argv=None) -> int:
@@ -26,6 +27,9 @@ def main(argv=None) -> int:
     m.add_argument("id")
     s = sub.add_parser("skill")
     s.add_argument("id")
+    export = sub.add_parser("export-skill", help="Dry-run or explicitly export a self-contained agent skill")
+    export.add_argument("--destination", type=Path, required=True)
+    export.add_argument("--apply", action="store_true", help="Create the new skill directory")
     args = parser.parse_args(argv)
     try:
         if args.command == "search":
@@ -39,6 +43,8 @@ def main(argv=None) -> int:
                 raise ContractError("Context file exceeds budget")
             state = json.loads(args.context.read_text(encoding="utf-8"))
             obj = assess(state) if args.command == "assess" else context_pack(state, args.max_chars)
+        elif args.command == "export-skill":
+            obj = export_skill(args.destination, apply=args.apply)
         elif args.command == "method":
             obj = method_get(args.id)
         else:
