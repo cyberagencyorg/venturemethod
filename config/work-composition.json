@@ -166,9 +166,9 @@
       "status": "gap_no_first_party_skill"
     },
     {
-      "id": "marketing-operations",
-      "title": "Marketing and campaign operations",
-      "default_role": "operator",
+      "id": "editorial-communications",
+      "title": "Brand and commercial editorial production",
+      "default_role": "specialist",
       "eligible_skill_ids": [
         "brand-voice-preservation",
         "copy-editing",
@@ -178,8 +178,18 @@
         "engagement-read"
       ],
       "execution_boundary": "advisory",
-      "status": "mapped",
-      "description": "Editorial methods only; campaign execution remains unavailable"
+      "status": "mapped"
+    },
+    {
+      "id": "marketing-operations",
+      "title": "Marketing and campaign operations",
+      "default_role": "operator",
+      "eligible_skill_ids": [],
+      "required_tool_ids": [
+        "engagement-read"
+      ],
+      "execution_boundary": "advisory",
+      "status": "gap_no_first_party_skill"
     },
     {
       "id": "people-operations",
