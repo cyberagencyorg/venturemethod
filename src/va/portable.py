@@ -340,3 +340,43 @@ def context_pack(state: dict, max_chars: int = 8000) -> dict:
         return {"assessment": result, "instructions": None,
                 "error": "Selected skill exceeds context budget; read it directly."}
     return {"assessment": result, "instructions": instructions}
+
+
+def snapshot_project(*, project: str, task: str, root: Path, paths: list[str]) -> dict:
+    """Construct a source-backed host-state draft without guessing unmet needs.
+
+    Inspection is explicit and read-only. The caller must authorize use of
+    captured private text by any downstream model or remote service.
+    """
+    state = {
+        "schema_version": SCHEMA_VERSION,
+        "project": project,
+        "task": task,
+        "authorization": "host_read_only",
+        "resources": inspect_paths(root, paths),
+        "covered_capabilities": [],
+        "gaps": [],
+    }
+    return validate_host(state)
+
+
+def propose_gap(state: dict, *, capability_id: str, skill_id: str, resource_id: str,
+                quote: str, reason: str, priority: str = "high") -> dict:
+    """Explicit host-authored hypothesis, checked against an exact source quote.
+
+    This function does NOT independently decide that a gap exists. It returns a
+    new state plus a purely advisory, reversible assessment. No host writes.
+    """
+    import copy
+    draft = copy.deepcopy(validate_host(state))
+    if any(item["capability_id"] == capability_id for item in draft["gaps"]):
+        raise ContractError("Capability already assessed; reconcile existing host decision")
+    draft["gaps"].append({
+        "capability_id": capability_id, "status": "unmet",
+        "priority": priority, "reason": reason, "skill_id": skill_id,
+        "evidence_refs": [resource_id],
+        "evidence_quotes": [{"resource_id": resource_id, "quote": quote}],
+    })
+    result = assess(draft)
+    return {"proposed_host_state": draft, "assessment": result,
+            "warning": "A matched quote does not establish the proposed gap's correctness."}

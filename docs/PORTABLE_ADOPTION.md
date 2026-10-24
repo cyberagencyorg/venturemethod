@@ -37,6 +37,25 @@ venturemethod export-skill --destination /absolute/host/.agents/skills/ventureme
 
 The exporter refuses existing nonempty destinations and symlinked paths. It never overwrites an installed skill or project file. Rollback is to remove only the newly exported `venturemethod/` directory. The export embeds the adoption instructions, first-party skills and catalog for offline progressive loading; a Python runtime is **not** needed by the host merely to read them. Discovery remains host/version dependent and must be tested in the real harness.
 
+## Inspect a real host project without manufacturing requirements
+
+The CLI now supports a complete read-only path from existing files to an evidence-backed **candidate** assessment:
+
+```sh
+# Nothing is written. Host must approve use and disclosure of these local files.
+venturemethod snapshot --project current-product --task "Assess unmet evidence quality" \
+  --root /absolute/authorized/project --file README.md --file docs/proposal.md
+
+# To retain the resulting JSON locally, redirect it to an authorized location.
+# Next, name the EXACT excerpt that supports a proposed gap.
+venturemethod propose --context /private/host-snapshot.json \
+  --capability engagement --skill evidence-audit \
+  --resource-id file:docs/proposal.md --quote "The proposal uses unsourced figures" \
+  --reason "Decision-critical market numbers lack supporting evidence"
+```
+
+Snapshot construction hashes and reads only the nominated files, includes no guessed deficiencies, and initially yields a no-intervention decision. `propose` creates a candidate gap with an exact-source excerpt and returns the proposed contract and advisory assessment without altering the original file. These operations **do not replace a qualified agent or human assessment** of whether the selected skill genuinely improves the user's task.
+
 ## Host contract
 
 \`host-state.schema.json\` requires a named project/task, \`authorization: host_read_only\`, source records with SHA-256, covered capability IDs and a list of capability gaps marked \`unmet\`, \`covered\` or \`uncertain\`. Every gap has an explicit priority, rationale, and source references. This is *input from the host*, not a verified finding from Venture Method.

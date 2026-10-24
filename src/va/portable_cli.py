@@ -5,7 +5,7 @@ import argparse
 import json
 import sys
 from pathlib import Path
-from .portable import ContractError, assess, catalog_search, context_pack, inspect_paths, method_get, skill_get
+from .portable import ContractError, assess, catalog_search, context_pack, inspect_paths, method_get, skill_get, snapshot_project, propose_gap
 from .portable_export import export_skill, verify_export
 
 
@@ -33,6 +33,19 @@ def main(argv=None) -> int:
     verify = sub.add_parser("verify-export", help="Verify every exported file against its manifest and optional trusted bundle digest")
     verify.add_argument("--destination", type=Path, required=True)
     verify.add_argument("--expected-sha256", type=str)
+    snapshot = sub.add_parser("snapshot", help="Produce a read-only host-state draft from explicitly nominated project files")
+    snapshot.add_argument("--root", type=Path, required=True)
+    snapshot.add_argument("--file", action="append", dest="files", required=True)
+    snapshot.add_argument("--task", required=True)
+    snapshot.add_argument("--project", required=True)
+    propose = sub.add_parser("propose", help="Propose one exact-source-anchored capability gap without modifying files")
+    propose.add_argument("--context", type=Path, required=True)
+    propose.add_argument("--resource-id", required=True)
+    propose.add_argument("--quote", required=True)
+    propose.add_argument("--capability", required=True)
+    propose.add_argument("--skill", required=True)
+    propose.add_argument("--reason", required=True)
+    propose.add_argument("--priority", default="high")
     args = parser.parse_args(argv)
     try:
         if args.command == "search":
@@ -40,12 +53,23 @@ def main(argv=None) -> int:
         elif args.command == "inspect":
             obj = {"resources": inspect_paths(args.root, args.files),
                    "disclosure_warning": "Contains authorized project text. Do not upload without host permission."}
-        elif args.command in ("assess", "pack"):
+        elif args.command == "snapshot":
+            obj = snapshot_project(project=args.project, task=args.task,
+                                   root=args.root, paths=args.files)
+        elif args.command in ("assess", "pack", "propose"):
             # No filesystem crawling. The file is explicitly provided by the caller.
             if args.context.stat().st_size > 131072:
                 raise ContractError("Context file exceeds budget")
             state = json.loads(args.context.read_text(encoding="utf-8"))
-            obj = assess(state) if args.command == "assess" else context_pack(state, args.max_chars)
+            if args.command == "assess":
+                obj = assess(state)
+            elif args.command == "pack":
+                obj = context_pack(state, args.max_chars)
+            else:
+                obj = propose_gap(state, capability_id=args.capability,
+                                  skill_id=args.skill, resource_id=args.resource_id,
+                                  quote=args.quote, reason=args.reason,
+                                  priority=args.priority)
         elif args.command == "export-skill":
             obj = export_skill(args.destination, apply=args.apply)
         elif args.command == "verify-export":
