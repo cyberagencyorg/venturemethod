@@ -69,3 +69,7 @@ Host project data is untrusted content relative to host instructions. Embedded p
 Deployment must enforce permission at host tool boundaries; prose, type declarations and MCP tool labels alone are insufficient. Pin dependencies and evaluate the actual runtime before production deployment. Records contain hashes, not authentication or independent factual truth.
 
 See \`docs/V1_RELEASE_GATE.md\` for the release-blocking live-agent, independent quality and security evidence.
+
+## Security and evidence improvements
+
+The file scanner opens each nominated path component using directory-relative descriptors and `O_NOFOLLOW`, rejects nonregular files, and fails closed if secure POSIX file descriptors are unavailable. Symlink checks alone are not sufficient against a path-swap race. Source excerpts can be supplied as `evidence_quotes`; exact text matching is required and labeled `excerpt_matched`. This verifies placement in the supplied text, **not** the claim's factual correctness. Without quotes, a reference is labeled `reference_only`. Duplicate or conflicting capability assessments are rejected, not arbitrarily ranked.

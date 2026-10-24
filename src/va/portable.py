@@ -8,6 +8,8 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
+import stat
 import re
 from pathlib import Path
 from typing import Any
@@ -106,48 +108,77 @@ def skill_get(skill_id: str) -> dict:
             "status": item["status"], "release": item["release"]}
 
 
-def inspect_paths(project_root: Path, included_paths: list[str]) -> list[dict]:
-    """Inspect explicitly nominated files only, forbidding symlinks and root escape.
+def _read_regular_file(root: Path, parts: tuple[str, ...]) -> bytes:
+    """Open every component relative to a pinned directory descriptor.
 
-    Files are not transmitted or stored here. Returned text is deliberately bounded;
-    callers must authorize its disclosure to their own model/runtime separately.
+    O_NOFOLLOW closes the check/open symlink race; fstat rejects special
+    files including FIFOs/devices. Fail closed on platforms lacking dir_fd.
+    """
+    if os.name != "posix" or not hasattr(os, "O_NOFOLLOW"):
+        raise ContractError("Secure scoped inspection requires POSIX O_NOFOLLOW")
+    fds = []
+    try:
+        directory_flags = os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW | os.O_CLOEXEC
+        base = os.open(root, directory_flags)
+        fds.append(base)
+        for segment in parts[:-1]:
+            fd = os.open(segment, directory_flags, dir_fd=fds[-1])
+            fds.append(fd)
+        file_flags = os.O_RDONLY | os.O_NOFOLLOW | os.O_NONBLOCK | os.O_CLOEXEC
+        final = os.open(parts[-1], file_flags, dir_fd=fds[-1])
+        fds.append(final)
+        info = os.fstat(final)
+        if not stat.S_ISREG(info.st_mode):
+            raise ContractError("Only ordinary files may be inspected")
+        if info.st_size > MAX_DOCUMENT_BYTES:
+            raise ContractError("Inspected file exceeds read budget")
+        chunks = []
+        remaining = MAX_DOCUMENT_BYTES + 1
+        while remaining:
+            chunk = os.read(final, min(8192, remaining))
+            if not chunk:
+                break
+            chunks.append(chunk)
+            remaining -= len(chunk)
+        payload = b"".join(chunks)
+        if len(payload) > MAX_DOCUMENT_BYTES:
+            raise ContractError("File expanded beyond read budget")
+        return payload
+    finally:
+        for fd in reversed(fds):
+            os.close(fd)
+
+
+def inspect_paths(project_root: Path, included_paths: list[str]) -> list[dict]:
+    """Read only explicitly authorized UTF-8 files, without following symlinks.
+
+    Returned text remains host-confidential. Caller decides where it goes.
     """
     root = project_root.resolve(strict=True)
-    if not root.is_dir() or not 1 <= len(included_paths) <= MAX_DOCUMENTS:
+    if not root.is_dir() or not isinstance(included_paths, list) or not 1 <= len(included_paths) <= MAX_DOCUMENTS:
         raise ContractError("Expected a directory and 1 to 16 explicit files")
     out, seen, total = [], set(), 0
     for rel in included_paths:
         if not isinstance(rel, str) or not rel or len(rel) > 240:
             raise ContractError("Invalid relative filename")
         p = Path(rel)
-        if p.is_absolute() or any(part in ("", ".", "..") for part in p.parts):
+        if p.is_absolute() or not p.parts or any(part in ("", ".", "..") for part in p.parts):
             raise ContractError("Traversal or absolute path is forbidden")
         if rel in seen:
             raise ContractError("Duplicate file")
         seen.add(rel)
-        candidate = root / p
-        # Reject symbolic links at *every* path segment, including directories.
-        cursor = root
-        for segment in p.parts:
-            cursor = cursor / segment
-            if cursor.is_symlink():
-                raise ContractError(f"Symlink not permitted: {rel}")
-        resolved = candidate.resolve(strict=True)
-        if not resolved.is_relative_to(root) or not resolved.is_file():
-            raise ContractError(f"Path outside authorized files: {rel}")
-        size = resolved.stat().st_size
-        total += size
-        if size > MAX_DOCUMENT_BYTES or total > MAX_CONTEXT_BYTES:
-            raise ContractError("Inspected content exceeds read budget")
-        data = resolved.read_bytes()
-        if b"\x00" in data:
+        payload = _read_regular_file(root, p.parts)
+        total += len(payload)
+        if total > MAX_CONTEXT_BYTES:
+            raise ContractError("Inspected content exceeds total read budget")
+        if b"\x00" in payload:
             raise ContractError("Binary file not accepted")
         try:
-            content = data.decode("utf-8")
+            content = payload.decode("utf-8")
         except UnicodeDecodeError as exc:
             raise ContractError("Only UTF-8 text accepted") from exc
         out.append({"id": f"file:{rel}", "path": rel,
-                    "sha256": hashlib.sha256(data).hexdigest(),
+                    "sha256": hashlib.sha256(payload).hexdigest(),
                     "text": content})
     return out
 
@@ -177,12 +208,14 @@ def validate_host(state: dict) -> dict:
     if any(not isinstance(x, str) or x not in c["capabilities"] for x in covered):
         raise ContractError("Unknown covered capability")
     refs = set()
+    resource_by_id = {}
     for resource in resources:
         if not isinstance(resource, dict) or set(resource) - {"id", "sha256", "text", "path"} or not isinstance(resource.get("id"), str):
             raise ContractError("Invalid resource")
         if not SAFE_REF.fullmatch(resource["id"]) or resource["id"] in refs:
             raise ContractError("Unsafe or duplicate resource ID")
         refs.add(resource["id"])
+        resource_by_id[resource["id"]] = resource
         if not isinstance(resource.get("sha256"), str) or not re.fullmatch("[0-9a-f]{64}", resource["sha256"]):
             raise ContractError("Resources must be fingerprinted")
         if "text" in resource:
@@ -192,9 +225,13 @@ def validate_host(state: dict) -> dict:
                 raise ContractError("Resource text does not match fingerprint")
     if len(json.dumps(state, ensure_ascii=False).encode("utf8")) > MAX_CONTEXT_BYTES:
         raise ContractError("Host state exceeds budget")
+    gap_ids = set()
     for gap in gaps:
-        if not isinstance(gap, dict) or set(gap) - {"capability_id", "status", "priority", "reason", "evidence_refs", "skill_id"} or gap.get("capability_id") not in c["capabilities"]:
+        if not isinstance(gap, dict) or set(gap) - {"capability_id", "status", "priority", "reason", "evidence_refs", "skill_id", "evidence_quotes"} or gap.get("capability_id") not in c["capabilities"]:
             raise ContractError("Unknown gap capability")
+        if gap["capability_id"] in gap_ids:
+            raise ContractError("Contradictory or duplicate capability assessments must be reconciled")
+        gap_ids.add(gap["capability_id"])
         if gap.get("status") not in ("unmet", "covered", "uncertain"):
             raise ContractError("Gap must have explicit status")
         if gap.get("priority") not in PRIORITY:
@@ -204,6 +241,18 @@ def validate_host(state: dict) -> dict:
             raise ContractError("Gap evidence references must resolve")
         if not isinstance(gap.get("reason"), str) or not 1 <= len(gap["reason"]) <= 800:
             raise ContractError("Gap requires a bounded rationale")
+        quotes = gap.get("evidence_quotes", [])
+        if not isinstance(quotes, list) or len(quotes) > 8:
+            raise ContractError("Evidence anchors must be a bounded array")
+        for anchor in quotes:
+            if not isinstance(anchor, dict) or set(anchor) != {"resource_id", "quote"}:
+                raise ContractError("Evidence anchor requires resource_id and quote")
+            rid, quote = anchor["resource_id"], anchor["quote"]
+            if rid not in evidence or not isinstance(quote, str) or not 4 <= len(quote) <= 1000:
+                raise ContractError("Evidence anchor must cite a supplied source")
+            source_text = resource_by_id[rid].get("text")
+            if source_text is None or quote not in source_text:
+                raise ContractError("Evidence anchor is not an exact excerpt in supplied text")
         if "skill_id" in gap:
             if gap["skill_id"] not in c["capabilities"][gap["capability_id"]]["eligible_skill_ids"]:
                 raise ContractError("Selected skill does not implement the declared capability")
@@ -250,6 +299,7 @@ def assess(state: dict) -> dict:
             "skill_status": c["skills"][sid]["status"],
             "evidence_refs": item["evidence_refs"], "reason": item["reason"],
             "priority": item["priority"],
+            "evidence_verification": "excerpt_matched" if item.get("evidence_quotes") else "reference_only",
             "execution_verified": False,
         }
         decision = "consult"
@@ -264,7 +314,7 @@ def assess(state: dict) -> dict:
         "context_sha256": digest, "state": "advisory_only",
         "effects": [], "host_authority": "retained",
         "limitations": [
-            "Gap assertions and evidence are supplied by the host, not independently proven.",
+            "Host-authored gaps are not independently assessed; excerpt matching establishes location, not factual truth.",
             "No skill was executed or independently evaluated by this assessment.",
             "The host must approve any later data access, tool execution or changes.",
         ],

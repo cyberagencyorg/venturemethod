@@ -1,6 +1,7 @@
 """Security and contract tests for selective external adoption."""
 import hashlib
 import json
+import os
 import tempfile
 import unittest
 from pathlib import Path
@@ -98,6 +99,34 @@ class PortableV1Tests(unittest.TestCase):
             for bad in ["../README.md", "/etc/passwd", "secret/protected", "README.md/../../x"]:
                 with self.assertRaises((portable.ContractError, OSError, ValueError)):
                     portable.inspect_paths(p, [bad])
+
+    def test_reject_duplicate_conflicting_gaps_and_fabricated_quotes(self):
+        duplicate = state([gap(), gap(status="covered")])
+        with self.assertRaises(portable.ContractError):
+            portable.assess(duplicate)
+        anchored = gap()
+        anchored["evidence_quotes"] = [{
+            "resource_id": "file:README.md",
+            "quote": "evidence appendix is incomplete"
+        }]
+        result = portable.assess(state([anchored]))
+        self.assertEqual(result["selected"]["evidence_verification"], "excerpt_matched")
+        anchored["evidence_quotes"][0]["quote"] = "The customer interviews prove unanimous support"
+        with self.assertRaises(portable.ContractError):
+            portable.assess(state([anchored]))
+
+    def test_reject_fifo_and_inner_symlink(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / "source.md").write_text("expected")
+            (root / "sub").mkdir()
+            (root / "sub" / "link.md").symlink_to(root / "source.md")
+            with self.assertRaises((portable.ContractError, OSError)):
+                portable.inspect_paths(root, ["sub/link.md"])
+            if hasattr(os, "mkfifo"):
+                os.mkfifo(root / "pipe")
+                with self.assertRaises((portable.ContractError, OSError)):
+                    portable.inspect_paths(root, ["pipe"])
 
     def test_binary_and_oversize_denied(self):
         with tempfile.TemporaryDirectory() as tmp:

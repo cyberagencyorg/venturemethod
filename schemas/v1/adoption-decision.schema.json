@@ -41,7 +41,8 @@
             "evidence_refs",
             "reason",
             "priority",
-            "execution_verified"
+            "execution_verified",
+            "evidence_verification"
           ],
           "properties": {
             "capability_id": {
@@ -76,6 +77,12 @@
             },
             "execution_verified": {
               "const": false
+            },
+            "evidence_verification": {
+              "enum": [
+                "excerpt_matched",
+                "reference_only"
+              ]
             }
           }
         },
@@ -161,7 +168,8 @@
               "evidence_refs",
               "reason",
               "priority",
-              "execution_verified"
+              "execution_verified",
+              "evidence_verification"
             ],
             "properties": {
               "capability_id": {
@@ -196,6 +204,12 @@
               },
               "execution_verified": {
                 "const": false
+              },
+              "evidence_verification": {
+                "enum": [
+                  "excerpt_matched",
+                  "reference_only"
+                ]
               }
             }
           }
