@@ -5,7 +5,7 @@ Technical verification: 2026-10-24 on implementation branch `feat/portable-adopt
 | Requirement | Available evidence | Status |
 | --- | --- | --- |
 | Portable reference format | Pinned official \`skills-ref\` validator runs on all 26 first-party skills and the portable adapter | Automated verified |
-| Typed contracts | 11 JSON Schema 2020-12 definitions, Python and Node validation, cross-reference and negative tests | Automated verified |
+| Typed contracts | 12 JSON Schema 2020-12 definitions, Python and Node validation, cross-reference and negative tests | Automated verified |
 | Host assessment and composition | Explicit file snapshots, source-anchored gaps, no-op, typed plans, bounded multi-domain prerequisites | Automated verified on fixtures |
 | External distribution | Self-contained Agent Skill, integrity checks, isolated wheel and pinned external Open ASS host smoke | Automated verified |
 | Tool interoperability | Python MCP in-memory test, independent Node client to Python server, typed work-plan and provider registry endpoints, no write tools | Automated verified |

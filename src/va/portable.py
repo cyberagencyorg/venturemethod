@@ -78,22 +78,50 @@ def catalog() -> dict:
 
 
 def catalog_search(query: str, limit: int = 6) -> dict:
+    """Deterministic cross-catalog discovery, never suitability or execution.
+
+    Search all three canonical identity families and preserve their relationships.
+    The host must review a candidate against the project before proposing a gap.
+    """
     if not isinstance(query, str) or not 1 <= len(query.strip()) <= MAX_QUERY:
         raise ContractError("query must contain 1 to 240 characters")
     if type(limit) is not int or not 1 <= limit <= 20:
         raise ContractError("limit must be 1 to 20")
-    words = set(re.findall(r"[a-z0-9]+", query.lower()))
     source = catalog()
+    links = _load("config/work-composition.json")["method_links"]
+    words = set(re.findall(r"[a-z0-9]+", query.casefold()))
+    normalized = " ".join(re.findall(r"[a-z0-9]+", query.casefold()))
     candidates = []
     for ident, item in source["capabilities"].items():
-        phrase = (ident + " " + item["title"]).lower()
-        score = sum(1 for word in words if word in re.findall(r"[a-z0-9]+", phrase))
+        title = item["title"]
+        base = set(re.findall(r"[a-z0-9]+", (ident + " " + title).casefold()))
+        eligible = [sid for sid in item["eligible_skill_ids"] if sid in source["skills"]]
+        method_ids = [row["method_id"] for row in links
+                      if row["capability_id"] == ident and row["method_id"] in source["methods"]]
+        skill_matches = [
+            sid for sid in eligible if words & set(re.findall(r"[a-z0-9]+", sid.casefold()))
+        ]
+        method_matches = [
+            mid for mid in method_ids if words & set(re.findall(
+                r"[a-z0-9]+", (mid + " " + source["methods"][mid]["title"]).casefold()))
+        ]
+        base_hits = len(words & base)
+        score = (4 * base_hits + 2 * len(skill_matches) + len(method_matches))
+        if normalized in (" ".join(re.findall(r"[a-z0-9]+", ident.casefold())),
+                          " ".join(re.findall(r"[a-z0-9]+", title.casefold()))):
+            score += 8
         if score:
-            candidates.append({"id": ident, "title": item["title"],
-                               "score": score, "status": item["status"]})
-    candidates.sort(key=lambda x: (-x["score"], x["id"]))
-    return {"schema_version": SCHEMA_VERSION, "matches": candidates[:limit],
-            "note": "Lexical discovery only; never proof of applicability or execution."}
+            candidates.append({
+                "id": ident, "title": title, "score": score,
+                "status": item["status"], "matched_skill_ids": sorted(skill_matches),
+                "matched_method_ids": sorted(set(method_matches)),
+            })
+    candidates.sort(key=lambda entry: (-entry["score"], entry["id"]))
+    return {
+        "schema_version": SCHEMA_VERSION, "matches": candidates[:limit],
+        "note": ("Cross-catalog lexical discovery only. Matches do not establish "
+                 "applicability, professional competence, execution or authorization."),
+    }
 
 
 def method_get(method_id: str) -> dict:

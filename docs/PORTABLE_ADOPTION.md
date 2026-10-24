@@ -104,3 +104,7 @@ Use `venturemethod verify-export --destination /absolute/host/.agents/skills/ven
 ## Multiple capabilities without inventing an agent team
 
 `venturemethod compose host-state.json --limit 3` or `composition_plan_tool` accepts multiple separately evidenced gaps, optional `depends_on` capability IDs, and explicit skill choices. The result is a bounded topologically ordered set of pending **advisory** work units. Each grants zero new rights, preserves host authority, and documents excluded capabilities or unresolved prerequisites. Cyclic dependencies fail closed. No automatic crew, scheduler, delegation or write action is created. If no capability is justified, composition returns `no_intervention`.
+
+## Cross-catalog discovery
+
+`venturemethod search QUERY` and the read-only MCP discovery tool index capability identifiers/titles, first-party skill IDs and linked methodology titles. The response includes matched skill and method IDs, canonical capability IDs, and an explicit warning that keyword matches are not evidence of suitability. It never chooses a provider or executes a method. `schemas/v1/discovery.schema.json` defines the versioned response.

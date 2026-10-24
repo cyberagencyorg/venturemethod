@@ -31,5 +31,5 @@ if (composedPath) {
     if (validators["composition-plan"](invalidReview)) throw new Error("Advisory schema permits self-approved work");
   }
 }
-if (Object.keys(validators).length < 11) throw new Error("Missing published schemas");
+if (Object.keys(validators).length < 12) throw new Error("Missing published schemas");
 console.log("Validated", Object.keys(validators).length, "JSON Schema contracts in Node.js");
