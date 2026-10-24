@@ -22,8 +22,9 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - run: npm install --no-save ajv@8.17.1
+      - run: npm install --no-save ajv@8.17.1 @modelcontextprotocol/client@2.4.0
       - run: node scripts/contract-interop.mjs
+      - run: node scripts/mcp-node-roundtrip.mjs
       - run: python -m pip install build
       - run: python -m build --wheel
       - run: |
