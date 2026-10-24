@@ -1,6 +1,6 @@
 # Capability status and current limits
 
-Checked against local v0.6 source and tests. **Implemented** means a local code path exists and passes structural tests. It does not mean the associated professional method has been independently validated.
+Existing v0.6 baseline with 2026-10-24 proposed positioning/copy extension. New editorial skills have structural fixtures, not measured effectiveness. **Implemented** means a local code path exists and passes structural tests. It does not mean the associated professional method has been independently validated.
 
 | Area | Current status | What remains |
 |---|---|---|
@@ -9,7 +9,7 @@ Checked against local v0.6 source and tests. **Implemented** means a local code 
 | Event history and integrity checking | Implemented offline | Database transactions, authenticated approvals and signed audit evidence |
 | Method catalog and comparison | Metadata and deterministic candidate filter | Professional comparative tests; semantic routing; calibrated applicability |
 | Opportunity Solution Tree | Local typed proposals, reviews and diffs | Interview extraction, actual research, graphical editing and collaborative merges |
-| Skill specifications | 26 original SKILL.md files | Live agent execution, comparative evaluation and expert review |
+| Skill specifications | 32 first-party SKILL.md files, including 6 draft marketing/voice methods | Live agent execution, comparative evaluation and expert review |
 | Third-party skill discovery | Passive, untrusted candidate registry | Automated licensing/security checks, vetted installs and pinned updates |
 | Decision-brief artifact generation | Deterministic Markdown drafts | Expert-level writing, slides/models, verified references, approvals |
 | Claim revision impact | Explicit-reference traversal | Semantic dependencies, selective refresh and resolution workflows |

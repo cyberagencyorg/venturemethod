@@ -22,6 +22,14 @@ The framework is a library you can draw from at any stage of work. You do **not*
 
 For mid-flight projects, preserve the current product requirements, research, plans, decisions, feedback and deadlines. Before proposing an intervention, ask what it adds beyond existing work. A new template, canvas, or retrospective is not automatically progress.
 
+## Positioning, brand voice and copy
+
+For marketing, agency profiles, company websites or any recurring brand-content project, **read the host project's existing approved marketing and voice context first**. If none exists, use `skills/marketing-context/SKILL.md` and `templates/marketing-context.md` to establish a single canonical project-owned context. Record exact rejected decisions and reasons there; do not replace existing authority.
+
+Use `skills/competitive-positioning/SKILL.md` for real buyer alternatives, differentiated capabilities, value, best-fit buyers and category selection **before** public positioning copy. Keep existing `brand-architecture` for corporate/entity structure. Use `skills/marketing-copywriting/SKILL.md` for new commercial text, `brand-voice-preservation` for tone fidelity, `copy-editing` for substantive revision and `human-writing-audit` for final linguistic patterns. **Choose only the minimum applicable subset.**
+
+The reusable integration guide is [Positioning, copy and voice](docs/POSITIONING_COPY_AND_VOICE.md). No agent has permission to publish or modify a connected service merely by reading these skills.
+
 ## Locate only what's relevant
 
 - **An unfamiliar problem, market or company:** `skills/company-investigation/SKILL.md`, `skills/market-landscape/SKILL.md` and research quality guidance.

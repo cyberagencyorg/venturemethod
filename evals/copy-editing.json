@@ -1,0 +1,36 @@
+{
+  "skill": "copy-editing",
+  "status": "fixture_requires_live_agent_comparison",
+  "suite_version": "1.0",
+  "evaluation": "Run identical task inputs with and without the skill; blindly grade on relevance, buyer evidence, author fidelity, denied claims, prohibited constructions, and exact user constraint compliance. Do not claim efficacy from this fixture alone.",
+  "tests": [
+    {
+      "case": "long-bio",
+      "prompt": "Profile has redundant paragraphs, substantiated achievements and unclear call to action.",
+      "expect": [
+        "Edit by separate argument, factual, specificity, reader, voice, structure and friction passes; preserve evidence"
+      ]
+    },
+    {
+      "case": "unsupported-figure",
+      "prompt": "Existing copy describes a project as a $100M deployment without source.",
+      "expect": [
+        "Request proof or narrow claim, do not invent number"
+      ]
+    },
+    {
+      "case": "local-fix",
+      "prompt": "User requests removal of a single repeated phrase.",
+      "expect": [
+        "Correct narrowly, maintain all surrounding accepted content"
+      ]
+    },
+    {
+      "case": "underlying-position",
+      "prompt": "Sentence is grammatical but no buyer can identify how the firm differs.",
+      "expect": [
+        "Escalate to positioning; do not solve by adjectives"
+      ]
+    }
+  ]
+}

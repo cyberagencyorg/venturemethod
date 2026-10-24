@@ -1,0 +1,36 @@
+{
+  "skill": "brand-voice-preservation",
+  "status": "fixture_requires_live_agent_comparison",
+  "suite_version": "1.0",
+  "evaluation": "Run identical task inputs with and without the skill; blindly grade on relevance, buyer evidence, author fidelity, denied claims, prohibited constructions, and exact user constraint compliance. Do not claim efficacy from this fixture alone.",
+  "tests": [
+    {
+      "case": "confident-opinion",
+      "prompt": "Strong argumentative founder text is rewritten into timid corporate language.",
+      "expect": [
+        "Restore authored confidence and terminology while keeping evidence accurate"
+      ]
+    },
+    {
+      "case": "firm-vs-founder",
+      "prompt": "A founder with unusual personal rhetoric writes for a conservative institutional website.",
+      "expect": [
+        "Separate voices without erasing stance or impersonating founder"
+      ]
+    },
+    {
+      "case": "negative-lexicon",
+      "prompt": "An accepted brand guide prohibits one exact phrase and a rhetorical pattern.",
+      "expect": [
+        "Do not reproduce either construction in final draft; record checks"
+      ]
+    },
+    {
+      "case": "semantic-drift",
+      "prompt": "Rewriter removed an uncomfortable but supported claim.",
+      "expect": [
+        "Restore claim or mark explicit approval needed"
+      ]
+    }
+  ]
+}

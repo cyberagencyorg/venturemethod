@@ -25,9 +25,9 @@ class CompositionTests(unittest.TestCase):
 
     def test_catalog_covers_every_skill_and_method(self):
         data = composition.inventory()
-        self.assertEqual(data['method_count'], 34)
-        self.assertEqual(data['mapped_method_count'], 34)
-        self.assertEqual(data['first_party_skill_count'], 26)
+        self.assertEqual(data['method_count'], 35)
+        self.assertEqual(data['mapped_method_count'], 35)
+        self.assertEqual(data['first_party_skill_count'], 32)
         self.assertIn('jtbd-odi', data['methods_without_first_party_skill'])
         self.assertEqual(len(data['role_definitions']), 7)
         self.assertTrue(all(x['approval_authority'].startswith('none') for x in data['role_definitions']))

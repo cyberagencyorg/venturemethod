@@ -209,6 +209,54 @@
       "status": "draft-validated-structure",
       "trust": "first-party",
       "release": "0.4.0"
+    },
+    {
+      "name": "marketing-context",
+      "path": "skills/marketing-context",
+      "origin": "original",
+      "status": "draft-validated-structure",
+      "trust": "first-party",
+      "release": "0.1.0"
+    },
+    {
+      "name": "competitive-positioning",
+      "path": "skills/competitive-positioning",
+      "origin": "original",
+      "status": "draft-validated-structure",
+      "trust": "first-party",
+      "release": "0.1.0"
+    },
+    {
+      "name": "marketing-copywriting",
+      "path": "skills/marketing-copywriting",
+      "origin": "original",
+      "status": "draft-validated-structure",
+      "trust": "first-party",
+      "release": "0.1.0"
+    },
+    {
+      "name": "brand-voice-preservation",
+      "path": "skills/brand-voice-preservation",
+      "origin": "original",
+      "status": "draft-validated-structure",
+      "trust": "first-party",
+      "release": "0.1.0"
+    },
+    {
+      "name": "copy-editing",
+      "path": "skills/copy-editing",
+      "origin": "original",
+      "status": "draft-validated-structure",
+      "trust": "first-party",
+      "release": "0.1.0"
+    },
+    {
+      "name": "human-writing-audit",
+      "path": "skills/human-writing-audit",
+      "origin": "original",
+      "status": "draft-validated-structure",
+      "trust": "first-party",
+      "release": "0.1.0"
     }
   ]
 }
