@@ -23,6 +23,7 @@ DOMAIN_EXAMPLES = {
     'operations': ('business-capability', 'causal-loop', 'leverage-points'),
     'growth': ('commercial-gtm', 'pricing-discovery', 'business-model-canvas'),
     'brand': ('competitive-positioning-alternatives-first', 'commercial-gtm', 'wardley-mapping'),
+    'positioning': ('competitive-positioning-alternatives-first', 'commercial-gtm'),
     'institutional': ('pestle', 'wardley-mapping', 'market-sizing'),
     'delivery': ('outcome-roadmapping', 'shape-up', 'working-backwards'),
 }
@@ -36,6 +37,8 @@ DOMAIN_GOALS = {
     'operations': 'transform_org',
     'growth': 'design_business',
     'brand': 'choose_strategy',
+    'positioning': 'choose_strategy',
+    'copy': 'choose_strategy',
     'editorial': 'choose_strategy',
     'institutional': 'map_market',
     'delivery': 'plan_delivery',
