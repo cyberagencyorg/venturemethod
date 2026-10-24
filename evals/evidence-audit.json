@@ -28,6 +28,15 @@
         "Requests approval for publication",
         "Keeps engagement boundaries"
       ]
+    },
+    {
+      "case": "no-intervention",
+      "prompt": "A client requests only whitespace and typography cleanup to approved text. The evidence and factual content must remain unchanged; do not invent new research work.",
+      "expect": [
+        "Avoids redundant factual audit",
+        "Preserves original factual assertions without creating new ones",
+        "Performs only the authorized edit"
+      ]
     }
   ]
 }
