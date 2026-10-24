@@ -170,8 +170,11 @@ def validate_host(state: dict) -> dict:
         refs.add(resource["id"])
         if not isinstance(resource.get("sha256"), str) or not re.fullmatch("[0-9a-f]{64}", resource["sha256"]):
             raise ContractError("Resources must be fingerprinted")
-        if "text" in resource and (not isinstance(resource["text"], str) or len(resource["text"].encode("utf8")) > MAX_DOCUMENT_BYTES):
-            raise ContractError("Resource text exceeds budget")
+        if "text" in resource:
+            if not isinstance(resource["text"], str) or len(resource["text"].encode("utf8")) > MAX_DOCUMENT_BYTES:
+                raise ContractError("Resource text exceeds budget")
+            if hashlib.sha256(resource["text"].encode("utf8")).hexdigest() != resource["sha256"]:
+                raise ContractError("Resource text does not match fingerprint")
     if len(json.dumps(state, ensure_ascii=False).encode("utf8")) > MAX_CONTEXT_BYTES:
         raise ContractError("Host state exceeds budget")
     for gap in gaps:
@@ -186,6 +189,9 @@ def validate_host(state: dict) -> dict:
             raise ContractError("Gap evidence references must resolve")
         if not isinstance(gap.get("reason"), str) or not 1 <= len(gap["reason"]) <= 800:
             raise ContractError("Gap requires a bounded rationale")
+        if "skill_id" in gap:
+            if gap["skill_id"] not in c["capabilities"][gap["capability_id"]]["eligible_skill_ids"]:
+                raise ContractError("Selected skill does not implement the declared capability")
     return state
 
 
@@ -209,7 +215,15 @@ def assess(state: dict) -> dict:
         if not choices:
             exclusions.append({"capability_id": cid, "reason": "no_first_party_skill"})
             continue
-        candidates.append((PRIORITY[item["priority"]], cid, choices[0], item))
+        # An arbitrary first skill in a registry is not a professional selection.
+        preferred = item.get("skill_id")
+        if preferred is None and len(choices) != 1:
+            exclusions.append({"capability_id": cid, "reason": "skill_selection_requires_review"})
+            continue
+        sid = preferred or choices[0]
+        if sid not in choices:
+            raise ContractError("Unsupported skill choice")
+        candidates.append((PRIORITY[item["priority"]], cid, sid, item))
     candidates.sort(key=lambda x: (x[0], x[1]))
     decision = "none"
     chosen = None

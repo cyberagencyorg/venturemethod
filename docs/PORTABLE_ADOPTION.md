@@ -29,9 +29,9 @@ The \`inspect\` command prints authorized project text to stdout. **Do not pipe 
 
 \`host-state.schema.json\` requires a named project/task, \`authorization: host_read_only\`, source records with SHA-256, covered capability IDs and a list of capability gaps marked \`unmet\`, \`covered\` or \`uncertain\`. Every gap has an explicit priority, rationale, and source references. This is *input from the host*, not a verified finding from Venture Method.
 
-\`adoption-decision.schema.json\` returns \`consult\` or \`none\`. The implementation never emits an execution approval or write effect. It picks at most one skill from each candidate capability and at most one overall. A nonmatching, already covered, unevidenced or unimplemented capability is declined. An inconclusive gap is declined until more evidence is provided.
+\`adoption-decision.schema.json\` returns \`consult\` or \`none\`. The implementation never emits an execution approval or write effect. It picks at most one capability and one skill. Where multiple skills implement a capability, the host must provide an explicit, reviewed `skill_id`; catalog order is not an acceptable choice. A nonmatching, already covered, unevidenced or unimplemented capability is declined. An inconclusive gap is declined until more evidence is provided.
 
-**Important:** Today the initial candidate skill is based on declared catalog order, not professional ranking. An agent must review relevance before using it. No catalog mapping counts as implemented specialist competence.
+**Important:** The resolver never chooses among multiple skills by registry order. Explicit host judgment is necessary and is not itself independently validated. No catalog mapping counts as implemented specialist competence.
 
 ## MCP
 

@@ -18,7 +18,8 @@
       "reason": "Proposal cites unsupported market figures",
       "evidence_refs": [
         "doc:proposal"
-      ]
+      ],
+      "skill_id": "evidence-audit"
     }
   ]
 }

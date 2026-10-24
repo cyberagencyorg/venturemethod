@@ -26,7 +26,9 @@ def state(gaps=None, covered=None):
 def gap(cid="engagement", status="unmet", refs=None, priority="high"):
     return {"capability_id": cid, "status": status, "priority": priority,
             "reason": "A material claim lacks verifiable source reference",
-            "evidence_refs": refs if refs is not None else ["file:README.md"]}
+            "evidence_refs": refs if refs is not None else ["file:README.md"],
+            **({"skill_id": "evidence-audit"} if cid == "engagement" else
+               {"skill_id": "product-requirements"} if cid == "product" else {})}
 
 
 class PortableV1Tests(unittest.TestCase):
@@ -45,6 +47,9 @@ class PortableV1Tests(unittest.TestCase):
         self.assertEqual(portable.assess(state([gap(status="uncertain")]))["decision"], "none")
         self.assertEqual(portable.assess(state([gap(refs=[])]))["decision"], "none")
         self.assertEqual(portable.assess(state([gap("sales-operations")]))["decision"], "none")
+        ambiguous = gap()
+        ambiguous.pop("skill_id")
+        self.assertEqual(portable.assess(state([ambiguous]))["decision"], "none")
 
     def test_evidenced_capability_is_advisory_with_no_effects(self):
         result = portable.assess(state([gap()]))
@@ -70,6 +75,14 @@ class PortableV1Tests(unittest.TestCase):
             portable.assess(invalid)
         invalid = state()
         invalid["resources"][0]["sha256"] = "fake"
+        with self.assertRaises(portable.ContractError):
+            portable.assess(invalid)
+        invalid = state([gap()])
+        invalid["resources"][0]["sha256"] = "a" * 64
+        with self.assertRaises(portable.ContractError):
+            portable.assess(invalid)
+        invalid = state([gap()])
+        invalid["gaps"][0]["skill_id"] = "commercial-offer"
         with self.assertRaises(portable.ContractError):
             portable.assess(invalid)
 

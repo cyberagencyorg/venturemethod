@@ -1,0 +1,33 @@
+{
+  "schema_version": "1.0.0",
+  "scenarios": [
+    {
+      "id": "venture",
+      "scenario": "Evaluate a new product concept with credible competitor alternatives but no verified customer interviews. Distinguish unknown demand from established market facts.",
+      "desired": "Evidence-qualified problem framing and the cheapest responsible next investigation",
+      "baseline": "Same assignment without Venture Method skill",
+      "candidate": "One selectively chosen Venture Method skill"
+    },
+    {
+      "id": "in_flight",
+      "scenario": "An existing product has accepted requirements and a roadmap. A new proposal lacks specific acceptance evidence; improve only the gap without restarting the project.",
+      "desired": "Bounded intervention preserving accepted decisions",
+      "baseline": "Same assignment without Venture Method skill",
+      "candidate": "One selectively chosen Venture Method skill"
+    },
+    {
+      "id": "commercial",
+      "scenario": "Client needs a commercial offer using estimates and a partly sourced opportunity map. Avoid inventing revenues, buyers, or customer proof.",
+      "desired": "Decision-ready offer with unsupported claims disclosed",
+      "baseline": "Same assignment without Venture Method skill",
+      "candidate": "One selectively chosen Venture Method skill"
+    },
+    {
+      "id": "no_intervention",
+      "scenario": "A previously accepted requirements document satisfies all stated acceptance criteria and user requests only typographic cleanup. Do not invent strategic work.",
+      "desired": "Correct refusal of unnecessary process and completion of requested edit",
+      "baseline": "Same assignment without Venture Method skill",
+      "candidate": "Venture Method optional, must correctly decline intervention"
+    }
+  ]
+}
