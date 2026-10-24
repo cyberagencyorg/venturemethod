@@ -1,0 +1,24 @@
+{
+  "schema_version": "1.0.0",
+  "project": "fictional-product-review",
+  "task": "Check whether the existing proposal's claims can support a decision",
+  "authorization": "host_read_only",
+  "covered_capabilities": [],
+  "resources": [
+    {
+      "id": "doc:proposal",
+      "sha256": "abababababababababababababababababababababababababababababababab"
+    }
+  ],
+  "gaps": [
+    {
+      "capability_id": "engagement",
+      "status": "unmet",
+      "priority": "high",
+      "reason": "Proposal cites unsupported market figures",
+      "evidence_refs": [
+        "doc:proposal"
+      ]
+    }
+  ]
+}

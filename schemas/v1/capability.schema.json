@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "$id": "https://github.com/cyberagencyorg/venturemethod/schemas/v1/capability.schema.json",
+  "additionalProperties": true,
+  "required": [
+    "id",
+    "title",
+    "eligible_skill_ids",
+    "required_tool_ids",
+    "status",
+    "execution_boundary"
+  ],
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "eligible_skill_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "required_tool_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "status": {
+      "type": "string"
+    },
+    "execution_boundary": {
+      "type": "string"
+    }
+  }
+}

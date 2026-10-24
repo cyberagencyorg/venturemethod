@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "$id": "https://github.com/cyberagencyorg/venturemethod/schemas/v1/execution-receipt.schema.json",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "run_id",
+    "host_runtime",
+    "input_sha256",
+    "capability_id",
+    "skill_version",
+    "status",
+    "effects",
+    "output_ref"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "run_id": {
+      "type": "string"
+    },
+    "host_runtime": {
+      "type": "string"
+    },
+    "input_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "capability_id": {
+      "type": "string"
+    },
+    "skill_version": {
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "attempted",
+        "completed",
+        "failed",
+        "declined"
+      ]
+    },
+    "effects": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "output_ref": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "cost": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "notes": {
+      "type": "string"
+    }
+  }
+}

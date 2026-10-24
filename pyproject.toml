@@ -1,7 +1,18 @@
 [project]
 name = "venturemethod"
-version = "0.8.0"
-description = "An adaptive, AI-native, agent-compatible framework for research, strategy, venture architecture, product and executive work"
+version = "0.9.0"
+description = "Portable professional method and skill library for existing human and agent workflows"
 requires-python = ">=3.11"
+dependencies = []
+
+[project.optional-dependencies]
+mcp = ["mcp>=2,<3"]
+validation = ["jsonschema>=4.23,<5"]
+dev = ["jsonschema>=4.23,<5", "mcp>=2,<3"]
+
+[project.scripts]
+venturemethod = "src.va.portable_cli:main"
+venturemethod-mcp = "src.va.mcp_server:main"
+
 [tool.setuptools]
 packages = ["src.va"]

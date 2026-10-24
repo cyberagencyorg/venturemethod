@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "$id": "https://github.com/cyberagencyorg/venturemethod/schemas/v1/evaluation.schema.json",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "scenario_id",
+    "baseline_ref",
+    "candidate_ref",
+    "runtime",
+    "reviewer",
+    "blind",
+    "rubric",
+    "decision"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "scenario_id": {
+      "type": "string"
+    },
+    "baseline_ref": {
+      "type": "string"
+    },
+    "candidate_ref": {
+      "type": "string"
+    },
+    "runtime": {
+      "type": "string"
+    },
+    "reviewer": {
+      "type": "string"
+    },
+    "blind": {
+      "type": "boolean"
+    },
+    "rubric": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "integer",
+        "minimum": 0,
+        "maximum": 4
+      }
+    },
+    "decision": {
+      "enum": [
+        "improves",
+        "tie",
+        "regresses",
+        "inconclusive"
+      ]
+    },
+    "notes": {
+      "type": "string"
+    }
+  }
+}
