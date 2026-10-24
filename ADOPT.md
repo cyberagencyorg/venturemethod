@@ -22,6 +22,10 @@ The framework is a library you can draw from at any stage of work. You do **not*
 
 For mid-flight projects, preserve the current product requirements, research, plans, decisions, feedback and deadlines. Before proposing an intervention, ask what it adds beyond existing work. A new template, canvas, or retrospective is not automatically progress.
 
+## Branded production and immutable identity
+
+Before any branded production task, inspect the host's approved identity, asset manifest, design tokens and original logo files. If the host has a brand-specific Agent Skill, invoke it alongside the smallest relevant Venture Method skill. See [Host brand kit contract](docs/HOST_BRAND_KIT_CONTRACT.md). Do not redraw approved symbols, generate fake proof, or substitute a new visual identity just because an asset is missing.
+
 ## Positioning, brand voice and copy
 
 For marketing, agency profiles, company websites or any recurring brand-content project, **read the host project's existing approved marketing and voice context first**. If none exists, use `skills/marketing-context/SKILL.md` and `templates/marketing-context.md` to establish a single canonical project-owned context. Record exact rejected decisions and reasons there; do not replace existing authority.
