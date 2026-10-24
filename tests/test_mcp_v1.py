@@ -11,7 +11,7 @@ class MCPRoundTripTests(unittest.TestCase):
         async def exercise():
             async with Client(mcp) as client:
                 available = await client.list_tools()
-                names = {item.name for item in available}
+                names = {item.name for item in available.tools}
                 self.assertEqual(names, {
                     "catalog_search_tool", "method_get_tool", "skill_get_tool",
                     "project_assess", "context_pack_tool"
