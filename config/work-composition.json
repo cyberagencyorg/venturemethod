@@ -178,7 +178,8 @@
         "engagement-read"
       ],
       "execution_boundary": "advisory",
-      "status": "partial_editorial_skills_only_no_campaign_execution"
+      "status": "mapped",
+      "description": "Editorial methods only; campaign execution remains unavailable"
     },
     {
       "id": "people-operations",
