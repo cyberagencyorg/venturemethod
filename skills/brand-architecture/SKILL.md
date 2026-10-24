@@ -14,6 +14,10 @@ A company, founder or venture needs identity research, offer architecture, messa
 
 Entity and subbrand relationships, actual audience, business model, founder intent, existing copy/assets, research, constraints, channel inventory.
 
+## Immutable host identity comes first
+
+Before proposing branded work, look for an existing owner-approved logo kit, style standard, token file, image/asset manifest and brand-director skill. Read and obey them. Reuse locked source artwork without redrawing or fabricating replacements. Record source-versus-derivative provenance and test the actual rendered artifact, not merely the Markdown or design brief. See `docs/HOST_BRAND_KIT_CONTRACT.md`.
+
 ## Positioning and editorial skill boundaries
 
 Read host-approved brand context first. Use `marketing-context` for durable prior decisions and exclusions; `competitive-positioning` for buyer alternatives and category selection; `marketing-copywriting` only after the commercial argument exists. This skill retains the higher-level entity architecture and channel consistency decision. Do not replace approved founder or institutional voice with generic agency language. See `docs/POSITIONING_COPY_AND_VOICE.md`.
