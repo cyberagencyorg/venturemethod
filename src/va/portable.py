@@ -470,7 +470,8 @@ def snapshot_project(*, project: str, task: str, root: Path, paths: list[str]) -
 
 
 def propose_gap(state: dict, *, capability_id: str, skill_id: str, resource_id: str,
-                quote: str, reason: str, priority: str = "high") -> dict:
+                quote: str, reason: str, priority: str = "high",
+                depends_on: list[str] | None = None) -> dict:
     """Explicit host-authored hypothesis, checked against an exact source quote.
 
     This function does NOT independently decide that a gap exists. It returns a
@@ -485,6 +486,7 @@ def propose_gap(state: dict, *, capability_id: str, skill_id: str, resource_id: 
         "priority": priority, "reason": reason, "skill_id": skill_id,
         "evidence_refs": [resource_id],
         "evidence_quotes": [{"resource_id": resource_id, "quote": quote}],
+        "depends_on": list(depends_on or []),
     })
     result = assess(draft)
     return {"proposed_host_state": draft, "assessment": result,

@@ -55,6 +55,7 @@ def main(argv=None) -> int:
     propose.add_argument("--skill", required=True)
     propose.add_argument("--reason", required=True)
     propose.add_argument("--priority", default="high")
+    propose.add_argument("--depends-on", action="append", default=[], help="Add an explicitly identified prerequisite capability ID")
     args = parser.parse_args(argv)
     try:
         if args.command == "search":
@@ -86,7 +87,7 @@ def main(argv=None) -> int:
                 obj = propose_gap(state, capability_id=args.capability,
                                   skill_id=args.skill, resource_id=args.resource_id,
                                   quote=args.quote, reason=args.reason,
-                                  priority=args.priority)
+                                  priority=args.priority, depends_on=args.depends_on)
         elif args.command == "export-skill":
             obj = export_skill(args.destination, apply=args.apply)
         elif args.command == "verify-export":

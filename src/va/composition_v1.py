@@ -99,6 +99,8 @@ def compose(host_state: dict, max_units: int = 3) -> dict:
         units.append({
             "unit": work, "capability_id": cid, "skill_id": sid,
             "depends_on": [x for x in gap.get("depends_on", []) if x in selected],
+            "preconditions_covered": [x for x in gap.get("depends_on", [])
+                                      if x in covered or (x in gaps and gaps[x]["status"] == "covered")],
             "evidence_refs": gap["evidence_refs"],
             "evidence_verification": "excerpt_matched" if gap.get("evidence_quotes") else "reference_only",
         })
@@ -171,6 +173,11 @@ def verify_composition(plan: dict) -> dict:
             not isinstance(dep, str) or dep not in seen for dep in deps
         ):
             raise ContractError("Prerequisites must be distinct, present, and ordered before dependents")
+        already_covered = item.get("preconditions_covered")
+        if not isinstance(already_covered, list) or len(already_covered) != len(set(str(x) for x in already_covered)) or any(
+            not isinstance(dep, str) or dep in seen or dep in deps for dep in already_covered
+        ):
+            raise ContractError("Covered prerequisites must be distinct from pending dependencies")
         if item.get("evidence_verification") not in ("excerpt_matched", "reference_only"):
             raise ContractError("Unsupported evidence grade")
         if not isinstance(item.get("evidence_refs"), list) or not item["evidence_refs"]:

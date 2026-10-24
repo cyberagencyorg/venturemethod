@@ -67,6 +67,47 @@ class PortableCLIFlowTests(unittest.TestCase):
             self.assertIn("Evidence Audit", json.loads(packed.stdout)["instructions"])
             self.assertEqual(sorted(p.name for p in host.iterdir()), ["AGENTS.md", "proposal.md"])
 
+
+    def test_cli_can_accumulate_dependent_gaps_without_host_edits(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root=Path(temp)
+            host=root/"external"
+            host.mkdir()
+            (host/"proposal.md").write_text(
+                "Decision-critical market claim lacks citations. The roadmap also lacks testable acceptance criteria.",
+                encoding="utf-8")
+            baseline=invoke("snapshot", "--root", host, "--file", "proposal.md",
+                            "--project","client","--task","Review proposal and product requirements")
+            self.assertEqual(baseline.returncode,0,baseline.stderr)
+            state=root/"state.json"
+            state.write_text(baseline.stdout)
+            a=invoke("propose","--context",state,
+                     "--capability","engagement","--skill","evidence-audit",
+                     "--resource-id","file:proposal.md",
+                     "--quote","market claim lacks citations",
+                     "--reason","Commercial decision relies on unsupported claims")
+            self.assertEqual(a.returncode,0,a.stderr)
+            state.write_text(json.dumps(json.loads(a.stdout)["proposed_host_state"]))
+            b=invoke("propose","--context",state,
+                     "--capability","product","--skill","product-requirements",
+                     "--depends-on","engagement",
+                     "--resource-id","file:proposal.md",
+                     "--quote","roadmap also lacks testable acceptance criteria",
+                     "--reason","Need verifiable release outcomes")
+            self.assertEqual(b.returncode,0,b.stderr)
+            state.write_text(json.dumps(json.loads(b.stdout)["proposed_host_state"]))
+            result=invoke("compose",state)
+            self.assertEqual(result.returncode,0,result.stderr)
+            plan=json.loads(result.stdout)
+            self.assertEqual([u["capability_id"] for u in plan["units"]], ["engagement","product"])
+            self.assertEqual(plan["units"][1]["depends_on"], ["engagement"])
+            plan_path=root/"plan.json"
+            plan_path.write_text(result.stdout)
+            verified=invoke("verify-composition",plan_path)
+            self.assertEqual(verified.returncode,0,verified.stderr)
+            self.assertEqual(json.loads(verified.stdout)["status"],"verified_advisory_structure")
+            self.assertEqual([p.name for p in host.iterdir()], ["proposal.md"])
+
     def test_prompt_injection_as_data_and_wrong_quote_rejected(self):
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp)

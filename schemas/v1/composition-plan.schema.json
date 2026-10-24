@@ -43,7 +43,8 @@
           "skill_id",
           "depends_on",
           "evidence_refs",
-          "evidence_verification"
+          "evidence_verification",
+          "preconditions_covered"
         ],
         "additionalProperties": false,
         "properties": {
@@ -74,6 +75,14 @@
               "excerpt_matched",
               "reference_only"
             ]
+          },
+          "preconditions_covered": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "pattern": "^[a-z][a-z0-9-]{0,63}$"
+            }
           }
         }
       }

@@ -37,6 +37,7 @@ class CompositionTests(unittest.TestCase):
             self.assertEqual(item["unit"]["allowed_tools"],[])
             self.assertEqual(item["unit"]["review"]["status"],"pending")
         self.assertEqual(plan["units"][2]["depends_on"],["product"])
+        self.assertEqual(plan["units"][2]["preconditions_covered"],[])
         schema=json.loads((ROOT/"schemas/v1/composition-plan.schema.json").read_text())
         Draft202012Validator(schema).validate(plan)
         ws=json.loads((ROOT/"schemas/v1/work-unit.schema.json").read_text())
@@ -121,6 +122,18 @@ class CompositionTests(unittest.TestCase):
         plan=compose(host(),max_units=2)
         self.assertEqual([x["capability_id"] for x in plan["units"]],["engagement","product"])
         self.assertIn({"capability_id":"commercial","reason":"composition_limit"},plan["excluded"])
+
+
+    def test_host_covered_preconditions_are_preserved_as_assumptions(self):
+        h=host()
+        h["covered_capabilities"]=["engagement"]
+        composed=compose(h)
+        self.assertEqual([u["capability_id"] for u in composed["units"]], ["product","commercial"])
+        self.assertEqual(composed["units"][0]["preconditions_covered"], ["engagement"])
+        self.assertEqual(composed["units"][0]["depends_on"], [])
+        self.assertEqual(composed["units"][1]["depends_on"], ["product"])
+        schema=json.loads((ROOT/"schemas/v1/composition-plan.schema.json").read_text())
+        Draft202012Validator(schema).validate(composed)
 
     def test_no_op_already_covered_and_unverified(self):
         h=host()
