@@ -6,6 +6,12 @@ description: "Write or substantively rewrite buyer-facing website, landing-page,
 
 **Purpose:** Express an already grounded commercial argument in distinctive and usable copy without replacing the author's voice.
 
+## When to use
+Use when drafting a new marketing page, service description, agency profile or commercial narrative, or performing a substantive buyer-facing rewrite.
+
+## Inputs
+Approved or provisional positioning, canonical marketing context, existing copy, authentic voice examples, channel constraints and evidence.
+
 ## Before drafting
 Read the host's canonical marketing context, including accepted positioning, prior drafts, authentic samples, rejected terms and evidence. Use `competitive-positioning` first when core alternatives, buyer value or category are unresolved. Do not generate a new category to make a headline sound novel.
 
@@ -14,7 +20,7 @@ Read the host's canonical marketing context, including accepted positioning, pri
 - **Blank or generic brief:** build an argument from verified context, with broad compositional freedom but no new facts.
 - **Focused edit:** change only the requested part; preserve all other accepted copy.
 
-## Process
+## Method
 1. Define destination, buyer state, buying occasion, one priority action, traffic context and evidence available.
 2. Outline information architecture at the appropriate length: relevance first, credible differentiation, service or mechanism, supportable proof and next action.
 3. For each section, write the factual proposition before the headline. If it is indistinguishable from competitor language, revisit positioning rather than inventing bolder adjectives.
