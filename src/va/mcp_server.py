@@ -7,7 +7,7 @@ authenticated design and threat review.
 from __future__ import annotations
 from mcp.server import MCPServer
 
-from .portable import catalog_search, method_get, skill_get, assess, context_pack
+from .portable import catalog_search, method_get, skill_get, assess, context_pack, work_plan, provider_catalog
 
 mcp = MCPServer("Khan's Venture Method", instructions=(
     "Read-only professional reference library. Host owns context and authority. "
@@ -44,6 +44,19 @@ def project_assess(host_state: dict) -> dict:
 def context_pack_tool(host_state: dict, max_chars: int = 8000) -> dict:
     """Build a bounded, optional skill packet from supplied host context."""
     return context_pack(host_state, max_chars)
+
+
+
+@mcp.tool()
+def work_plan_tool(host_state: dict) -> dict:
+    """Return a typed advisory work proposal with no authority or side effects."""
+    return work_plan(host_state)
+
+
+@mcp.tool()
+def providers_get_tool() -> dict:
+    """Return versioned first-party skill provider maturity and permissions."""
+    return provider_catalog()
 
 
 def main() -> None:

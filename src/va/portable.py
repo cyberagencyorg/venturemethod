@@ -196,9 +196,11 @@ def validate_host(state: dict) -> dict:
         raise ContractError("Host task is required")
     if not isinstance(state.get("project"), str) or not 1 <= len(state["project"]) <= 120:
         raise ContractError("Host project identifier is required")
-    allowed = {"schema_version", "task", "project", "authorization", "resources", "gaps", "covered_capabilities"}
+    allowed = {"schema_version", "task", "project", "authorization", "resources", "gaps", "covered_capabilities", "phase"}
     if set(state) - allowed:
         raise ContractError("Unexpected host contract properties")
+    if state.get("phase", "unknown") not in ("starting", "in_flight", "review", "continuous", "unknown"):
+        raise ContractError("Unsupported project phase")
     if state.get("authorization") != "host_read_only":
         raise ContractError("Only explicitly authorized read-only host context is permitted")
     resources = state.get("resources")
@@ -327,19 +329,90 @@ def assess(state: dict) -> dict:
     }
 
 
+def provider_catalog() -> dict:
+    """Versioned read-only provider descriptions, not an execution registry."""
+    c = catalog()
+    composition = _load("config/work-composition.json")
+    bindings = {}
+    for item in composition["capabilities"]:
+        cid = item["id"]
+        for sid in item["eligible_skill_ids"]:
+            bindings.setdefault(sid, set()).add(cid)
+    for row in composition["method_links"]:
+        if row["method_id"] not in c["methods"] or row["capability_id"] not in c["capabilities"]:
+            raise ContractError("Method link references an unknown catalog identity")
+        if row["skill_id"] not in c["skills"] or row["skill_id"] not in c["capabilities"][row["capability_id"]]["eligible_skill_ids"]:
+            raise ContractError("Method link has no declared first-party skill mapping")
+        if row.get("execution_verified") is not False:
+            raise ContractError("Metadata cannot assert unverified execution")
+    return {
+        sid: {
+            "schema_version": SCHEMA_VERSION, "id": sid,
+            "kind": "first_party_skill", "version": item["release"],
+            "license": "not_declared", "source": item["path"],
+            "capability_ids": sorted(bindings.get(sid, ())),
+            "skill_ids": [sid],
+            "permissions": {"effects": ["read"], "scopes": ["bundled_skill_instructions_only"]},
+            "maturity": {
+                "specified": True, "available": True, "installed": False,
+                "executed": False, "independently_evaluated": False,
+            },
+        }
+        for sid, item in c["skills"].items()
+    }
+
+
+def work_plan(state: dict) -> dict:
+    """Generate a typed, non-executable work proposal from a proven assessment.
+
+    A host may ignore it. The work contract grants zero new tool rights and
+    never implies permission to read, delegate, publish or write files.
+    """
+    host = validate_host(state)
+    decision = assess(host)
+    if decision["decision"] == "none":
+        return {"status": "no_intervention", "work_unit": None, "assessment": decision}
+    chosen = decision["selected"]
+    unit = {
+        "schema_version": SCHEMA_VERSION,
+        "id": "consult-" + decision["context_sha256"][:16],
+        "host_project": host["project"],
+        "objective": host["task"],
+        "phase": host.get("phase", "unknown"),
+        "existing_artifacts": [r["id"] for r in host["resources"]],
+        "selected_capabilities": [chosen["capability_id"]],
+        "allowed_tools": [], "authorized_effects": [],
+        "review": {
+            "owner": "host_authority_unspecified", "status": "pending",
+            "required_before_effects": True,
+        },
+        "stop_when": "Provide one source-backed advisory output; stop before any mutation or external tool action.",
+        "outputs": ["One narrowly scoped recommendation or justified no-intervention decision"],
+    }
+    return {
+        "status": "proposal_only", "work_unit": unit,
+        "assessment": decision,
+        "limitations": [
+            "Work-unit records are not authority tokens or verified agent executions.",
+            "The host must independently approve any tool access, model disclosure or modification.",
+        ],
+    }
+
+
 def context_pack(state: dict, max_chars: int = 8000) -> dict:
     if type(max_chars) is not int or not 256 <= max_chars <= 16000:
         raise ContractError("max_chars must be 256 to 16000")
     result = assess(state)
     if result["decision"] == "none":
-        return {"assessment": result, "instructions": "No justified intervention. Preserve existing host work."}
+        return {"assessment": result, "work_plan": work_plan(state),
+                "instructions": "No justified intervention. Preserve existing host work."}
     selected = result["selected"]
     instructions = skill_get(selected["skill_id"])["content"]
     if len(instructions) > max_chars:
         # Never emit clipped procedures that could lose their safety constraints.
-        return {"assessment": result, "instructions": None,
+        return {"assessment": result, "work_plan": work_plan(state), "instructions": None,
                 "error": "Selected skill exceeds context budget; read it directly."}
-    return {"assessment": result, "instructions": instructions}
+    return {"assessment": result, "work_plan": work_plan(state), "instructions": instructions}
 
 
 def snapshot_project(*, project: str, task: str, root: Path, paths: list[str]) -> dict:

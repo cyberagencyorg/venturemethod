@@ -5,7 +5,7 @@ import argparse
 import json
 import sys
 from pathlib import Path
-from .portable import ContractError, assess, catalog_search, context_pack, inspect_paths, method_get, skill_get, snapshot_project, propose_gap
+from .portable import ContractError, assess, catalog_search, context_pack, inspect_paths, method_get, skill_get, snapshot_project, propose_gap, work_plan, provider_catalog
 from .portable_export import export_skill, verify_export
 
 
@@ -23,6 +23,9 @@ def main(argv=None) -> int:
     pack = sub.add_parser("pack", help="Build bounded reference packet")
     pack.add_argument("context", type=Path)
     pack.add_argument("--max-chars", type=int, default=8000)
+    plan = sub.add_parser("plan", help="Produce a typed, non-executable work proposal")
+    plan.add_argument("context", type=Path)
+    providers = sub.add_parser("providers", help="Inspect canonical first-party provider maturity")
     m = sub.add_parser("method")
     m.add_argument("id")
     s = sub.add_parser("skill")
@@ -56,7 +59,7 @@ def main(argv=None) -> int:
         elif args.command == "snapshot":
             obj = snapshot_project(project=args.project, task=args.task,
                                    root=args.root, paths=args.files)
-        elif args.command in ("assess", "pack", "propose"):
+        elif args.command in ("assess", "pack", "propose", "plan"):
             # No filesystem crawling. The file is explicitly provided by the caller.
             if args.context.stat().st_size > 131072:
                 raise ContractError("Context file exceeds budget")
@@ -65,6 +68,8 @@ def main(argv=None) -> int:
                 obj = assess(state)
             elif args.command == "pack":
                 obj = context_pack(state, args.max_chars)
+            elif args.command == "plan":
+                obj = work_plan(state)
             else:
                 obj = propose_gap(state, capability_id=args.capability,
                                   skill_id=args.skill, resource_id=args.resource_id,
@@ -74,6 +79,8 @@ def main(argv=None) -> int:
             obj = export_skill(args.destination, apply=args.apply)
         elif args.command == "verify-export":
             obj = verify_export(args.destination, expected_bundle_sha256=args.expected_sha256)
+        elif args.command == "providers":
+            obj = provider_catalog()
         elif args.command == "method":
             obj = method_get(args.id)
         else:

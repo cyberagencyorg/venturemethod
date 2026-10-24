@@ -141,6 +141,15 @@
           }
         }
       }
+    },
+    "phase": {
+      "enum": [
+        "starting",
+        "in_flight",
+        "review",
+        "continuous",
+        "unknown"
+      ]
     }
   }
 }

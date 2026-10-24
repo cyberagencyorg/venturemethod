@@ -38,7 +38,8 @@
         "starting",
         "in_flight",
         "review",
-        "continuous"
+        "continuous",
+        "unknown"
       ]
     },
     "existing_artifacts": {

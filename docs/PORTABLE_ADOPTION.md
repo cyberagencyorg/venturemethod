@@ -96,3 +96,7 @@ The file scanner opens each nominated path component using directory-relative de
 ## Verifying a distributed skill
 
 Use `venturemethod verify-export --destination /absolute/host/.agents/skills/venturemethod --expected-sha256 DIGEST` with the digest from the trusted export dry run. This checks each file and detects unexpected files or modifications. Without a separately retained expected digest, a modified manifest could conceal changes; the check does not establish author identity or source authenticity. The exporter refuses existing destinations, including empty folders. Fresh exports use exclusive file creation rather than overwrites.
+
+## Typed work proposals and provider maturity
+
+`venturemethod plan host-state.json` or the MCP `work_plan_tool` translates a justified assessment into a `schemas/v1/work-unit.schema.json` proposal. The proposal retains the host project, precise objective, existing artifact references, one proposed capability, zero newly authorized effects, pending host review, and explicit stopping rules. A no-op assessment generates no work unit. `venturemethod providers` (or MCP `providers_get_tool`) derives first-party provider records with specification, availability, installation, execution, and independent-evaluation statuses kept separate. **These outputs cannot authorize a host tool or attest professional competence.**
