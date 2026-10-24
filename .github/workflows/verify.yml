@@ -43,3 +43,14 @@ jobs:
           test -f /tmp/vm-host/.agents/skills/venturemethod/references/skills/evidence-audit.md
           /tmp/venturemethod-wheel-test/bin/venturemethod verify-export --destination /tmp/vm-host/.agents/skills/venturemethod > /dev/null
           skills-ref validate /tmp/vm-host/.agents/skills/venturemethod
+
+      - name: External host read-only adoption smoke test
+        run: |
+          git clone --quiet --no-checkout --filter=blob:none https://github.com/BradKhan/open-ASS.git /tmp/vm-openass-host
+          git -C /tmp/vm-openass-host fetch --quiet --depth 1 origin 35f10ba4cb7556b96f98e334ecce64a5f945c975
+          git -C /tmp/vm-openass-host checkout --quiet --detach 35f10ba4cb7556b96f98e334ecce64a5f945c975
+          venturemethod export-skill --destination /tmp/vm-openass-host/.agents/skills/venturemethod --apply > /dev/null
+          venturemethod verify-export --destination /tmp/vm-openass-host/.agents/skills/venturemethod > /dev/null
+          skills-ref validate /tmp/vm-openass-host/.agents/skills/venturemethod
+          (cd /tmp/vm-openass-host && python3 scripts/context.py check)
+          git -C /tmp/vm-openass-host diff --quiet HEAD
