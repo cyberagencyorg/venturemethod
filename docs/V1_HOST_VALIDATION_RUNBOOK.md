@@ -52,3 +52,7 @@ Until these exist, keep the release candidate below version 1.0, even with green
 ## Current implementation entry points
 
 File-first consultation does not require Python. For optional machine-readable use, `venturemethod snapshot` generates an authorized host-state draft from exact files; `venturemethod propose` requires a source excerpt and names the capability and skill; `venturemethod plan` produces a typed, non-executable work contract. Use `venturemethod providers` to inspect declared versus actually installed/executed/evaluated states. The local MCP exposes the equivalent work planning and provider registry. These paths are verified in synthetic and CLI fixtures, not yet in independent agent harnesses.
+
+## Multiple professional capabilities
+
+The compose CLI and read-only MCP composition endpoint accept independently evidenced unmet capabilities and explicit depends_on relationships. Both generate an ordered set of pending advisory work units without granting tool rights. Include a multi-domain case in live agent evaluations. Verify that prerequisites are retained, previous accepted work is not duplicated, cycles are rejected, and no automated delegation occurs.
