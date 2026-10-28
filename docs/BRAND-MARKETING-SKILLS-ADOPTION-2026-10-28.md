@@ -22,6 +22,18 @@ Read and apply `marketing-context`, `competitive-positioning`, `brand-architectu
 
 **Premium capability presentation examples:** Reaktor (https://www.reaktor.com/services), Trail of Bits (https://trailofbits.com/services), IDEO (https://www.ideo.com/practices), Palantir's AIP Bootcamp (https://www.palantir.com/platforms/aip/bootcamp/), Work & Co (https://www.work.co/). Study information architecture, content-proving patterns, buying journeys and original research; do not reproduce distinctive copy, protected images, customer evidence or layouts.
 
+## Slogans, brand memory and effective hooks
+
+**New dedicated reference:** [Brand Attention, Slogans and Hooks](BRAND-ATTENTION-SLOGANS-AND-HOOKS-2026-10-28.md).
+
+The earlier skills audit omitted this important capability. Use:
+- Ehrenberg-Bass Category Entry Points and distinctive brand asset research to link buying occasions to the brand.
+- Hodges/Estes/Warren 2024 slogan research to separate immediate liking from delayed accurate recall.
+- Binet/Field B2B long/short brand vs activation principles to prevent one masterline from trying to sell every offer.
+- Corey Haines' existing `ad-creative` and `ad-creative/references/hook-system.md` for segment/motivation/format-specific ad opening and creative iteration; `marketing-psychology`, `copywriting`, `ab-testing` as optional specialists.
+
+**Do not reinvent the hook generator in Venture Method.** The only likely first-party gap is a thin orchestration and evaluation method distinguishing core conviction, category, signature line, campaign hook, content opening, offer lead and CTA. A dedicated new skill should be added only after comparative evaluation against the existing skill combination. Avoid legal clearance promises and invented conversion statistics.
+
 ## Priority source-to-task map
 
 | When a host asks for | Current VM role | External consult | Output/acceptance |
