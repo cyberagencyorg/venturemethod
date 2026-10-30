@@ -1,0 +1,3 @@
+# Offline reconciliation proof
+
+Node 18+; no dependencies. Run `node --test engine.test.mjs` from this directory. Contains 27 deterministic tests (24 cases, 100-replay test, duplicate conflict, second credit). The simulator is strictly in-memory, has no actual bank connection or cryptographic verifier, and cannot be used for real funds. `authenticated` is synthetic verified-adapter input. Not audited, not production-ready. All deployment, actual bank signature verification, locking/transactions, operations, legal permission and live incident handling are TODO. See ../05-product-and-technical-spec.md and ../06-security-and-assurance.md.
