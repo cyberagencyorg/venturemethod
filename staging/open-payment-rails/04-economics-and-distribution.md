@@ -14,10 +14,10 @@
 
 ## Cost comparator
 
-For a merchant with \`N\` paid invoices in a month, average eligible transaction value \`A\`, percent provider fee \`p\`, fixed fee per receipt \`f\`, bank charges \`b\`, monthly subscription \`s\`, monthly integration operations \`o\`, and exceptions \`e\` costing \`c\` each:
+For a merchant with `N` paid invoices in a month, average eligible transaction value `A`, percent provider fee `p`, fixed fee per receipt `f`, bank charges `b`, monthly subscription `s`, monthly integration operations `o`, and exceptions `e` costing `c` each:
 
-- Current cost = \`N * (A * p + f + b) + s + o + e * c\`.
-- Open-source cost = \`monthly amortized setup + infrastructure + bank/API tariffs + maintenance + support + exception handling + expected incident loss\`.
+- Current cost = `N * (A * p + f + b) + s + o + e * c`.
+- Open-source cost = `monthly amortized setup + infrastructure + bank/API tariffs + maintenance + support + exception handling + expected incident loss`.
 - Incremental monthly value = avoidable current cost minus open-source cost, adjusted for latency, reconciliation quality and migration risk.
 - Net implementation margin = contracted implementation fee minus engineer time, security/legal review, partner charges, hardware/hosting and expected support warranty.
 - Managed recurring contribution = subscription receipts minus infrastructure, bank partner fees, ongoing security work, customer support and customer-specific processing labor.
@@ -42,13 +42,13 @@ Break-even direct-bank calculation for Thai illustration: if a merchant has 500 
 
 ## Explicit variable sensitivity tests (future spreadsheet)
 
-- \`N\`: 50, 500, 3,000 monthly transactions.
-- \`p\`: 0%, 0.5%, 1.65% incumbent processing as hypothetical cases, not market averages.
-- \`bank_fee\`: 0%, 0.3%, 1% or flat transfer cost as **assumptions** only.
-- \`integration_effort\`: 1, 4, 12 engineer-weeks as scenario variables.
-- \`support_per_month\`: 2, 10, 40 engineer-hours as scenario variables.
-- \`reconciliation_error_rate\`: estimated baseline required; no fabricated probability.
-- \`acquisition\`: channel, response, close rate and paid customer acquisition cost remain unknown.
+- `N`: 50, 500, 3,000 monthly transactions.
+- `p`: 0%, 0.5%, 1.65% incumbent processing as hypothetical cases, not market averages.
+- `bank_fee`: 0%, 0.3%, 1% or flat transfer cost as **assumptions** only.
+- `integration_effort`: 1, 4, 12 engineer-weeks as scenario variables.
+- `support_per_month`: 2, 10, 40 engineer-hours as scenario variables.
+- `reconciliation_error_rate`: estimated baseline required; no fabricated probability.
+- `acquisition`: channel, response, close rate and paid customer acquisition cost remain unknown.
 
 Worst-case stress: a 1.65%-fee customer pays its bank 1% for API-acquired QR plus a large setup retainer, with frequent reconciliation support. 'Zero platform fee' saves little and creates new liability.
 

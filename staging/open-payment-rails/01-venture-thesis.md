@@ -41,7 +41,7 @@
 ## Proposed product edge
 
 1. **Bank correctness over QR generation.** Immutable receipt evidence, supported inquiry, deterministic matching, replay and exception handling.
-2. **Adapters with machine-readable capabilities.** Per bank disclose \`generate_qr\`, \`verify_received\`, \`list_credits\`, \`virtual_account\`, \`refund\`, \`webhook_signature\` and production entitlement.
+2. **Adapters with machine-readable capabilities.** Per bank disclose `generate_qr`, `verify_received`, `list_credits`, `virtual_account`, `refund`, `webhook_signature` and production entitlement.
 3. **Merchant-held boundaries.** Bank account and order record remain customer-controlled, exportable, and portable.
 4. **Reliable integrations.** The same downstream event and webhooks work regardless of source, but include provenance and assurance so PSP observations are not falsely described as bank-confirmed.
 5. **Deployability.** Open API, Docker or Cloudflare-supported runtime, and reference UI; no requirement to sign up for our service.

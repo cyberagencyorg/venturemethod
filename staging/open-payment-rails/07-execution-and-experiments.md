@@ -24,7 +24,7 @@
 ## Proposed engineering delivery tickets
 
 ### P0-01. Schema + package
-- Introduce versioned \`PaymentRequest\`, \`BankCredit\`, \`Allocation\`, \`BankConnection\`, \`Event\`, \`Exception\`, \`WebhookDelivery\`.
+- Introduce versioned `PaymentRequest`, `BankCredit`, `Allocation`, `BankConnection`, `Event`, `Exception`, `WebhookDelivery`.
 - Derive JSON schema and TypeScript definitions, document migration/version compatibility.
 - **Accept:** valid fixtures pass; wrong currency, negative amount and missing tenant fields fail validation.
 

@@ -43,7 +43,7 @@
 
 Do not relocate or overwrite this Venture Method framework's methods to create the product. When a standalone repo is authorized:
 
-\`\`\`text
+```text
 open-payment-rails/
   README.md
   context/           # venture thesis, legal boundary, source register, claim/decision ledger
@@ -54,14 +54,14 @@ open-payment-rails/
   integrations/      # one per permitted bank; never real credentials in git
   evals/             # exact-commit validation and outcome evidence
   .github/           # issues, templates and CI
-\`\`\`
+```
 
 **Migration process:**
 1. Copy these files unchanged with explicit source URL, date and original commit SHA.
 2. Keep original [intake issue #19](https://github.com/cyberagencyorg/venturemethod/issues/19) as provenance anchor; record the new home in an append-only update.
 3. Install minimum test/CI tooling; do not import Venture Method framework source code into the payment application.
 4. Reevaluate license before public release; verify rights to any pasted QR library, bank SDK or open-source reference code.
-5. Write an \`ADRs/\` decision for every consequential change to scope/permission/country; source referenced claims and compare against previous baseline.
+5. Write an `ADRs/` decision for every consequential change to scope/permission/country; source referenced claims and compare against previous baseline.
 6. Keep live credentials, bank contracts and customer records **out of public Git**.
 
 ## Specific next implementation move

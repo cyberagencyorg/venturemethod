@@ -69,7 +69,7 @@ TAM = number of reachable merchant integrators/operators with a demonstrated ban
 
 - **Hyperswitch:** Apache-2.0 open-source payment orchestration and provider integration; evaluate whether it can host bank-event adapters without excessive code or model mismatch. [S24]
 - **BTCPay Server:** noncustodial/self-host deployment pattern, but crypto settlement is a different operating model. Use for self-hosting/invoice design only.
-- **Thai PromptPay plugins:** \`VBWD-platform/vbwd-plugin-promptpay\` advertises direct QR and bank webhook matching. Check license, code quality, regulatory eligibility, maintenance and verified integration before adaptation. [S25]
+- **Thai PromptPay plugins:** `VBWD-platform/vbwd-plugin-promptpay` advertises direct QR and bank webhook matching. Check license, code quality, regulatory eligibility, maintenance and verified integration before adaptation. [S25]
 - **Unofficial MBBank scrapers:** projects advertise OTP/CAPTCHA automation and unofficial session-based APIs. **Exclude as production foundations** due to unauthorized-access and credential risks; do not infer safety from a repository's 'production ready' claim. [S26]
 
 ## Commercially useful conclusion

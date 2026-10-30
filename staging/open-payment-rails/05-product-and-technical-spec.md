@@ -38,15 +38,15 @@ All actions require explicit scoped authorization; failed access and high-impact
 
 | Object | Essential fields | Invariants |
 |---|---|---|
-| Merchant | \`merchant_id\`, display_name, legal_entity, country, data_policy | All bank connections and payment requests belong to one merchant |
-| BankConnection | \`connection_id\`, merchant_id, bank, account_reference, currency, credential_reference, entitlement, capability manifest, verified_at | No raw login password in event rows; explicit permission state |
-| PaymentRequest | \`payment_id\`, merchant_id, external_order_id, amount_minor, currency, target_bank_connection_id, unique_reference, \`expires_at\`, \`status\`, created_at | Stable idempotency key; immutable amount/reference after display |
-| BankCredit | \`credit_id\`, connection_id, bank_transaction_id, amount_minor, currency, bank_timestamp, received_timestamp, reference, evidence_level, raw_payload_hash | Dedup on bank transaction key scoped to bank/account; signed ingress provenance |
-| Allocation | \`allocation_id\`, merchant_id, payment_id, credit_id, allocated_minor, decision_type, reviewer_id, created_at | \`unique(credit_id)\` for full-credit single allocation MVP; cannot auto-allocate ambiguous payments |
-| Exception | \`exception_id\`, reason, candidate_ids, assigned_to, evidence_references, resolution, timestamp | No silent dismissal or paid flag |
-| Event | \`event_id\`, entity_type/id, event_type, schema_version, actor, correlation_id, created_at, canonical_data_hash | Append only; immutable published history |
-| WebhookDelivery | \`delivery_id\`, event_id, endpoint_id, attempt_no, state, next_retry_at, result_code | Retry safely, idempotent event IDs, signed outbound body |
-| ReconciliationRun | \`run_id\`, connection_id, requested_window, source_cursor, started/completed, missing_count, duplicate_count, exception_count | Cursor and fetched evidence persisted, not counted as new transfers twice |
+| Merchant | `merchant_id`, display_name, legal_entity, country, data_policy | All bank connections and payment requests belong to one merchant |
+| BankConnection | `connection_id`, merchant_id, bank, account_reference, currency, credential_reference, entitlement, capability manifest, verified_at | No raw login password in event rows; explicit permission state |
+| PaymentRequest | `payment_id`, merchant_id, external_order_id, amount_minor, currency, target_bank_connection_id, unique_reference, `expires_at`, `status`, created_at | Stable idempotency key; immutable amount/reference after display |
+| BankCredit | `credit_id`, connection_id, bank_transaction_id, amount_minor, currency, bank_timestamp, received_timestamp, reference, evidence_level, raw_payload_hash | Dedup on bank transaction key scoped to bank/account; signed ingress provenance |
+| Allocation | `allocation_id`, merchant_id, payment_id, credit_id, allocated_minor, decision_type, reviewer_id, created_at | `unique(credit_id)` for full-credit single allocation MVP; cannot auto-allocate ambiguous payments |
+| Exception | `exception_id`, reason, candidate_ids, assigned_to, evidence_references, resolution, timestamp | No silent dismissal or paid flag |
+| Event | `event_id`, entity_type/id, event_type, schema_version, actor, correlation_id, created_at, canonical_data_hash | Append only; immutable published history |
+| WebhookDelivery | `delivery_id`, event_id, endpoint_id, attempt_no, state, next_retry_at, result_code | Retry safely, idempotent event IDs, signed outbound body |
+| ReconciliationRun | `run_id`, connection_id, requested_window, source_cursor, started/completed, missing_count, duplicate_count, exception_count | Cursor and fetched evidence persisted, not counted as new transfers twice |
 
 No mutable "balance" from ourselves is authoritative; record merchant bank observations and matching decisions, not a parallel custodian ledger.
 
@@ -60,11 +60,11 @@ No mutable "balance" from ourselves is authoritative; record merchant bank obser
 
 ## State model
 
-Payment request: \`CREATED -> AWAITING_PAYMENT -> VERIFYING -> PAID\`. A request may also be \`EXPIRED\`, \`CANCELED\` or \`UNDER_REVIEW\`. A late bank credit on expired/canceled request must enter exception review. Refunds are a separate \`RefundRequest\` with a bank-confirmed outcome and never reverse or delete the original PAID event.
+Payment request: `CREATED -> AWAITING_PAYMENT -> VERIFYING -> PAID`. A request may also be `EXPIRED`, `CANCELED` or `UNDER_REVIEW`. A late bank credit on expired/canceled request must enter exception review. Refunds are a separate `RefundRequest` with a bank-confirmed outcome and never reverse or delete the original PAID event.
 
-**Monotonicity rule:** order fulfillment is triggered once by the first committed \`payment.verified\` transition, never by a raw webhook and never on a downstream HTTP response. Disallow transitions from \`PAID\` back to \`AWAITING_PAYMENT\`. If money later reverses, append compensating evidence with separate status and merchant action.
+**Monotonicity rule:** order fulfillment is triggered once by the first committed `payment.verified` transition, never by a raw webhook and never on a downstream HTTP response. Disallow transitions from `PAID` back to `AWAITING_PAYMENT`. If money later reverses, append compensating evidence with separate status and merchant action.
 
-**Idempotency:** enforce unique \`(merchant_id,external_order_id)\` within agreed namespace, \`(connection_id,bank_transaction_id)\`, allocation key, event key, and outbox event + endpoint key. Retry with same idempotency key and changed request parameters returns a conflict.
+**Idempotency:** enforce unique `(merchant_id,external_order_id)` within agreed namespace, `(connection_id,bank_transaction_id)`, allocation key, event key, and outbox event + endpoint key. Retry with same idempotency key and changed request parameters returns a conflict.
 
 ## Matching algorithm, deterministic first
 
@@ -79,7 +79,7 @@ An imported event can be useful for locating a likely credit, but its authority 
 
 ## Proposed HTTP API (subject to architecture review)
 
-\`\`\`http
+```http
 POST /v1/payment-requests
 Idempotency-Key: 3cf8...
 Authorization: Bearer <merchant-scoped-api-token>
@@ -92,11 +92,11 @@ Authorization: Bearer <merchant-scoped-api-token>
   "expires_in_seconds": 900,
   "metadata": {"invoice_id": "INV-4821"}
 }
-\`\`\`
+```
 
-Return \`payment_id\`, \`status=AWAITING_PAYMENT\`, \`payment_reference\`, a payment instruction or authorized bank QR payload, bank capability details, expiry and total fee representation where known. **No claim of a completed transfer.**
+Return `payment_id`, `status=AWAITING_PAYMENT`, `payment_reference`, a payment instruction or authorized bank QR payload, bank capability details, expiry and total fee representation where known. **No claim of a completed transfer.**
 
-\`\`\`http
+```http
 GET /v1/payment-requests/{id}
 GET /v1/bank-connections/{id}/capabilities
 GET /v1/bank-credits?from=&to=&cursor=
@@ -107,13 +107,13 @@ POST /v1/bank-ingress/{adapter}
 POST /v1/reconciliation-runs
 GET /v1/reconciliation-runs/{id}
 GET /v1/exports/{id}
-\`\`\`
+```
 
-Merchant outbound event payload: \`id\`, \`type=payment.verified\`, \`version=1\`, \`merchant_id\`, \`payment_id\`, \`external_order_id\`, \`amount_minor\`, \`currency\`, \`bank_credit_id\`, \`evidence_level\`, \`occurred_at\`. Signed over timestamp + raw JSON bytes with per-endpoint secret, replay window and key rotation mechanism. Do not expose full bank customer details.
+Merchant outbound event payload: `id`, `type=payment.verified`, `version=1`, `merchant_id`, `payment_id`, `external_order_id`, `amount_minor`, `currency`, `bank_credit_id`, `evidence_level`, `occurred_at`. Signed over timestamp + raw JSON bytes with per-endpoint secret, replay window and key rotation mechanism. Do not expose full bank customer details.
 
 ## Bank adapter interface
 
-\`\`\`ts
+```ts
 type AdapterCapabilities = {
   bankId: string;
   country: string;
@@ -129,11 +129,11 @@ type AdapterCapabilities = {
   productionEntitlement: "unverified" | "approved" | "denied";
   apiVersion: string;
 };
-\`\`\`
+```
 
-Adapter methods: \`validateConfiguration\`, \`getCapabilities\`, \`createPaymentInstruction\`, \`authenticateIncomingEvent\`, \`normalizeCredit\`, \`lookupCredit\`, \`listCredits\`, \`health\`. Optional \`requestRefund\` requires explicit feature approval.
+Adapter methods: `validateConfiguration`, `getCapabilities`, `createPaymentInstruction`, `authenticateIncomingEvent`, `normalizeCredit`, `lookupCredit`, `listCredits`, `health`. Optional `requestRefund` requires explicit feature approval.
 
-**Fail closed:** unsupported methods return \`UNSUPPORTED\`; unauthorized methods return \`ENTITLEMENT_REQUIRED\`, not empty successful responses. No decorator can convert a screenshot or notification-only adapter into direct-bank evidence.
+**Fail closed:** unsupported methods return `UNSUPPORTED`; unauthorized methods return `ENTITLEMENT_REQUIRED`, not empty successful responses. No decorator can convert a screenshot or notification-only adapter into direct-bank evidence.
 
 ## UX surfaces
 

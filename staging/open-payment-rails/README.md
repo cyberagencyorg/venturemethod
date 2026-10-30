@@ -2,7 +2,7 @@
 
 **Status: v0.2 desk-research and design package, not an approved venture or production payment system.**  
 Date: 2026-10-30. Owner / decision authority: Brad Khan.  
-Temporary home: private \`cyberagencyorg/venturemethod\`, isolated on an unmerged research branch. Intended to be moved to a standalone repository.  
+Temporary home: private `cyberagencyorg/venturemethod`, isolated on an unmerged research branch. Intended to be moved to a standalone repository.  
 Original intake: [Venture Method issue #19](https://github.com/cyberagencyorg/venturemethod/issues/19).
 
 ## Executive conclusion
@@ -39,6 +39,6 @@ The attractive point is portability and independent control of bank payment data
 
 ## Framework use and limits
 
-Venture Method consult level, using \`ADOPT.md\`, \`AGENTS.md\`, \`docs/METHOD_SELECTION.md\`, \`docs/ARCHITECTURE.md\` plus applicable skill documents. Source -> claim -> interpretation -> recommendation -> test is preserved. No CLI engagement, agent test score, human interview or regulatory approval is implied by writing these files. This is a focused working dossier, **not** a modification to the Venture Method framework or an activation of a new venture.
+Venture Method consult level, using `ADOPT.md`, `AGENTS.md`, `docs/METHOD_SELECTION.md`, `docs/ARCHITECTURE.md` plus applicable skill documents. Source -> claim -> interpretation -> recommendation -> test is preserved. No CLI engagement, agent test score, human interview or regulatory approval is implied by writing these files. This is a focused working dossier, **not** a modification to the Venture Method framework or an activation of a new venture.
 
-**Vocabulary:** \`[SOURCE]\` primary or published observation; \`[INFERENCE]\` interpretation; \`[HYPOTHESIS]\` untested future assertion; \`[DESIGN]\` suggested engineering contract; \`[TODO]\` requires real-world action; \`[DECISION PROPOSED]\` not approved.
+**Vocabulary:** `[SOURCE]` primary or published observation; `[INFERENCE]` interpretation; `[HYPOTHESIS]` untested future assertion; `[DESIGN]` suggested engineering contract; `[TODO]` requires real-world action; `[DECISION PROPOSED]` not approved.

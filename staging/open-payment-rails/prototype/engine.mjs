@@ -8,7 +8,7 @@
 export function reconcile(state, credit) {
   const next={payments:state.payments.map(p=>({...p})),credits:[...state.credits],allocations:[...state.allocations],events:[...state.events],exceptions:[...state.exceptions],outbox:[...state.outbox]};
   function incident(reason) {
-    next.exceptions.push({id:"exc_"+(next.exceptions.length+1),reason,merchantId:credit.merchantId??null,bankTransactionId:credit.bankTransactionId??null});
+    next.exceptions.push({id:"exc_"+(next.exceptions.length+1),reason,merchantId:credit?.merchantId??null,bankTransactionId:credit?.bankTransactionId??null});
     return {state:next,outcome:"EXCEPTION",reason};
   }
   if (!credit || typeof credit!=="object") return incident("INVALID_EVENT");
