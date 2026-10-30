@@ -21,6 +21,7 @@ The attractive point is portability and independent control of bank payment data
 - [x] Develop conditional venture thesis, customer segmentation, build/partner/do-nothing comparison and country screening.
 - [x] Draft initial solution architecture, event-state model, core APIs, abuse cases, noncustodial limits, pricing hypotheses and staged delivery backlog.
 - [x] Register evidence, counterarguments, open assumptions, invalidation conditions and technical acceptance criteria.
+- [x] Stage a synthetic JavaScript matching proof with 27 test cases and draft machine-readable JSON/API contracts. This is not production readiness.
 - [ ] Bank approvals or live production merchant credentials. No bank has been contacted or contract signed.
 - [ ] Customer interviews, paid pilot LOIs, independent financial audit, certified legal advice and real transaction data.
 - [ ] Independently verified implementation or performance benchmarks.
@@ -35,7 +36,9 @@ The attractive point is portability and independent control of bank payment data
 5. [05-product-and-technical-spec.md](05-product-and-technical-spec.md): product boundary, users, requirements, event state, API sketch, reconciliation.
 6. [06-security-and-assurance.md](06-security-and-assurance.md): threat model, controls, tests, review prerequisites.
 7. [07-execution-and-experiments.md](07-execution-and-experiments.md): build-ready epics, verifiable exit conditions, independent validation TODOs.
-8. [08-decisions-and-hand-off.md](08-decisions-and-hand-off.md): recorded tradeoffs, approvals, open decisions, transport instructions.
+8. [specs/contracts.schema.json](specs/contracts.schema.json) and [specs/openapi.json](specs/openapi.json): unimplemented machine-readable contracts.
+9. [prototype](prototype/): pure in-memory matcher and synthetic tests.
+10. [08-decisions-and-hand-off.md](08-decisions-and-hand-off.md): recorded tradeoffs, approvals, open decisions, transport instructions.
 
 ## Framework use and limits
 

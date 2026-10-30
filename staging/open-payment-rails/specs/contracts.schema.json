@@ -1,0 +1,206 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Open Payment Rails draft contracts",
+  "description": "Proposed schemas only. No production bank integration.",
+  "$defs": {
+    "PaymentRequest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "paymentId",
+        "merchantId",
+        "bankId",
+        "accountId",
+        "externalOrderId",
+        "amountMinor",
+        "currency",
+        "reference",
+        "status",
+        "createdAt"
+      ],
+      "properties": {
+        "paymentId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "externalOrderId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "merchantId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "bankId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "accountId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "amountMinor": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "currency": {
+          "type": "string",
+          "pattern": "^[A-Z]{3}$"
+        },
+        "reference": {
+          "type": "string",
+          "minLength": 1
+        },
+        "status": {
+          "enum": [
+            "CREATED",
+            "AWAITING_PAYMENT",
+            "VERIFYING",
+            "UNDER_REVIEW",
+            "PAID",
+            "EXPIRED",
+            "CANCELED"
+          ]
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "expiresAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "BankCredit": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "merchantId",
+        "bankId",
+        "accountId",
+        "bankTransactionId",
+        "amountMinor",
+        "currency",
+        "reference",
+        "occurredAt",
+        "evidenceLevel"
+      ],
+      "properties": {
+        "merchantId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "bankId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "accountId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "amountMinor": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "currency": {
+          "type": "string",
+          "pattern": "^[A-Z]{3}$"
+        },
+        "reference": {
+          "type": "string",
+          "minLength": 1
+        },
+        "bankTransactionId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "occurredAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "evidenceLevel": {
+          "enum": [
+            "BANK_DIRECT",
+            "AUTHORIZED_BANK_DELEGATE",
+            "UNTRUSTED"
+          ]
+        },
+        "rawPayloadHash": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      }
+    },
+    "AdapterCapabilities": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "bankId",
+        "country",
+        "currency",
+        "createQr",
+        "verifyIncomingCredit",
+        "listCredits",
+        "creditWebhook",
+        "officialVirtualAccount",
+        "refunds",
+        "evidence",
+        "productionEntitlement",
+        "apiVersion"
+      ],
+      "properties": {
+        "bankId": {
+          "type": "string"
+        },
+        "country": {
+          "type": "string",
+          "pattern": "^[A-Z]{2}$"
+        },
+        "currency": {
+          "type": "string",
+          "pattern": "^[A-Z]{3}$"
+        },
+        "createQr": {
+          "type": "boolean"
+        },
+        "verifyIncomingCredit": {
+          "type": "boolean"
+        },
+        "listCredits": {
+          "type": "boolean"
+        },
+        "creditWebhook": {
+          "type": "boolean"
+        },
+        "officialVirtualAccount": {
+          "type": "boolean"
+        },
+        "refunds": {
+          "enum": [
+            "none",
+            "manual_only",
+            "bank_api"
+          ]
+        },
+        "evidence": {
+          "enum": [
+            "direct_bank",
+            "authorized_delegate",
+            "notification_only"
+          ]
+        },
+        "productionEntitlement": {
+          "enum": [
+            "unverified",
+            "approved",
+            "denied"
+          ]
+        },
+        "apiVersion": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

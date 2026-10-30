@@ -7,9 +7,9 @@
 | ID | Scope | Verifiable output | State |
 |---|---|---|---|
 | E00 | Venture dossier + evidence + risk + scenarios | Reproducible private GitHub documentation and source URLs | **DONE** |
-| E01 | Canonical schema and bank capability manifest | Typed JSON schemas for request/credit/event/connection, sample records, versioned spec | **SPECIFIED, IMPLEMENTATION TODO** |
-| E02 | Deterministic matching library | Pure function receiving normalized evidence + open requests, returning match/exception, with tests | **SPECIFIED, IMPLEMENTATION TODO** |
-| E03 | Bank simulator and fixtures | Fake bank account, signed synthetic callbacks, query endpoint, replay/duplicate/late injection; no money | **TODO** |
+| E01 | Canonical schema and bank capability manifest | Typed JSON schemas for request/credit/event/connection, sample records, versioned spec | **DRAFT SCHEMA WRITTEN; VALIDATOR TODO** |
+| E02 | Deterministic matching library | Pure function receiving normalized evidence + open requests, returning match/exception, with tests | **PURE SYNTHETIC MATCHER WRITTEN; DB/PROPERTY TESTS TODO** |
+| E03 | Bank simulator and fixtures | Synthetic credit fixtures and replay available; cryptographic callback and fake query endpoint still TODO | **PARTIAL, IN-MEMORY ONLY** |
 | E04 | Transactional allocation and outbox | DB migration enforcing unique bank credit, allocation and downstream event | **TODO** |
 | E05 | Merchant API with idempotency | OpenAPI and local API; pending/verified distinction; property tests | **TODO** |
 | E06 | Operations UI | Payments, bank health, exceptions, reconciliation, secrets access limits | **TODO** |

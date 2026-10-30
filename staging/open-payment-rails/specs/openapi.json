@@ -1,0 +1,394 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Open Payment Rails proposed merchant API",
+    "version": "0.1.0-draft",
+    "description": "Unimplemented reference API; no licensed payment operation implied."
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8787",
+      "description": "Hypothetical sandbox"
+    }
+  ],
+  "security": [
+    {
+      "merchantBearer": []
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "merchantBearer": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    },
+    "schemas": {
+      "PaymentRequest": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "paymentId",
+          "merchantId",
+          "bankId",
+          "accountId",
+          "externalOrderId",
+          "amountMinor",
+          "currency",
+          "reference",
+          "status",
+          "createdAt"
+        ],
+        "properties": {
+          "paymentId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "externalOrderId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "merchantId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "bankId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "accountId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "amountMinor": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "currency": {
+            "type": "string",
+            "pattern": "^[A-Z]{3}$"
+          },
+          "reference": {
+            "type": "string",
+            "minLength": 1
+          },
+          "status": {
+            "enum": [
+              "CREATED",
+              "AWAITING_PAYMENT",
+              "VERIFYING",
+              "UNDER_REVIEW",
+              "PAID",
+              "EXPIRED",
+              "CANCELED"
+            ]
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "expiresAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "BankCredit": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "merchantId",
+          "bankId",
+          "accountId",
+          "bankTransactionId",
+          "amountMinor",
+          "currency",
+          "reference",
+          "occurredAt",
+          "evidenceLevel"
+        ],
+        "properties": {
+          "merchantId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "bankId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "accountId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "amountMinor": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "currency": {
+            "type": "string",
+            "pattern": "^[A-Z]{3}$"
+          },
+          "reference": {
+            "type": "string",
+            "minLength": 1
+          },
+          "bankTransactionId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "occurredAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "evidenceLevel": {
+            "enum": [
+              "BANK_DIRECT",
+              "AUTHORIZED_BANK_DELEGATE",
+              "UNTRUSTED"
+            ]
+          },
+          "rawPayloadHash": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          }
+        }
+      },
+      "AdapterCapabilities": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "bankId",
+          "country",
+          "currency",
+          "createQr",
+          "verifyIncomingCredit",
+          "listCredits",
+          "creditWebhook",
+          "officialVirtualAccount",
+          "refunds",
+          "evidence",
+          "productionEntitlement",
+          "apiVersion"
+        ],
+        "properties": {
+          "bankId": {
+            "type": "string"
+          },
+          "country": {
+            "type": "string",
+            "pattern": "^[A-Z]{2}$"
+          },
+          "currency": {
+            "type": "string",
+            "pattern": "^[A-Z]{3}$"
+          },
+          "createQr": {
+            "type": "boolean"
+          },
+          "verifyIncomingCredit": {
+            "type": "boolean"
+          },
+          "listCredits": {
+            "type": "boolean"
+          },
+          "creditWebhook": {
+            "type": "boolean"
+          },
+          "officialVirtualAccount": {
+            "type": "boolean"
+          },
+          "refunds": {
+            "enum": [
+              "none",
+              "manual_only",
+              "bank_api"
+            ]
+          },
+          "evidence": {
+            "enum": [
+              "direct_bank",
+              "authorized_delegate",
+              "notification_only"
+            ]
+          },
+          "productionEntitlement": {
+            "enum": [
+              "unverified",
+              "approved",
+              "denied"
+            ]
+          },
+          "apiVersion": {
+            "type": "string"
+          }
+        }
+      },
+      "CreateRequest": {
+        "type": "object",
+        "required": [
+          "externalOrderId",
+          "bankId",
+          "accountId",
+          "amountMinor",
+          "currency"
+        ],
+        "properties": {
+          "externalOrderId": {
+            "type": "string"
+          },
+          "bankId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "accountId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "amountMinor": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "currency": {
+            "type": "string",
+            "pattern": "^[A-Z]{3}$"
+          },
+          "expiresAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      }
+    }
+  },
+  "paths": {
+    "/v1/payment-requests": {
+      "post": {
+        "operationId": "createPaymentRequest",
+        "summary": "Create pending request, not a settlement",
+        "parameters": [
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 16
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Pending request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaymentRequest"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Bank entitlement missing"
+          },
+          "409": {
+            "description": "Idempotency conflict"
+          }
+        }
+      }
+    },
+    "/v1/payment-requests/{paymentId}": {
+      "get": {
+        "operationId": "getPaymentRequest",
+        "summary": "Get scoped merchant payment verification status",
+        "parameters": [
+          {
+            "name": "paymentId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Payment status",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaymentRequest"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      }
+    },
+    "/v1/bank-connections/{connectionId}/capabilities": {
+      "get": {
+        "operationId": "getBankCapabilities",
+        "summary": "Read actual bank/merchant entitlements",
+        "parameters": [
+          {
+            "name": "connectionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Capabilities",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdapterCapabilities"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/exceptions": {
+      "get": {
+        "operationId": "listExceptions",
+        "summary": "List unresolved payment matching exceptions",
+        "responses": {
+          "200": {
+            "description": "Merchant-scoped exception list"
+          }
+        }
+      }
+    },
+    "/v1/reconciliation-runs": {
+      "post": {
+        "operationId": "startReconciliationRun",
+        "summary": "Queue read-only bank transaction reconciliation",
+        "responses": {
+          "202": {
+            "description": "Reconciliation run queued"
+          },
+          "403": {
+            "description": "Entitlement required"
+          }
+        }
+      }
+    }
+  }
+}
